@@ -116,6 +116,15 @@
   --rz-info: var(--ag-info);
   --rz-warning: var(--ag-warn);
   --rz-danger: var(--ag-danger);
+
+  /* Switches + checkboxes: Radzen's "checked" state has its own colour variables
+     (not --rz-primary), so it otherwise stays Radzen's default indigo. Map the
+     on-state onto the emerald accent. */
+  --rz-switch-checked-background-color: var(--ag-accent);
+  --rz-switch-checked-circle-background-color: #ffffff;
+  --rz-checkbox-checked-background-color: var(--ag-accent);
+  --rz-checkbox-checked-border: 1px solid var(--ag-accent);
+  --rz-checkbox-checked-color: var(--ag-on-accent);
 }
 
 /* ---------------------------------------------------------- global element */
