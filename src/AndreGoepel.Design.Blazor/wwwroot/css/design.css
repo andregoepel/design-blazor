@@ -102,14 +102,24 @@
   /* borders */
   --rz-border-color: var(--ag-border);
   --rz-base-300: var(--ag-border);
+  /* Neutral base ramp — Radzen's light defaults otherwise leak into the dark shell:
+     --rz-base / --rz-on-base back ButtonStyle.Base (which DialogService.Confirm uses for
+     its Cancel button) and --rz-base-200 backs BadgeStyle.Light (measured 1.2:1 contrast
+     unmapped). Keep 200 a step below the already-mapped 300 (#4). */
+  --rz-base-200: var(--ag-hover);
+  --rz-base: var(--ag-hover);
+  --rz-on-base: var(--ag-text);
   --rz-input-border-color: var(--ag-border2);
   --rz-input-disabled-background: var(--ag-hover);
   --rz-border-radius: 6px;
   --rz-card-border-radius: 10px;
 
-  /* data grid surfaces (Radzen defaults are white — break dark mode row hover) */
+  /* data grid surfaces (Radzen defaults are white — break dark mode row hover and the
+     striped-row background, which otherwise alternates to Radzen's light default) (#4) */
   --rz-grid-background-color: var(--ag-surface);
   --rz-grid-hover-background-color: var(--ag-hover);
+  --rz-grid-stripe-background-color: var(--ag-hover);
+  --rz-grid-stripe-odd-background-color: var(--ag-surface);
 
   /* status colours */
   --rz-success: var(--ag-accent);
