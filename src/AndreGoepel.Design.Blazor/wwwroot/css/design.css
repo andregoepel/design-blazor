@@ -261,7 +261,13 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   color: var(--ag-text2);
 }
 
-.rz-listbox .rz-listbox-item:hover {
+/* Radzen's material-base hover rule is
+   `.rz-listbox:not(.rz-state-disabled) .rz-listbox-item:hover:hover` — the doubled
+   `:hover` and the `:not()` are a deliberate specificity bump. A plain
+   `.rz-listbox-item:hover` loses to it, leaving the light base-theme hover colour in
+   dark mode (unreadable dark text on a light row). Match the selector exactly so this
+   layer — loaded after material-base — wins on source order. */
+.rz-listbox:not(.rz-state-disabled) .rz-listbox-item:hover:hover {
   background: var(--ag-hover);
   color: var(--ag-text);
 }
