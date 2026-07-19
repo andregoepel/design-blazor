@@ -52,11 +52,11 @@
                             <Template Context="u">
                                 @if (u.Active)
                                 {
-                                    <span class="ag-badge ag-badge-success">Active</span>
+                                    <StatusBadge Text="Active" Variant="BadgeVariant.Success" />
                                 }
                                 else
                                 {
-                                    <span class="ag-badge ag-badge-danger">Disabled</span>
+                                    <StatusBadge Text="Disabled" Variant="BadgeVariant.Danger" />
                                 }
                             </Template>
                         </RadzenDataGridColumn>

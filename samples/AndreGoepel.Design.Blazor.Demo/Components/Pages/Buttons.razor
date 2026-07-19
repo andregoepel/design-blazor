@@ -37,13 +37,16 @@
             <RadzenStack Gap="1rem">
                 <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Status badges</RadzenText>
                 <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
-                    <span class="ag-badge ag-badge-success">Active</span>
-                    <span class="ag-badge ag-badge-danger">Deleted</span>
+                    <StatusBadge Text="Active" Variant="BadgeVariant.Success" />
+                    <StatusBadge Text="Deleted" Variant="BadgeVariant.Danger" />
+                    <StatusBadge Text="Invited" Variant="BadgeVariant.Warning" />
+                    <StatusBadge Text="Syncing" Variant="BadgeVariant.Info" />
+                    <StatusBadge Text="Draft" Variant="BadgeVariant.Neutral" />
                 </RadzenStack>
                 <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-                    Only <code>success</code> and <code>danger</code> ship today. The
-                    <code>warn</code> / <code>info</code> / <code>neutral</code> variants and a
-                    typed <code>StatusBadge</code> component arrive in issue #8.
+                    The <code>StatusBadge</code> component maps a semantic <code>Variant</code>
+                    (Success / Danger / Warning / Info / Neutral) to the matching
+                    <code>ag-badge-*</code> class.
                 </RadzenText>
             </RadzenStack>
         </RadzenCard>

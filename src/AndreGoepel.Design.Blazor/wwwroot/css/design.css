@@ -539,6 +539,21 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   color: var(--ag-danger);
 }
 
+.ag-badge-warn {
+  background: var(--ag-warn-soft);
+  color: var(--ag-warn);
+}
+
+.ag-badge-info {
+  background: var(--ag-info-soft);
+  color: var(--ag-info);
+}
+
+.ag-badge-neutral {
+  background: var(--ag-hover);
+  color: var(--ag-muted);
+}
+
 /* Table row actions: a primary action plus a compact overflow (⋯) button. */
 .ag-row-actions {
   display: flex;
