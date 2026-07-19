@@ -59,12 +59,11 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="User" Title="" Width="160px" TextAlign="TextAlign.End" Sortable="false">
                             <Template Context="u">
-                                <div class="ag-row-actions">
+                                <RowActions>
                                     <RadzenButton Text="Edit" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
                                                   Click="@(() => Edit(u))" />
-                                    <RadzenButton Icon="more_horiz" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
-                                                  class="ag-icon-btn" Click="@(args => OpenRowMenu(args, u))" />
-                                </div>
+                                    <IconButton Icon="more_horiz" Title="More actions" Click="@(args => OpenRowMenu(args, u))" />
+                                </RowActions>
                             </Template>
                         </RadzenDataGridColumn>
                     </Columns>
