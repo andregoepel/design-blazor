@@ -1,0 +1,31 @@
+@* Compact icon-only button (DESIGN.md §5 "Data grids" → Row actions), e.g. a
+   grid row's "⋯" overflow trigger. Icon is a Radzen Material icon ligature
+   name (the same "Icon" RadzenButton itself takes) — not an AppIcon glyph;
+   AppIcon is for icon needs outside a Radzen button slot (see the "Icons"
+   recipe). Title is required: an icon-only button has no visible text, so it
+   is the button's only accessible name. *@
+
+<RadzenButton Icon="@Icon" title="@Title" aria-label="@Title"
+              ButtonStyle="@(Danger ? ButtonStyle.Danger : ButtonStyle.Light)"
+              Size="ButtonSize.Small" class="ag-icon-btn" Click="Click" />
+
+@code {
+    /// <summary>Radzen Material icon ligature name, e.g. "more_horiz", "edit", "delete".</summary>
+    [Parameter, EditorRequired]
+    public string Icon { get; set; } = "";
+
+    /// <summary>Accessible name / tooltip — required since the button has no visible text.</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "";
+
+    /// <summary>Tints the button for a destructive action (e.g. delete).</summary>
+    [Parameter]
+    public bool Danger { get; set; }
+
+    /// <summary>
+    /// Click handler. Takes <see cref="MouseEventArgs"/> so it can open a
+    /// <c>ContextMenuService</c> overflow menu positioned at the click.
+    /// </summary>
+    [Parameter]
+    public EventCallback<MouseEventArgs> Click { get; set; }
+}

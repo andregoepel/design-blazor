@@ -278,19 +278,21 @@ glyph the `ag-empty-icon` colour token expects, not a full-colour emoji.
 ```
 
 - Status columns use `.ag-badge` (see above).
-- **Row actions:** keep the primary action visible and hide the rest behind a
-  compact `⋯` overflow menu via `ContextMenuService`:
+- **Row actions:** use `RowActions` + `IconButton` — keep the primary action
+  visible and hide the rest behind a compact `⋯` overflow menu via
+  `ContextMenuService`. `IconButton`'s `Icon` is a Radzen Material icon
+  ligature name (like `RadzenButton`'s own `Icon`), not an `AppIcon` glyph —
+  `Title` is required since the button has no visible text:
 
 ```razor
-<div class="ag-row-actions">
+<RowActions>
     <RadzenButton Text="Users" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
                   Disabled="@data.Deleted" Click="@(() => ShowUsersAsync(data))" />
     @if (RowHasMenu(data))
     {
-        <RadzenButton Icon="more_horiz" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
-                      class="ag-icon-btn" Click="@(args => OpenRowMenu(args, data))" />
+        <IconButton Icon="more_horiz" Title="More actions" Click="@(args => OpenRowMenu(args, data))" />
     }
-</div>
+</RowActions>
 ```
 
 ```csharp
@@ -354,7 +356,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
 | `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state (rendered by `EmptyState`) |
-| `ag-row-actions`, `ag-icon-btn` | grid row actions + compact `⋯` button |
+| `ag-row-actions`, `ag-icon-btn` | grid row actions (rendered by `RowActions`) + compact `⋯` button (rendered by `IconButton`) |
 | `ag-cell-name`, `ag-cell-id` | name/email + truncated mono id in a grid cell |
 | `ag-login-*` | login-card building blocks (provided by `LoginLayout`) |
 | `ag-shell`, `ag-sidebar`, `ag-topbar`, `ag-topbar-left`, `ag-nav-item`, `ag-theme-toggle`, `ag-hamburger`, `ag-backdrop`, … | app shell (rendered by `AppShell`) |
