@@ -1,0 +1,31 @@
+@* The inline soft-tinted info pill (ag-info-box recipe): a muted Label and a
+   bold Value, e.g. "Next scheduled run: tomorrow at 03:00 UTC". Pass
+   ChildContent instead of Value for richer content than plain text. *@
+
+<div class="ag-info-box">
+    <span class="ag-info-box-label">@Label</span>
+    <span class="ag-info-box-value">
+        @if (ChildContent is not null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            @Value
+        }
+    </span>
+</div>
+
+@code {
+    /// <summary>The muted label, e.g. "Next scheduled run".</summary>
+    [Parameter, EditorRequired]
+    public string Label { get; set; } = "";
+
+    /// <summary>The bold value text. Ignored when <see cref="ChildContent"/> is set.</summary>
+    [Parameter]
+    public string? Value { get; set; }
+
+    /// <summary>Richer value content — takes precedence over <see cref="Value"/>.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
