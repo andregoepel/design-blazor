@@ -196,10 +196,18 @@ stretching.
 
 ### Status badges
 
+Use `StatusBadge` with a semantic `Variant`; it maps to the matching
+`ag-badge-*` class. Five variants ship: `Success`, `Danger`, `Warning`, `Info`,
+`Neutral` (the default).
+
 ```razor
-<span class="ag-badge ag-badge-success">Active</span>
-<span class="ag-badge ag-badge-danger">Deleted</span>
+<StatusBadge Text="Active" Variant="BadgeVariant.Success" />
+<StatusBadge Text="Deleted" Variant="BadgeVariant.Danger" />
+<StatusBadge Text="Invited" Variant="BadgeVariant.Warning" />
 ```
+
+The underlying classes are `ag-badge` + `ag-badge-success` / `-danger` / `-warn`
+/ `-info` / `-neutral`, all tinted from the `--ag-*` tokens.
 
 ### Alerts / status banners
 
@@ -319,7 +327,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
-| `ag-badge` + `ag-badge-success` / `ag-badge-danger` | status pills |
+| `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
 | `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state (rendered by `EmptyState`) |

@@ -1,0 +1,25 @@
+@* Status pill over the ag-badge recipe. Pass Text + a semantic Variant; the
+   variant maps to an ag-badge-* class (DESIGN.md §5). Replaces the raw
+   <span class="ag-badge ag-badge-*"> markup and the inline warn workaround. *@
+
+<span class="ag-badge @VariantClass">@Text</span>
+
+@code {
+    /// <summary>The label shown inside the pill, e.g. "Active".</summary>
+    [Parameter, EditorRequired]
+    public string Text { get; set; } = "";
+
+    /// <summary>Semantic colour. Defaults to <see cref="BadgeVariant.Neutral"/>.</summary>
+    [Parameter]
+    public BadgeVariant Variant { get; set; } = BadgeVariant.Neutral;
+
+    private string VariantClass =>
+        Variant switch
+        {
+            BadgeVariant.Success => "ag-badge-success",
+            BadgeVariant.Danger => "ag-badge-danger",
+            BadgeVariant.Warning => "ag-badge-warn",
+            BadgeVariant.Info => "ag-badge-info",
+            _ => "ag-badge-neutral",
+        };
+}
