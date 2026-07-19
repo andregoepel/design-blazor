@@ -8,17 +8,12 @@
 
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
-        <div class="ag-page-head">
-            <div>
-                <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Data grid</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
-                    The in-card grid recipe: toolbar (search + count), name/id cells, status badges,
-                    and a row-action overflow menu. <code>DataCard</code> + <code>GridToolbar</code> +
-                    <code>RowActions</code> components land in issues #10 and #11.
-                </RadzenText>
-            </div>
-            <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
-        </div>
+        <PageHeader Title="Data grid"
+                    Subtitle="The in-card grid recipe: toolbar (search + count), name/id cells, status badges, and a row-action overflow menu. DataCard + GridToolbar + RowActions components land in issues #10 and #11.">
+            <Actions>
+                <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
+            </Actions>
+        </PageHeader>
 
         @if (Filtered.Count == 0)
         {
