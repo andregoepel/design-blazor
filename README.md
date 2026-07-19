@@ -46,7 +46,7 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
   the app shell, and the login card.
 - **Components** — `AppShell`, `AppPageTitle`, `LoginShell`, `AppIcon`,
   `ThemeToggle`, `PageHeader`, `StatusBadge`, `EmptyState`, `RowActions`,
-  `IconButton`, `DataCard`, `GridToolbar`, `CardForm`, `FormField`,
+  `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`, `CardForm`, `FormField`,
   `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`, and the cascading
   `BreadcrumbState`.
 - **Services** — `ConfirmService` (standardised confirm/delete dialogs), registered

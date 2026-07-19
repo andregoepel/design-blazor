@@ -1,0 +1,49 @@
+@* A filter/search bar: a card holding a horizontal, wrapping row of filter
+   fields (put FormFields — or any controls — in ChildContent) with an Apply
+   button, and optional extra Actions after it. Fields are bottom-aligned so
+   label-above FormFields line their controls up. Give controls a sensible
+   min-width; the bar itself only lays them out. *@
+
+<RadzenCard>
+    <RadzenStack
+        Orientation="Orientation.Horizontal"
+        Wrap="FlexWrap.Wrap"
+        Gap="1rem"
+        AlignItems="AlignItems.End"
+    >
+        @ChildContent
+        <RadzenButton
+            Text="@ApplyText"
+            Icon="@ApplyIcon"
+            ButtonStyle="ApplyStyle"
+            Click="OnApply"
+        />
+        @Actions
+    </RadzenStack>
+</RadzenCard>
+
+@code {
+    /// <summary>The filter fields (typically <c>FormField</c>s wrapping inputs).</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Raised when the Apply button is clicked.</summary>
+    [Parameter]
+    public EventCallback OnApply { get; set; }
+
+    /// <summary>Apply button text.</summary>
+    [Parameter]
+    public string ApplyText { get; set; } = "Apply";
+
+    /// <summary>Apply button icon (Radzen Material ligature name).</summary>
+    [Parameter]
+    public string ApplyIcon { get; set; } = "search";
+
+    /// <summary>Apply button style. Defaults to <see cref="Radzen.ButtonStyle.Light"/>.</summary>
+    [Parameter]
+    public ButtonStyle ApplyStyle { get; set; } = ButtonStyle.Light;
+
+    /// <summary>Optional extra actions rendered after the Apply button (e.g. a reset).</summary>
+    [Parameter]
+    public RenderFragment? Actions { get; set; }
+}

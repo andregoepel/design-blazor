@@ -9,11 +9,22 @@
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
         <PageHeader Title="Data grid"
-                    Subtitle="The in-card grid recipe: DataCard + GridToolbar (search + count), name/id cells, status badges, and a row-action overflow menu. RowActions/IconButton land in issue #11.">
+                    Subtitle="The in-card grid recipe: a FilterBar of structured filters, then DataCard + GridToolbar (search + count), name/id cells, status badges, and a row-action overflow menu.">
             <Actions>
                 <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
             </Actions>
         </PageHeader>
+
+        <FilterBar OnApply="ApplyFilters" ApplyText="Apply">
+            <ChildContent>
+                <FormField Label="Status" For="StatusFilter">
+                    <RadzenDropDown @bind-Value="_pendingStatus" Data="_statuses" Name="StatusFilter" Style="min-width: 12rem;" />
+                </FormField>
+            </ChildContent>
+            <Actions>
+                <RadzenButton Text="Reset" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
+            </Actions>
+        </FilterBar>
 
         <DataCard>
             <GridToolbar @bind-Search="_search" SearchPlaceholder="Search users…"
@@ -73,13 +84,31 @@
     private string _search = string.Empty;
     private readonly List<User> _users = Seed();
 
+    private readonly string[] _statuses = ["All", "Active", "Disabled"];
+    private string _pendingStatus = "All"; // bound to the dropdown
+    private string _appliedStatus = "All"; // committed on Apply
+
     private List<User> Filtered =>
-        string.IsNullOrWhiteSpace(_search)
-            ? _users
-            : _users.Where(u =>
-                  u.Name.Contains(_search, StringComparison.OrdinalIgnoreCase) ||
-                  u.Email.Contains(_search, StringComparison.OrdinalIgnoreCase))
-              .ToList();
+        _users
+            .Where(u =>
+                string.IsNullOrWhiteSpace(_search)
+                || u.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)
+                || u.Email.Contains(_search, StringComparison.OrdinalIgnoreCase)
+            )
+            .Where(u =>
+                _appliedStatus == "All"
+                || (_appliedStatus == "Active" && u.Active)
+                || (_appliedStatus == "Disabled" && !u.Active)
+            )
+            .ToList();
+
+    private void ApplyFilters() => _appliedStatus = _pendingStatus;
+
+    private void ResetFilters()
+    {
+        _pendingStatus = "All";
+        _appliedStatus = "All";
+    }
 
     private void AddOne()
     {
