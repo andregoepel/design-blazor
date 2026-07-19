@@ -17,11 +17,8 @@
 
         @if (Filtered.Count == 0)
         {
-            <div class="ag-empty">
-                <span class="ag-empty-icon">👤&#xFE0E;</span>
-                <span class="ag-empty-title">No users match your search</span>
-                <span class="ag-empty-text">Try a different term, or clear the search box.</span>
-            </div>
+            <EmptyState Icon="@("👤︎")" Title="No users match your search"
+                        Text="Try a different term, or clear the search box." />
         }
         else
         {

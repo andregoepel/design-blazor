@@ -219,13 +219,21 @@ of the heading — not inside it.
 
 ### Empty state
 
+Use `EmptyState` over the `ag-empty` recipe: `Icon` (optional glyph), `Title`,
+`Text` (optional), `Actions` (optional call-to-action).
+
 ```razor
-<div class="ag-empty">
-    <span class="ag-empty-icon">🔑&#xFE0E;</span>
-    <span class="ag-empty-title">No passkeys registered yet</span>
-    <span class="ag-empty-text">Passkeys let you sign in without a password.</span>
-</div>
+<EmptyState Icon="@("🔑︎")" Title="No passkeys registered yet"
+            Text="Passkeys let you sign in without a password.">
+    <Actions>
+        <RadzenButton Text="Register passkey" Icon="add" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Small" />
+    </Actions>
+</EmptyState>
 ```
+
+`Icon` is rendered as-is inside `.ag-empty-icon` — pass a plain emoji glyph
+with a trailing U+FE0E variation selector so it renders as the flat text-style
+glyph the `ag-empty-icon` colour token expects, not a full-colour emoji.
 
 ### Data grids (`RadzenDataGrid`)
 
@@ -322,7 +330,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
-| `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state |
+| `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state (rendered by `EmptyState`) |
 | `ag-row-actions`, `ag-icon-btn` | grid row actions + compact `⋯` button |
 | `ag-cell-name`, `ag-cell-id` | name/email + truncated mono id in a grid cell |
 | `ag-login-*` | login-card building blocks (provided by `LoginLayout`) |

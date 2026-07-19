@@ -1,0 +1,39 @@
+@* Dashed empty-state card (no data yet) over the ag-empty recipe (DESIGN.md §5).
+   Icon is rendered as-is inside .ag-empty-icon — pass a plain emoji glyph, e.g.
+   "🔑︎" (the trailing U+FE0E variation selector forces the flat text-style
+   glyph so the ag-empty-icon color token actually applies, matching the
+   existing Passkeys example this recipe was lifted from). *@
+
+<div class="ag-empty">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <span class="ag-empty-icon">@Icon</span>
+    }
+    <span class="ag-empty-title">@Title</span>
+    @if (!string.IsNullOrWhiteSpace(Text))
+    {
+        <span class="ag-empty-text">@Text</span>
+    }
+    @if (Actions is not null)
+    {
+        @Actions
+    }
+</div>
+
+@code {
+    /// <summary>Optional glyph shown above the title, e.g. an emoji.</summary>
+    [Parameter]
+    public string? Icon { get; set; }
+
+    /// <summary>Short headline, e.g. "No passkeys registered yet".</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "";
+
+    /// <summary>Optional supporting copy shown under the title.</summary>
+    [Parameter]
+    public string? Text { get; set; }
+
+    /// <summary>Optional call-to-action rendered below the text (e.g. a primary button).</summary>
+    [Parameter]
+    public RenderFragment? Actions { get; set; }
+}
