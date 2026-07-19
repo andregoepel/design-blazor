@@ -1,4 +1,5 @@
 @page "/"
+@rendermode InteractiveServer
 
 <AppPageTitle Title="Overview" Breadcrumb="Getting started / Overview" Suffix="Design Blazor" />
 
@@ -16,13 +17,8 @@
                     responsive drawer, theme toggle) is the library's own <code>AppShell</code> +
                     <code>ThemeToggle</code>. Use the sidebar to browse each surface.
                 </RadzenText>
-                <div class="ag-info-box">
-                    <span class="ag-info-box-label">Component-library status</span>
-                    <span class="ag-info-box-value">
-                        Browse the sidebar for a live gallery of each shipped component. New
-                        components get their own gallery section as they land.
-                    </span>
-                </div>
+                <InfoBox Label="Component-library status"
+                         Value="Browse the sidebar for a live gallery of each shipped component. New components get their own gallery section as they land." />
             </RadzenStack>
         </RadzenCard>
 
@@ -50,5 +46,12 @@
                 <StatTile Label="Net" Value="€2,359.60" />
             </RadzenColumn>
         </RadzenRow>
+
+        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+            <code>LinkButton</code> — a button that navigates on click, e.g. in a card footer.
+        </RadzenText>
+        <div class="ag-actions-inline">
+            <LinkButton Text="Jump to icons" Path="icons" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
+        </div>
     </RadzenStack>
 </div>

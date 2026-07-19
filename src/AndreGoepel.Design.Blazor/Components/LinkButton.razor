@@ -1,0 +1,25 @@
+@* A RadzenButton that navigates to a route on click, e.g. "Back to overview"
+   or a card-footer "View details" link styled as a button. *@
+@inject NavigationManager NavigationManager
+
+<RadzenButton Text="@Text" Icon="@Icon" ButtonStyle="ButtonStyle" Click="Navigate" />
+
+@code {
+    /// <summary>The button label.</summary>
+    [Parameter, EditorRequired]
+    public string Text { get; set; } = "";
+
+    /// <summary>The route to navigate to on click.</summary>
+    [Parameter, EditorRequired]
+    public string Path { get; set; } = "";
+
+    /// <summary>Radzen button style. Defaults to <see cref="Radzen.ButtonStyle.Primary"/>.</summary>
+    [Parameter]
+    public ButtonStyle ButtonStyle { get; set; } = ButtonStyle.Primary;
+
+    /// <summary>Optional Radzen Material icon ligature name (e.g. "arrow_back").</summary>
+    [Parameter]
+    public string? Icon { get; set; }
+
+    private void Navigate() => NavigationManager.NavigateTo(Path);
+}

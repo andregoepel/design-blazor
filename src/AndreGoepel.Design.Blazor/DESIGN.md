@@ -195,6 +195,12 @@ primary in a right-aligned footer.
 | Secondary / cancel | `Light` | transparent, hairline border, muted-to-text |
 | Destructive | `Danger` | danger-soft tint + red text (not a solid red block) |
 
+A button that navigates instead of raising a `Click` handler — use `LinkButton`:
+
+```razor
+<LinkButton Text="View passkeys" Path="account/manage/passkeys" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
+```
+
 ### Icons
 
 Two separate icon systems are in play:
@@ -217,6 +223,20 @@ Available glyphs: `sun`, `monitor`, `moon`, `edit`, `delete`, `search`,
 `x`. Icons are decorative by default (`aria-hidden`) — give the surrounding
 control its own accessible label. Add a new glyph by dropping its 24×24
 geometry into `AppIcon`'s `Glyphs` dictionary.
+
+### Info box
+
+An inline soft-tinted pill for a single labelled fact, e.g. "Next scheduled
+run" — use `InfoBox`. Pass `Value` for plain text, or `ChildContent` for
+richer content (a mono span, a link, …):
+
+```razor
+<InfoBox Label="Next scheduled run">
+    Tomorrow at 03:00 — <span class="ag-mono">0 3 * * *</span>
+</InfoBox>
+
+<InfoBox Label="Environment" Value="Production" />
+```
 
 ### Card action row
 
@@ -437,7 +457,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-toggle-row`, `ag-toggle-row-text`, `ag-toggle-row-label`, `ag-toggle-row-description` | settings toggle row: label + description + switch (rendered by `SettingToggleRow`) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |
-| `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
+| `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (rendered by `InfoBox`) |
 | `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state (rendered by `EmptyState`) |
 | `ag-row-actions`, `ag-icon-btn` | grid row actions (rendered by `RowActions`) + compact `⋯` button (rendered by `IconButton`) |
 | `ag-cell-name`, `ag-cell-id` | name/email + truncated mono id in a grid cell |
