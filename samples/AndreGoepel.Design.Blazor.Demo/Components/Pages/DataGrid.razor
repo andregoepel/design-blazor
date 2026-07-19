@@ -77,6 +77,20 @@
                 </RadzenDataGrid>
             }
         </DataCard>
+
+        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+            Radzen's own built-in <code>EmptyText</code> — for a plain "no rows" message where a
+            full <code>EmptyState</code> would be overkill.
+        </RadzenText>
+        <DataCard>
+            <RadzenDataGrid TItem="User" Data="@(new List<User>())" EmptyText="No archived users."
+                            Density="Density.Compact" AllowPaging="false">
+                <Columns>
+                    <RadzenDataGridColumn TItem="User" Property="Name" Title="User" />
+                    <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" />
+                </Columns>
+            </RadzenDataGrid>
+        </DataCard>
     </RadzenStack>
 </div>
 

@@ -345,6 +345,18 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   background: var(--ag-hover);
 }
 
+/* RadzenDataGrid's EmptyText renders a bare <td class="rz-datatable-emptymessage">
+   that nothing upstream styles — not material-base, not the rules above — so it
+   sits flush and uncoloured against the grid. This isn't a token remap (there's no
+   Radzen variable backing it); give it the padding/colour/centring of a deliberate
+   empty state. For a richer empty state (icon, action button), use EmptyState in
+   the grid's own empty-data branch instead of EmptyText. */
+.rz-datatable-emptymessage {
+  padding: 2.5rem 1rem;
+  color: var(--ag-muted);
+  text-align: center;
+}
+
 /* Let the grid fill the card and fit its columns instead of sizing to the sum
    of the fixed column widths (which overflowed the card horizontally). */
 .rz-data-grid .rz-grid-table {
@@ -435,6 +447,14 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
 
 .rz-density-compact .rz-grid-table td {
   padding: 13px 20px;
+}
+
+/* The compact-density td rule above (2 classes + type = higher specificity than
+   .rz-datatable-emptymessage alone) otherwise wins and crushes the empty state's
+   padding back down to the compact row height. Beat it explicitly so "no rows"
+   keeps a deliberate, spacious layout regardless of grid density. */
+.rz-density-compact .rz-grid-table td.rz-datatable-emptymessage {
+  padding: 2.5rem 1rem;
 }
 
 /* Context menus (grid row overflow "⋯" menus). Radzen's default hover is a
