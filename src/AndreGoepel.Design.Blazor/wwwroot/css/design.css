@@ -135,6 +135,19 @@
   --rz-checkbox-checked-background-color: var(--ag-accent);
   --rz-checkbox-checked-border: 1px solid var(--ag-accent);
   --rz-checkbox-checked-color: var(--ag-on-accent);
+
+  /* Dropdown / autocomplete panel items: like the switch/checkbox state above,
+     Radzen's hover + selected colours are their own variables — the selected
+     text otherwise stays Radzen's default indigo, the hover fill Radzen's light
+     default (white in the dark shell), and the selected item carries a shadow
+     that reads as a border. Map them onto the token palette. */
+  --rz-dropdown-item-hover-background-color: var(--ag-hover);
+  --rz-dropdown-item-hover-color: var(--ag-text);
+  --rz-dropdown-item-selected-background-color: var(--ag-accent-soft);
+  --rz-dropdown-item-selected-color: var(--ag-accent-text);
+  --rz-dropdown-item-selected-shadow: none;
+  --rz-dropdown-item-selected-hover-background-color: var(--ag-accent-soft);
+  --rz-dropdown-item-selected-hover-color: var(--ag-accent-text);
 }
 
 /* ---------------------------------------------------------- global element */
@@ -170,6 +183,7 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
 /* Inputs picked up by Radzen textboxes / dropdowns */
 .rz-textbox,
 .rz-inputtext,
+.rz-textarea,
 .rz-dropdown,
 .rz-lookup {
   background: var(--ag-input);
@@ -180,6 +194,7 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
 
 .rz-textbox:focus,
 .rz-inputtext:focus,
+.rz-textarea:focus,
 .rz-textbox:focus-within,
 .rz-inputtext:focus-within {
   border-color: var(--ag-accent);
