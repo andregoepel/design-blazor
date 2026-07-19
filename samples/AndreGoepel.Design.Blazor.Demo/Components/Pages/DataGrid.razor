@@ -1,6 +1,6 @@
 @page "/data-grid"
 @rendermode InteractiveServer
-@inject DialogService Dialogs
+@inject ConfirmService Confirm
 @inject ContextMenuService ContextMenu
 @inject NotificationService Notifications
 
@@ -117,12 +117,7 @@
 
     private async Task DeleteAsync(User u)
     {
-        var ok = await Dialogs.Confirm(
-            $"Delete {u.Name}? This cannot be undone.",
-            "Delete user",
-            new ConfirmOptions { OkButtonText = "Delete", CancelButtonText = "Cancel" });
-
-        if (ok == true)
+        if (await Confirm.ConfirmDeleteAsync(u.Name))
         {
             _users.Remove(u);
             Notifications.Notify(NotificationSeverity.Success, "Deleted", $"{u.Name} was removed.");

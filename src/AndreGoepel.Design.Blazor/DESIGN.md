@@ -348,6 +348,25 @@ private void OpenRowMenu(MouseEventArgs args, Role role)
 
 The host layout must render `<RadzenContextMenu />` once (the Aspire sample does).
 
+### Confirmations
+
+Don't call `DialogService.Confirm` directly — inject `ConfirmService` and use it,
+so every confirm dialog gets the same title, OK/Cancel wording, and the
+`bool?`→`bool` collapse (a dismissed dialog counts as "no"). Register it once with
+`services.AddDesignBlazor()` (after `AddRadzenComponents()`).
+
+```csharp
+@inject ConfirmService Confirm
+
+// standard destructive delete: "Delete {name}? This cannot be undone." + a "Delete" button
+if (await Confirm.ConfirmDeleteAsync(role.Name))
+    await DeleteRoleAsync(role);
+
+// or a custom confirm
+if (await Confirm.ConfirmAsync("Sign everyone out?", "End sessions", okText: "Sign out"))
+    await EndSessionsAsync();
+```
+
 ### Auth / login pages
 
 Auth pages use `LoginLayout`, which supplies the centred card, brand, and footer.
