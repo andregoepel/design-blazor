@@ -1,3 +1,4 @@
+using AndreGoepel.Design.Blazor;
 using AndreGoepel.Design.Blazor.Demo.Components;
 using Radzen;
 
@@ -9,6 +10,9 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 // Radzen services: registers the Dialog / Notification / Tooltip / ContextMenu
 // hosts that the design-system components rely on (rendered once in MainLayout).
 builder.Services.AddRadzenComponents();
+
+// Design-system services (ConfirmService, …) — must follow AddRadzenComponents.
+builder.Services.AddDesignBlazor();
 
 var app = builder.Build();
 
