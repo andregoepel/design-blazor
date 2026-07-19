@@ -11,4 +11,7 @@
   <Folder Name="/samples/">
     <Project Path="samples/AndreGoepel.Design.Blazor.Demo/AndreGoepel.Design.Blazor.Demo.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AndreGoepel.Design.Blazor.Tests/AndreGoepel.Design.Blazor.Tests.csproj" />
+  </Folder>
 </Solution>

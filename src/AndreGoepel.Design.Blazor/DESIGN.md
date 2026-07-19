@@ -107,11 +107,7 @@ card; the card holds the form/content; actions sit in a bordered footer.
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
 
-        @* Heading + subtitle, outside the card *@
-        <div>
-            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Page title</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">Short description.</RadzenText>
-        </div>
+        <PageHeader Title="Page title" Subtitle="Short description." />
 
         @* Status banners (if any) go here — OUTSIDE the card *@
 
@@ -130,17 +126,19 @@ card; the card holds the form/content; actions sit in a bordered footer.
 ```
 
 **Page header with a right-aligned action** (e.g. "+ New role", "Register
-passkey") — use `.ag-page-head`:
+passkey") — pass `Actions`:
 
 ```razor
-<div class="ag-page-head">
-    <div>
-        <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Page title</RadzenText>
-        <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">Description.</RadzenText>
-    </div>
-    <RadzenButton Text="New role" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="@New" />
-</div>
+<PageHeader Title="Page title" Subtitle="Description.">
+    <Actions>
+        <RadzenButton Text="New role" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="@New" />
+    </Actions>
+</PageHeader>
 ```
+
+`PageHeader` is a thin wrapper over `.ag-page-head` (heading left, actions right,
+bottom-aligned; wraps below ~640px). Omit `Subtitle` for a title-only heading and
+`Actions` for a plain heading with no right-hand slot.
 
 ---
 
@@ -309,7 +307,7 @@ A page just provides the heading block + form + a centred footer link:
 
 | Class | Purpose |
 |---|---|
-| `ag-page-head` | header row: heading left, action right |
+| `ag-page-head` | header row: heading left, action right (rendered by `PageHeader`) |
 | `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
