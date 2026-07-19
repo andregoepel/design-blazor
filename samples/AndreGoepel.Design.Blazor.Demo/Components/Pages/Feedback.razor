@@ -1,0 +1,62 @@
+@page "/feedback"
+@rendermode InteractiveServer
+@inject NotificationService Notifications
+
+<AppPageTitle Title="Feedback & empty states" Breadcrumb="Components / Feedback" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Feedback &amp; empty states</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                Alerts, toast notifications, the info box, and the dashed empty state.
+                An <code>EmptyState</code> component lands in issue #9.
+            </RadzenText>
+        </div>
+
+        <RadzenStack Gap="0.75rem">
+            <RadzenAlert AlertStyle="AlertStyle.Info" ShowIcon="true" AllowClose="false">Informational banner — sits outside the card.</RadzenAlert>
+            <RadzenAlert AlertStyle="AlertStyle.Success" ShowIcon="true" AllowClose="false">Success — the change was saved.</RadzenAlert>
+            <RadzenAlert AlertStyle="AlertStyle.Warning" ShowIcon="true" AllowClose="false">Warning — consent expires in 7 days.</RadzenAlert>
+            <RadzenAlert AlertStyle="AlertStyle.Danger" ShowIcon="true" AllowClose="false">Danger — the connection failed.</RadzenAlert>
+        </RadzenStack>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Toast notifications</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap">
+                    <RadzenButton Text="Info" ButtonStyle="ButtonStyle.Light" Click="@(() => Notify(NotificationSeverity.Info))" />
+                    <RadzenButton Text="Success" ButtonStyle="ButtonStyle.Success" Click="@(() => Notify(NotificationSeverity.Success))" />
+                    <RadzenButton Text="Warning" ButtonStyle="ButtonStyle.Warning" Click="@(() => Notify(NotificationSeverity.Warning))" />
+                    <RadzenButton Text="Error" ButtonStyle="ButtonStyle.Danger" Click="@(() => Notify(NotificationSeverity.Error))" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Info box</RadzenText>
+                <div class="ag-info-box">
+                    <span class="ag-info-box-label">Next scheduled run</span>
+                    <span class="ag-info-box-value">Tomorrow at 03:00 — <span class="ag-mono">0 3 * * *</span></span>
+                </div>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Empty state</RadzenText>
+                <div class="ag-empty">
+                    <span class="ag-empty-icon">🔑&#xFE0E;</span>
+                    <span class="ag-empty-title">No passkeys registered yet</span>
+                    <span class="ag-empty-text">Passkeys let you sign in without a password.</span>
+                </div>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenStack>
+</div>
+
+@code {
+    private void Notify(NotificationSeverity severity) =>
+        Notifications.Notify(severity, severity.ToString(), "This is a sample notification.");
+}

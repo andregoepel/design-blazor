@@ -1,0 +1,32 @@
+@page "/icons"
+
+<AppPageTitle Title="Icons" Breadcrumb="Getting started / Icons" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Icons</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                The <code>AppIcon</code> inline-SVG set (stroke-based, inherits <code>currentColor</code>).
+                The glyph set expands in issue #19.
+            </RadzenText>
+        </div>
+
+        <RadzenCard>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:0.75rem;">
+                @foreach (var name in Glyphs)
+                {
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:0.9rem; border:1px solid var(--ag-border); border-radius:8px;">
+                        <AppIcon Name="@name" Size="24" />
+                        <span class="ag-mono" style="font-size:12px;">@name</span>
+                    </div>
+                }
+            </div>
+        </RadzenCard>
+    </RadzenStack>
+</div>
+
+@code {
+    // Keep in sync with AppIcon.Glyphs; add new names here as #19 lands.
+    private static readonly string[] Glyphs = ["sun", "monitor", "moon"];
+}

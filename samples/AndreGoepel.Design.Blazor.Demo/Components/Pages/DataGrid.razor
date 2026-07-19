@@ -1,0 +1,168 @@
+@page "/data-grid"
+@rendermode InteractiveServer
+@inject DialogService Dialogs
+@inject ContextMenuService ContextMenu
+@inject NotificationService Notifications
+
+<AppPageTitle Title="Data grid" Breadcrumb="Components / Data grid" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div class="ag-page-head">
+            <div>
+                <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Data grid</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                    The in-card grid recipe: toolbar (search + count), name/id cells, status badges,
+                    and a row-action overflow menu. <code>DataCard</code> + <code>GridToolbar</code> +
+                    <code>RowActions</code> components land in issues #10 and #11.
+                </RadzenText>
+            </div>
+            <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
+        </div>
+
+        @if (Filtered.Count == 0)
+        {
+            <div class="ag-empty">
+                <span class="ag-empty-icon">👤&#xFE0E;</span>
+                <span class="ag-empty-title">No users match your search</span>
+                <span class="ag-empty-text">Try a different term, or clear the search box.</span>
+            </div>
+        }
+        else
+        {
+            <RadzenCard Style="padding: 0; overflow: hidden;">
+                <div class="ag-grid-toolbar">
+                    <div class="ag-search">
+                        <span class="ag-search-icon"><AppIcon Name="monitor" Size="14" /></span>
+                        <input class="ag-search-input" placeholder="Search users…"
+                               value="@_search" @oninput="OnSearch" />
+                    </div>
+                    <span class="ag-grid-count">@Filtered.Count of @_users.Count</span>
+                </div>
+
+                <RadzenDataGrid TItem="User" Data="Filtered" Density="Density.Compact"
+                                AllowFiltering="false" AllowColumnResize="false"
+                                AllowPaging="true" PageSize="8" AllowSorting="true">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="User" Property="Name" Title="User">
+                            <Template Context="u">
+                                <div style="display:flex; flex-direction:column; gap:2px;">
+                                    <span class="ag-cell-name">@u.Name</span>
+                                    <span class="ag-cell-id">@u.Id</span>
+                                </div>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" />
+                        <RadzenDataGridColumn TItem="User" Property="Active" Title="Status" Width="120px">
+                            <Template Context="u">
+                                @if (u.Active)
+                                {
+                                    <span class="ag-badge ag-badge-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="ag-badge ag-badge-danger">Disabled</span>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="User" Title="" Width="160px" TextAlign="TextAlign.End" Sortable="false">
+                            <Template Context="u">
+                                <div class="ag-row-actions">
+                                    <RadzenButton Text="Edit" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                                                  Click="@(() => Edit(u))" />
+                                    <RadzenButton Icon="more_horiz" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                                                  class="ag-icon-btn" Click="@(args => OpenRowMenu(args, u))" />
+                                </div>
+                            </Template>
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+            </RadzenCard>
+        }
+    </RadzenStack>
+</div>
+
+@code {
+    private string _search = string.Empty;
+    private readonly List<User> _users = Seed();
+
+    private List<User> Filtered =>
+        string.IsNullOrWhiteSpace(_search)
+            ? _users
+            : _users.Where(u =>
+                  u.Name.Contains(_search, StringComparison.OrdinalIgnoreCase) ||
+                  u.Email.Contains(_search, StringComparison.OrdinalIgnoreCase))
+              .ToList();
+
+    private void OnSearch(ChangeEventArgs e) => _search = e.Value?.ToString() ?? string.Empty;
+
+    private void AddOne()
+    {
+        var n = _users.Count + 1;
+        _users.Add(new User($"USR-{n:000}", $"New User {n}", $"user{n}@example.com", true));
+        Notifications.Notify(NotificationSeverity.Success, "Added", "A demo user was added.");
+    }
+
+    private void Edit(User u) =>
+        Notifications.Notify(NotificationSeverity.Info, "Edit", $"Would open the editor for {u.Name}.");
+
+    private void OpenRowMenu(MouseEventArgs args, User u)
+    {
+        var items = new List<ContextMenuItem>
+        {
+            new() { Text = u.Active ? "Disable" : "Enable", Value = "toggle", Icon = "sync" },
+            new() { Text = "Delete", Value = "delete", Icon = "delete", IconColor = "var(--ag-danger)" },
+        };
+
+        ContextMenu.Open(args, items, async e =>
+        {
+            ContextMenu.Close();
+            switch (e.Value as string)
+            {
+                case "toggle":
+                    u.Active = !u.Active;
+                    StateHasChanged();
+                    break;
+                case "delete":
+                    await DeleteAsync(u);
+                    break;
+            }
+        });
+    }
+
+    private async Task DeleteAsync(User u)
+    {
+        var ok = await Dialogs.Confirm(
+            $"Delete {u.Name}? This cannot be undone.",
+            "Delete user",
+            new ConfirmOptions { OkButtonText = "Delete", CancelButtonText = "Cancel" });
+
+        if (ok == true)
+        {
+            _users.Remove(u);
+            Notifications.Notify(NotificationSeverity.Success, "Deleted", $"{u.Name} was removed.");
+            StateHasChanged();
+        }
+    }
+
+    private static List<User> Seed() =>
+    [
+        new("USR-001", "Ada Lovelace", "ada@example.com", true),
+        new("USR-002", "Alan Turing", "alan@example.com", true),
+        new("USR-003", "Grace Hopper", "grace@example.com", false),
+        new("USR-004", "Katherine Johnson", "katherine@example.com", true),
+        new("USR-005", "Edsger Dijkstra", "edsger@example.com", true),
+        new("USR-006", "Barbara Liskov", "barbara@example.com", false),
+        new("USR-007", "Donald Knuth", "donald@example.com", true),
+        new("USR-008", "Margaret Hamilton", "margaret@example.com", true),
+        new("USR-009", "Linus Torvalds", "linus@example.com", true),
+    ];
+
+    private sealed class User(string id, string name, string email, bool active)
+    {
+        public string Id { get; } = id;
+        public string Name { get; } = name;
+        public string Email { get; } = email;
+        public bool Active { get; set; } = active;
+    }
+}

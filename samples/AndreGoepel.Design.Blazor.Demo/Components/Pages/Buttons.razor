@@ -1,0 +1,79 @@
+@page "/buttons"
+@rendermode InteractiveServer
+
+<AppPageTitle Title="Buttons & badges" Breadcrumb="Components / Buttons" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Buttons &amp; badges</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                Radzen buttons reskinned by the design tokens, and the <code>ag-badge</code> status pills.
+            </RadzenText>
+        </div>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Button styles</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                    <RadzenButton Text="Primary" ButtonStyle="ButtonStyle.Primary" />
+                    <RadzenButton Text="Light / cancel" ButtonStyle="ButtonStyle.Light" />
+                    <RadzenButton Text="Secondary" ButtonStyle="ButtonStyle.Secondary" />
+                    <RadzenButton Text="Success" ButtonStyle="ButtonStyle.Success" />
+                    <RadzenButton Text="Warning" ButtonStyle="ButtonStyle.Warning" />
+                    <RadzenButton Text="Danger" ButtonStyle="ButtonStyle.Danger" />
+                    <RadzenButton Text="Disabled" ButtonStyle="ButtonStyle.Primary" Disabled="true" />
+                </RadzenStack>
+
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Sizes &amp; busy state</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                    <RadzenButton Text="Medium" ButtonStyle="ButtonStyle.Primary" />
+                    <RadzenButton Text="Small" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Small" />
+                    <RadzenButton Text="Extra small" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.ExtraSmall" />
+                    <RadzenButton Text="@(_busy ? "Working…" : "Run with busy state")" ButtonStyle="ButtonStyle.Primary"
+                                  IsBusy="_busy" BusyText="Working…" Click="RunBusyAsync" />
+                    <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Primary" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Status badges</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                    <span class="ag-badge ag-badge-success">Active</span>
+                    <span class="ag-badge ag-badge-danger">Deleted</span>
+                </RadzenStack>
+                <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+                    Only <code>success</code> and <code>danger</code> ship today. The
+                    <code>warn</code> / <code>info</code> / <code>neutral</code> variants and a
+                    typed <code>StatusBadge</code> component arrive in issue #8.
+                </RadzenText>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="0.75rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Card action row</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                    The bordered, right-aligned <code>ag-card-actions</code> footer.
+                </RadzenText>
+                <div class="ag-card-actions">
+                    <RadzenButton Text="Cancel" ButtonStyle="ButtonStyle.Light" />
+                    <RadzenButton Text="Save changes" ButtonStyle="ButtonStyle.Primary" />
+                </div>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenStack>
+</div>
+
+@code {
+    private bool _busy;
+
+    private async Task RunBusyAsync()
+    {
+        _busy = true;
+        await Task.Delay(1200);
+        _busy = false;
+    }
+}
