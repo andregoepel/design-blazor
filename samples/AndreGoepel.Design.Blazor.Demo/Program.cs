@@ -12,7 +12,8 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddRadzenComponents();
 
 // Design-system services (ConfirmService, …) — must follow AddRadzenComponents.
-builder.Services.AddDesignBlazor();
+// BrandName is appended to every page's document title by AppPageTitle.
+builder.Services.AddDesignBlazor(o => o.BrandName = "Design Blazor");
 
 var app = builder.Build();
 

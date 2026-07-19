@@ -49,8 +49,10 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
   `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`, `CardForm`, `FormField`,
   `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`, and the cascading
   `BreadcrumbState`.
-- **Services** — `ConfirmService` (standardised confirm/delete dialogs), registered
-  via `services.AddDesignBlazor()` (call after `AddRadzenComponents()`).
+- **Services & options** — `ConfirmService` (standardised confirm/delete dialogs)
+  and `DesignBlazorOptions` (e.g. the `BrandName` `AppPageTitle` appends to document
+  titles), registered via `services.AddDesignBlazor(o => o.BrandName = "Acme")`
+  (call after `AddRadzenComponents()`).
 - **Self-hosted fonts** (Manrope / Space Grotesk / JetBrains Mono) — nothing is
   fetched from Google at runtime. Regenerate with `scripts/fetch-fonts.py`.
 
