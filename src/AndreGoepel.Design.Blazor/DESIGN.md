@@ -510,21 +510,49 @@ fills the slots:
 The host only needs to load `nav.js` (see the Aspire sample's `App.razor`);
 `AppShell` emits the hamburger, backdrop and `data-nav-open` itself.
 
+### Page title & brand
+
+Every routed page uses `AppPageTitle` to set the document `<title>`. Register the
+brand once at startup and pages don't repeat it:
+
+```csharp
+builder.Services.AddDesignBlazor(o => o.BrandName = "Acme");
+```
+
+```razor
+<AppPageTitle Title="Profile" Breadcrumb="Account / Profile" />
+@* document title → "Profile – Acme" *@
+```
+
+The title is `"{Title} – {brand}"`, where the brand is an explicit `Suffix` on the
+page if given, otherwise the configured `BrandName`; with neither, it's just
+`Title`. Pass `Suffix` only to override the brand for one page. Options are
+resolved optionally, so a page still renders (without a suffix) when no brand is
+configured.
+
+> **Migration.** `AppPageTitle` now reads the brand from `DesignBlazorOptions`, so
+> the per-app wrapper components (`AppFoundationPageTitle`,
+> `IdentityPageTitle`) are redundant: register the brand via
+> `AddDesignBlazor(o => o.BrandName = …)` (mapping the existing
+> `AppFoundationLayoutOptions.BrandName` / `MartenIdentityBlazorOptions.ApplicationName`),
+> replace `<AppFoundationPageTitle …>` / `<IdentityPageTitle …>` with
+> `<AppPageTitle …>`, and delete the wrapper. Tracked in each repo's adoption issue.
+
 ### Topbar breadcrumb
 
 The topbar crumb is **defined per page, not by the layout**. Each shell page sets
-it through `IdentityPageTitle`'s optional `Breadcrumb` parameter, in sentence case
-with the section prefix:
+it through `AppPageTitle`'s optional `Breadcrumb` parameter, in sentence case with
+the section prefix:
 
 ```razor
-<IdentityPageTitle Title="Profile" Breadcrumb="Account / Profile" />
+<AppPageTitle Title="Profile" Breadcrumb="Account / Profile" />
 ```
 
-`IdentityPageTitle` pushes the value into a cascading `BreadcrumbState` that
-`AppShell` owns and renders in `ag-topbar-title`; the shell re-renders when it
-changes. Omit `Breadcrumb` and the document `Title` is used as a fallback. Pages
-outside the shell (the `LoginLayout` auth pages) have no `BreadcrumbState` cascaded,
-so they simply ignore the parameter.
+`AppPageTitle` pushes the value into a cascading `BreadcrumbState` that `AppShell`
+owns and renders in `ag-topbar-title`; the shell re-renders when it changes. Omit
+`Breadcrumb` and the document `Title` is used as a fallback. Pages outside the
+shell (the `LoginLayout` auth pages) have no `BreadcrumbState` cascaded, so they
+simply ignore the parameter.
 
 ### Responsive
 
