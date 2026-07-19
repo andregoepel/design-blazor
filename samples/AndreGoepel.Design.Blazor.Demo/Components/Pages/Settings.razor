@@ -1,0 +1,34 @@
+@page "/settings"
+@rendermode InteractiveServer
+@inject NotificationService Notifications
+
+<AppPageTitle Title="Settings toggles" Breadcrumb="Components / Settings" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <PageHeader Title="Settings toggles"
+                    Subtitle="SettingToggleRow: label + description + switch, stacked in a card. The last row drops its bottom border automatically." />
+
+        <RadzenCard Style="padding: 8px 30px;">
+            <SettingToggleRow Label="Self-service registration"
+                               Description="Lets visitors create their own account."
+                               @bind-Value="_registration" />
+            <SettingToggleRow Label="Two-factor authentication"
+                               Description="Authenticator-app setup for sign-in."
+                               @bind-Value="_twoFactor" />
+            <SettingToggleRow Label="Passkeys"
+                               Description="WebAuthn passkey registration and sign-in."
+                               @bind-Value="_passkeys" Disabled="true" />
+        </RadzenCard>
+
+        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+            Current values: registration=@_registration, two-factor=@_twoFactor, passkeys=@_passkeys (disabled)
+        </RadzenText>
+    </RadzenStack>
+</div>
+
+@code {
+    private bool _registration = true;
+    private bool _twoFactor = true;
+    private bool _passkeys;
+}
