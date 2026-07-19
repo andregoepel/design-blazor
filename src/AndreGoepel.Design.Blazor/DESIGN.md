@@ -362,6 +362,11 @@ named fragment). With no `Actions`, the fields can sit directly inside.
 </RadzenDataGridColumn>
 ```
 
+- **No rows:** `RadzenDataGrid`'s own `EmptyText` is styled (padding, muted colour,
+  centred) for a plain "no rows" message. For a richer empty state — an icon, a
+  call-to-action — swap the grid for `EmptyState` in your empty-data branch instead
+  (see the Data grid gallery page for both side by side).
+
 - **Toolbar (search + count):** use `GridToolbar` inside `DataCard`, above the
   grid. Bind `Search` two-way and filter your own data off it — the component
   only renders the box, filtering is the page's job:
@@ -597,6 +602,34 @@ component types:
   table fills the card without horizontal overflow.
 - **Read-only inputs** need `--rz-input-disabled-background` defined (Radzen
   leaves it empty → transparent).
+- **Radzen's neutral ramp and grid stripes have their own light defaults** that
+  `--rz-text-color`/`--rz-border-color` don't cover: `--rz-base` / `--rz-on-base`
+  (backs `ButtonStyle.Base`, which `DialogService.Confirm()` uses for its Cancel
+  button — unmapped, every confirm dialog showed a white button), `--rz-base-200`
+  (backs `BadgeStyle.Light` — unmapped, measured 1.2:1 contrast), and
+  `--rz-grid-stripe-background-color` / `--rz-grid-stripe-odd-background-color`
+  (alternating grid rows — unmapped, every second row stayed white). All three
+  are remapped onto the token palette.
+- **A `RadzenDataGrid`'s `EmptyText` renders an unstyled `<td class="rz-datatable-emptymessage">`**
+  — nothing upstream styles it, so it's given deliberate padding/colour/centring.
+  Because `.rz-density-compact .rz-grid-table td` (2 classes + a type selector) has
+  higher specificity, a compact grid needs its own override
+  (`.rz-density-compact .rz-grid-table td.rz-datatable-emptymessage`) or the
+  compact padding wins and crushes the empty state back down.
+- **`RadzenDropDown`'s panel-item hover/selected colours are their own variables**
+  (`--rz-dropdown-item-*`), not `--rz-primary` — same class of leak as the switch/
+  checkbox checked state below. Unmapped, the selected item's text stayed Radzen's
+  default indigo and hover stayed white.
+- **A closed dropdown's inner value label carries `.rz-inputtext`**, so the
+  generic input-border rule drew a second border *inside* the dropdown's own
+  frame. Stripped via `.rz-dropdown .rz-dropdown-label.rz-inputtext`.
+- **Switches/checkboxes have their own "checked" colour variables** (not
+  `--rz-primary`), so the on-state stays Radzen's default indigo unless
+  `--rz-switch-checked-*` / `--rz-checkbox-checked-*` are mapped onto the accent.
+- **Blazor's enhanced navigation morphs `<html>` to the server response**, which
+  has no `data-theme` — wiping the theme on every page change. `theme.js` runs a
+  `MutationObserver` on `data-theme` that re-applies the resolved preference
+  whenever the attribute is removed.
 
 ---
 
