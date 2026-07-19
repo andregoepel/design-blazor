@@ -111,15 +111,10 @@ card; the card holds the form/content; actions sit in a bordered footer.
 
         @* Status banners (if any) go here — OUTSIDE the card *@
 
-        <RadzenCard>
-            <RadzenStack Orientation="Orientation.Vertical" Gap="1.5rem" AlignItems="AlignItems.Stretch">
-                @* fields … *@
-                <div class="ag-card-actions">
-                    <RadzenButton Text="Cancel" ButtonStyle="ButtonStyle.Light" Click="@Cancel" />
-                    <RadzenButton ButtonType="ButtonType.Submit" Text="Save changes" ButtonStyle="ButtonStyle.Primary" />
-                </div>
-            </RadzenStack>
-        </RadzenCard>
+        @* A form page: CardForm supplies the card + template form + action footer. *@
+        <CardForm TItem="InputModel" Data="Input" Submit="SaveAsync">
+            @* FormFields … (see §5) *@
+        </CardForm>
 
     </RadzenStack>
 </div>
@@ -146,25 +141,27 @@ bottom-aligned; wraps below ~640px). Omit `Subtitle` for a title-only heading an
 
 ### Forms
 
-Label **above** the field, full width. Never use `RadzenFormField` (its floating
-label doesn't match the design). Group fields in a `RadzenStack Gap="1.25rem"`.
+Use `CardForm` (the card + `RadzenTemplateForm` + action footer) with `FormField`s
+(label **above** the field, full width). Never use `RadzenFormField` — its floating
+label doesn't match the design. Put the control + any validators in each
+`FormField`'s content; set `For` to the control's `Name` so the label links to it.
 
 ```razor
-<RadzenStack Gap="0.4rem">
-    <RadzenLabel Text="Email" Component="Email" />
-    <RadzenTextBox @bind-Value="@Input.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
-    <ValidationMessage For="@(() => Input.Email)" class="rz-message rz-messages-error" />
-</RadzenStack>
+<CardForm TItem="InputModel" Data="Input" Submit="SaveAsync" Cancel="Cancel" IsBusy="_saving">
+    <FormField Label="Email" For="Email" Hint="We'll only use this to contact you.">
+        <RadzenTextBox @bind-Value="Input.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
+        <RadzenRequiredValidator Component="Email" Text="Email is required" />
+        <RadzenEmailValidator Component="Email" Text="That is not a valid email" />
+    </FormField>
+</CardForm>
 ```
 
-Two fields side by side (collapses to one column on narrow screens):
+`Submit` fires only when validation passes; while `IsBusy` is true the primary
+button shows `BusyText` and both buttons disable. `Cancel` is optional — omit it and
+no cancel button is shown.
 
-```razor
-<div class="ag-form-grid">
-    <RadzenStack Gap="0.4rem"> … field … </RadzenStack>
-    <RadzenStack Gap="0.4rem"> … field … </RadzenStack>
-</div>
-```
+Two fields side by side (collapses to one column on narrow screens): wrap them in
+`<div class="ag-form-grid">…</div>` inside the `CardForm`.
 
 Read-only fields render greyed automatically (`.rz-textbox[readonly]`). Just set
 `ReadOnly="true"`; you do not need extra inline styles.
@@ -394,7 +391,7 @@ A page just provides the heading block + form + a centred footer link:
 | Class | Purpose |
 |---|---|
 | `ag-page-head` | header row: heading left, action right (rendered by `PageHeader`) |
-| `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left) |
+| `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left; rendered by `CardForm`) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
