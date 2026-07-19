@@ -180,6 +180,29 @@ primary in a right-aligned footer.
 | Secondary / cancel | `Light` | transparent, hairline border, muted-to-text |
 | Destructive | `Danger` | danger-soft tint + red text (not a solid red block) |
 
+### Icons
+
+Two separate icon systems are in play:
+
+- **`RadzenButton`'s `Icon="…"`** uses Radzen's bundled Material Symbols font
+  (ligature names like `add`, `delete`, `search`, `more_horiz`) — the default
+  for anything inside a Radzen button.
+- **`AppIcon`** is a small hand-drawn inline-SVG set (stroke-based, inherits
+  `currentColor`, 24×24 viewBox) for icon needs *outside* a Radzen button slot
+  — e.g. `ThemeToggle`'s sun/monitor/moon switch, or a bespoke icon next to
+  plain text.
+
+```razor
+<AppIcon Name="search" />           @* 16px, default *@
+<AppIcon Name="chevron-left" Size="24" />
+```
+
+Available glyphs: `sun`, `monitor`, `moon`, `edit`, `delete`, `search`,
+`more-horizontal`, `plus`, `chevron-left`, `chevron-right`, `key`, `check`,
+`x`. Icons are decorative by default (`aria-hidden`) — give the surrounding
+control its own accessible label. Add a new glyph by dropping its 24×24
+geometry into `AppIcon`'s `Glyphs` dictionary.
+
 ### Card action row
 
 ```razor
