@@ -1,0 +1,77 @@
+@typeparam TItem
+
+@* Add/edit form scaffold (DESIGN.md §4/§5): a RadzenCard wrapping a
+   RadzenTemplateForm, its fields (put FormFields in ChildContent), and the
+   bordered ag-card-actions footer with a Primary submit + optional Light cancel.
+   Submit fires only when validation passes. Set IsBusy while saving. *@
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="TItem" Data="Data" Submit="Submit">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="1.25rem" AlignItems="AlignItems.Stretch">
+            @if (!string.IsNullOrWhiteSpace(Title))
+            {
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@Title</RadzenText>
+            }
+
+            @ChildContent
+
+            <div class="ag-card-actions">
+                @if (Cancel.HasDelegate)
+                {
+                    <RadzenButton
+                        Text="@CancelText"
+                        ButtonStyle="ButtonStyle.Light"
+                        ButtonType="ButtonType.Button"
+                        Click="Cancel"
+                        Disabled="IsBusy"
+                    />
+                }
+                <RadzenButton
+                    ButtonType="ButtonType.Submit"
+                    Text="@SubmitText"
+                    ButtonStyle="ButtonStyle.Primary"
+                    IsBusy="IsBusy"
+                    BusyText="@BusyText"
+                />
+            </div>
+        </RadzenStack>
+    </RadzenTemplateForm>
+</RadzenCard>
+
+@code {
+    /// <summary>The form model bound by the fields inside <see cref="ChildContent"/>.</summary>
+    [Parameter, EditorRequired]
+    public TItem Data { get; set; } = default!;
+
+    /// <summary>The fields — typically a stack of <c>FormField</c>s (and validators).</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Raised with <see cref="Data"/> when the form is submitted and valid.</summary>
+    [Parameter]
+    public EventCallback<TItem> Submit { get; set; }
+
+    /// <summary>Optional cancel action. When unset, no cancel button is shown.</summary>
+    [Parameter]
+    public EventCallback Cancel { get; set; }
+
+    /// <summary>Optional heading rendered at the top of the card body.</summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>Primary submit button text.</summary>
+    [Parameter]
+    public string SubmitText { get; set; } = "Save changes";
+
+    /// <summary>Cancel button text.</summary>
+    [Parameter]
+    public string CancelText { get; set; } = "Cancel";
+
+    /// <summary>While true, the submit button shows <see cref="BusyText"/> and is disabled.</summary>
+    [Parameter]
+    public bool IsBusy { get; set; }
+
+    /// <summary>Busy-state text on the submit button.</summary>
+    [Parameter]
+    public string BusyText { get; set; } = "Saving…";
+}

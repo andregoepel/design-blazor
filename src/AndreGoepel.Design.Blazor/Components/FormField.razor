@@ -1,0 +1,33 @@
+@* Label-above form field (DESIGN.md §5 "Forms"): a label over the control, full
+   width. Put the input (and any validators) in ChildContent; set For to the
+   input's Name so the label links to it. Never use RadzenFormField — its floating
+   label doesn't match the design. *@
+
+<RadzenStack Gap="0.4rem">
+    <RadzenLabel Text="@Label" Component="@For" />
+    @ChildContent
+    @if (!string.IsNullOrWhiteSpace(Hint))
+    {
+        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+            @Hint
+        </RadzenText>
+    }
+</RadzenStack>
+
+@code {
+    /// <summary>The field label.</summary>
+    [Parameter, EditorRequired]
+    public string Label { get; set; } = "";
+
+    /// <summary>The <c>Name</c> of the control this labels (links the label to it).</summary>
+    [Parameter]
+    public string? For { get; set; }
+
+    /// <summary>The control, plus any validators.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Optional muted help text shown under the control.</summary>
+    [Parameter]
+    public string? Hint { get; set; }
+}
