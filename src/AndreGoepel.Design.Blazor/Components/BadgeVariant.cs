@@ -1,6 +1,9 @@
 namespace AndreGoepel.Design.Blazor.Components;
 
-/// <summary>Semantic colour for a <see cref="StatusBadge"/>, mapped to an ag-badge-* class.</summary>
+/// <summary>
+/// Semantic colour shared by status-oriented components (<see cref="StatusBadge"/>
+/// maps it to an ag-badge-* class; <see cref="StatTile"/> maps it to a text colour).
+/// </summary>
 public enum BadgeVariant
 {
     /// <summary>Neutral / muted (default) — no strong status meaning.</summary>
