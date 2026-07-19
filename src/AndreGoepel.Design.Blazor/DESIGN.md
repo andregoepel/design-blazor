@@ -315,6 +315,33 @@ Use `EmptyState` over the `ag-empty` recipe: `Icon` (optional glyph), `Title`,
 with a trailing U+FE0E variation selector so it renders as the flat text-style
 glyph the `ag-empty-icon` colour token expects, not a full-colour emoji.
 
+### Filter bar
+
+For structured filters above a grid (status, date range, owner, …), use
+`FilterBar` — a card holding a horizontal, wrapping row of fields with an Apply
+button. It's for *committed* filters (Apply-on-click); for live text search
+inside the grid card, use `GridToolbar` instead — the two compose. Put
+`FormField`s in `ChildContent`, handle `OnApply`, and give controls a `min-width`
+so they don't collapse:
+
+```razor
+<FilterBar OnApply="ApplyFilters">
+    <ChildContent>
+        <FormField Label="Status" For="StatusFilter">
+            <RadzenDropDown @bind-Value="_pendingStatus" Data="_statuses" Name="StatusFilter" Style="min-width: 12rem;" />
+        </FormField>
+    </ChildContent>
+    <Actions>
+        <RadzenButton Text="Reset" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
+    </Actions>
+</FilterBar>
+```
+
+Note: because `FilterBar` has **both** `ChildContent` and an optional `Actions`
+slot, once you use `Actions` you must wrap the fields in an explicit
+`<ChildContent>` tag (a Blazor rule — you can't mix implicit child content with a
+named fragment). With no `Actions`, the fields can sit directly inside.
+
 ### Data grids (`RadzenDataGrid`)
 
 - Wrap in `DataCard` (a `RadzenCard` with `Style="padding: 0; overflow: hidden;"`
