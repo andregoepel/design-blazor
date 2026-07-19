@@ -46,7 +46,7 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
   the app shell, and the login card.
 - **Components** — `AppShell`, `AppPageTitle`, `LoginShell`, `AppIcon`,
   `ThemeToggle`, `PageHeader`, `StatusBadge`, `EmptyState`, `RowActions`,
-  `IconButton`, and the cascading `BreadcrumbState`.
+  `IconButton`,  `DataCard`, `GridToolbar`, and the cascading `BreadcrumbState`.
 - **Self-hosted fonts** (Manrope / Space Grotesk / JetBrains Mono) — nothing is
   fetched from Google at runtime. Regenerate with `scripts/fetch-fonts.py`.
 

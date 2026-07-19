@@ -260,7 +260,8 @@ glyph the `ag-empty-icon` colour token expects, not a full-colour emoji.
 
 ### Data grids (`RadzenDataGrid`)
 
-- Wrap in `<RadzenCard Style="padding: 0; overflow: hidden;">`.
+- Wrap in `DataCard` (a `RadzenCard` with `Style="padding: 0; overflow: hidden;"`
+  so a `GridToolbar` + grid sit flush against its edges).
 - `AllowFiltering="false"`, `AllowColumnResize="false"`, no `SelectionMode` —
   rows are display-only. Column headers are upper-cased by the stylesheet; write
   titles in sentence case.
@@ -276,6 +277,31 @@ glyph the `ag-empty-icon` colour token expects, not a full-colour emoji.
     </Template>
 </RadzenDataGridColumn>
 ```
+
+- **Toolbar (search + count):** use `GridToolbar` inside `DataCard`, above the
+  grid. Bind `Search` two-way and filter your own data off it — the component
+  only renders the box, filtering is the page's job:
+
+```razor
+<DataCard>
+    <GridToolbar @bind-Search="_search" SearchPlaceholder="Search roles…"
+                 Count="@($"{Filtered.Count} of {_roles.Count}")" />
+
+    @if (Filtered.Count == 0)
+    {
+        <div class="rz-p-4 rz-p-md-6">
+            <EmptyState Title="No roles match your search" />
+        </div>
+    }
+    else
+    {
+        <RadzenDataGrid TItem="Role" Data="Filtered" … />
+    }
+</DataCard>
+```
+
+  Keep the toolbar mounted even when the grid is replaced by an `EmptyState` —
+  otherwise the user has no way to clear a search that matched nothing.
 
 - Status columns use `.ag-badge` (see above).
 - **Row actions:** use `RowActions` + `IconButton` — keep the primary action
@@ -353,7 +379,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
-| `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count |
+| `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
 | `ag-empty`, `ag-empty-icon`, `ag-empty-title`, `ag-empty-text` | dashed empty state (rendered by `EmptyState`) |
 | `ag-row-actions`, `ag-icon-btn` | grid row actions (rendered by `RowActions`) + compact `⋯` button (rendered by `IconButton`) |

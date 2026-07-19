@@ -9,29 +9,25 @@
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
         <PageHeader Title="Data grid"
-                    Subtitle="The in-card grid recipe: toolbar (search + count), name/id cells, status badges, and a row-action overflow menu. DataCard + GridToolbar + RowActions components land in issues #10 and #11.">
+                    Subtitle="The in-card grid recipe: DataCard + GridToolbar (search + count), name/id cells, status badges, and a row-action overflow menu. RowActions/IconButton land in issue #11.">
             <Actions>
                 <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
             </Actions>
         </PageHeader>
 
-        @if (Filtered.Count == 0)
-        {
-            <EmptyState Icon="@("👤︎")" Title="No users match your search"
-                        Text="Try a different term, or clear the search box." />
-        }
-        else
-        {
-            <RadzenCard Style="padding: 0; overflow: hidden;">
-                <div class="ag-grid-toolbar">
-                    <div class="ag-search">
-                        <span class="ag-search-icon"><AppIcon Name="monitor" Size="14" /></span>
-                        <input class="ag-search-input" placeholder="Search users…"
-                               value="@_search" @oninput="OnSearch" />
-                    </div>
-                    <span class="ag-grid-count">@Filtered.Count of @_users.Count</span>
-                </div>
+        <DataCard>
+            <GridToolbar @bind-Search="_search" SearchPlaceholder="Search users…"
+                         Count="@($"{Filtered.Count} of {_users.Count}")" />
 
+            @if (Filtered.Count == 0)
+            {
+                <div class="rz-p-4 rz-p-md-6">
+                    <EmptyState Icon="@("👤︎")" Title="No users match your search"
+                                Text="Try a different term, or clear the search box." />
+                </div>
+            }
+            else
+            {
                 <RadzenDataGrid TItem="User" Data="Filtered" Density="Density.Compact"
                                 AllowFiltering="false" AllowColumnResize="false"
                                 AllowPaging="true" PageSize="8" AllowSorting="true">
@@ -68,8 +64,8 @@
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>
-            </RadzenCard>
-        }
+            }
+        </DataCard>
     </RadzenStack>
 </div>
 
@@ -84,8 +80,6 @@
                   u.Name.Contains(_search, StringComparison.OrdinalIgnoreCase) ||
                   u.Email.Contains(_search, StringComparison.OrdinalIgnoreCase))
               .ToList();
-
-    private void OnSearch(ChangeEventArgs e) => _search = e.Value?.ToString() ?? string.Empty;
 
     private void AddOne()
     {
