@@ -5,7 +5,7 @@
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
         <PageHeader Title="Icons"
-                    Subtitle="The AppIcon inline-SVG set (stroke-based, inherits currentColor). The glyph set expands in issue #19." />
+                    Subtitle="The AppIcon inline-SVG set (stroke-based, inherits currentColor)." />
 
         <RadzenCard>
             <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:0.75rem;">
@@ -22,6 +22,21 @@
 </div>
 
 @code {
-    // Keep in sync with AppIcon.Glyphs; add new names here as #19 lands.
-    private static readonly string[] Glyphs = ["sun", "monitor", "moon"];
+    // Keep in sync with AppIcon.Glyphs.
+    private static readonly string[] Glyphs =
+    [
+        "sun",
+        "monitor",
+        "moon",
+        "edit",
+        "delete",
+        "search",
+        "more-horizontal",
+        "plus",
+        "chevron-left",
+        "chevron-right",
+        "key",
+        "check",
+        "x",
+    ];
 }
