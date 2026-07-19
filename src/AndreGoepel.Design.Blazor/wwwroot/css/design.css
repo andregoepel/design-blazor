@@ -597,6 +597,41 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   }
 }
 
+/* A settings toggle row: label + description on the left, a switch on the
+   right. Stack them in a card; the last row should drop its border (add
+   .ag-toggle-row-last, or let SettingToggleRow's own :last-child rule
+   handle it when they're the card's only content). */
+.ag-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ag-border);
+}
+
+.ag-toggle-row:last-child {
+  border-bottom: none;
+}
+
+.ag-toggle-row-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ag-toggle-row-label {
+  font: 600 15px "Space Grotesk", system-ui, sans-serif;
+  color: var(--ag-text);
+}
+
+.ag-toggle-row-description {
+  font-size: 12.5px;
+  color: var(--ag-muted);
+}
+
 /* Page header row with a heading on the left and an action on the right. */
 .ag-page-head {
   display: flex;

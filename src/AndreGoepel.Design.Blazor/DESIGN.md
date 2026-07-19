@@ -166,6 +166,24 @@ Two fields side by side (collapses to one column on narrow screens): wrap them i
 Read-only fields render greyed automatically (`.rz-textbox[readonly]`). Just set
 `ReadOnly="true"`; you do not need extra inline styles.
 
+### Settings toggles
+
+A stack of on/off feature toggles (e.g. an admin settings page) — use
+`SettingToggleRow` inside a `RadzenCard`, one per setting. Each row is label +
+description on the left, a `RadzenSwitch` on the right, with a bottom border
+that the last row drops automatically:
+
+```razor
+<RadzenCard Style="padding: 8px 30px;">
+    <SettingToggleRow Label="Self-service registration"
+                       Description="Lets visitors create their own account."
+                       @bind-Value="Input.EnableUserRegistration" />
+    <SettingToggleRow Label="Passkeys"
+                       Description="WebAuthn passkey registration and sign-in."
+                       @bind-Value="Input.EnablePasskey" />
+</RadzenCard>
+```
+
 ### Buttons
 
 Sentence case, dark-on-accent primaries. Order secondary/cancel **before** the
@@ -394,6 +412,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left; rendered by `CardForm`) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
+| `ag-toggle-row`, `ag-toggle-row-text`, `ag-toggle-row-label`, `ag-toggle-row-description` | settings toggle row: label + description + switch (rendered by `SettingToggleRow`) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (e.g. "Next scheduled run …") |
