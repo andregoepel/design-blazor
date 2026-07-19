@@ -41,11 +41,12 @@
         <RadzenCard>
             <RadzenStack Gap="1rem">
                 <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Empty state</RadzenText>
-                <div class="ag-empty">
-                    <span class="ag-empty-icon">🔑&#xFE0E;</span>
-                    <span class="ag-empty-title">No passkeys registered yet</span>
-                    <span class="ag-empty-text">Passkeys let you sign in without a password.</span>
-                </div>
+                <EmptyState Icon="@("🔑︎")" Title="No passkeys registered yet"
+                            Text="Passkeys let you sign in without a password.">
+                    <Actions>
+                        <RadzenButton Text="Register passkey" Icon="add" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Small" />
+                    </Actions>
+                </EmptyState>
             </RadzenStack>
         </RadzenCard>
     </RadzenStack>
