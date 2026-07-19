@@ -1,0 +1,53 @@
+@* A summary tile: a muted caption (with an optional AppIcon glyph) over a big
+   value, tinted by Variant. Just a card of RadzenText — no new CSS class,
+   composed entirely from existing tokens/primitives. *@
+
+<RadzenCard>
+    <RadzenStack Gap="0.4rem">
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.4rem" AlignItems="AlignItems.Center">
+                <AppIcon Name="@Icon" Size="14" />
+                <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">@Label</RadzenText>
+            </RadzenStack>
+        }
+        else
+        {
+            <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">@Label</RadzenText>
+        }
+        <RadzenText TextStyle="TextStyle.H5" Style="@ValueStyle">@Value</RadzenText>
+    </RadzenStack>
+</RadzenCard>
+
+@code {
+    /// <summary>The muted caption above the value, e.g. "Income".</summary>
+    [Parameter, EditorRequired]
+    public string Label { get; set; } = "";
+
+    /// <summary>The big value, pre-formatted by the caller (e.g. "€1,234.56").</summary>
+    [Parameter, EditorRequired]
+    public string Value { get; set; } = "";
+
+    /// <summary>
+    /// Tints the value. <see cref="BadgeVariant.Neutral"/> (default) leaves it at
+    /// the normal heading colour.
+    /// </summary>
+    [Parameter]
+    public BadgeVariant Variant { get; set; } = BadgeVariant.Neutral;
+
+    /// <summary>Optional <c>AppIcon</c> glyph shown next to the label.</summary>
+    [Parameter]
+    public string? Icon { get; set; }
+
+    private string? ValueColorVar =>
+        Variant switch
+        {
+            BadgeVariant.Success => "var(--ag-accent-text)",
+            BadgeVariant.Danger => "var(--ag-danger)",
+            BadgeVariant.Warning => "var(--ag-warn)",
+            BadgeVariant.Info => "var(--ag-info)",
+            _ => null,
+        };
+
+    private string? ValueStyle => ValueColorVar is null ? null : $"color: {ValueColorVar};";
+}

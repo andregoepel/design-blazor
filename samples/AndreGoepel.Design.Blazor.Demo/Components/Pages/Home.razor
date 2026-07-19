@@ -17,11 +17,10 @@
                     <code>ThemeToggle</code>. Use the sidebar to browse each surface.
                 </RadzenText>
                 <div class="ag-info-box">
-                    <span class="ag-info-box-label">Wave 1 status</span>
+                    <span class="ag-info-box-label">Component-library status</span>
                     <span class="ag-info-box-value">
-                        <code>PageHeader</code> ships. Remaining components (StatusBadge, EmptyState,
-                        CardForm, …) still use the documented ag-* CSS recipes directly, and get
-                        their own gallery sections as they land.
+                        Browse the sidebar for a live gallery of each shipped component. New
+                        components get their own gallery section as they land.
                     </span>
                 </div>
             </RadzenStack>
@@ -36,5 +35,20 @@
                 <RadzenButton Text="Primary action" Icon="add" ButtonStyle="ButtonStyle.Primary" />
             </Actions>
         </PageHeader>
+
+        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+            <code>StatTile</code> — a caption + a big value, optionally tinted and iconed.
+        </RadzenText>
+        <RadzenRow Gap="1rem">
+            <RadzenColumn Size="12" SizeMd="4">
+                <StatTile Label="Income" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMd="4">
+                <StatTile Label="Expenses" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMd="4">
+                <StatTile Label="Net" Value="€2,359.60" />
+            </RadzenColumn>
+        </RadzenRow>
     </RadzenStack>
 </div>

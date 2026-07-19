@@ -247,6 +247,28 @@ Use `StatusBadge` with a semantic `Variant`; it maps to the matching
 The underlying classes are `ag-badge` + `ag-badge-success` / `-danger` / `-warn`
 / `-info` / `-neutral`, all tinted from the `--ag-*` tokens.
 
+### Stat tiles
+
+Use `StatTile` for a summary number (a dashboard row of Income/Expenses/Net,
+planned-vs-actual, …): a muted caption over a big value, optionally tinted with
+the same `BadgeVariant` as `StatusBadge`, and an optional `AppIcon` glyph next
+to the caption. `Value` is a pre-formatted string — `StatTile` doesn't format
+numbers or currency itself.
+
+```razor
+<RadzenRow Gap="1rem">
+    <RadzenColumn Size="12" SizeMd="4">
+        <StatTile Label="Income" Value="€4,250.00" Variant="BadgeVariant.Success" />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMd="4">
+        <StatTile Label="Expenses" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMd="4">
+        <StatTile Label="Net" Value="€2,359.60" />   @* Neutral: inherits the default heading colour *@
+    </RadzenColumn>
+</RadzenRow>
+```
+
 ### Alerts / status banners
 
 Use `RadzenAlert`; the stylesheet softens Radzen's filled variants into tinted
