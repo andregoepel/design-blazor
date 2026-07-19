@@ -1,0 +1,12 @@
+@* Right-aligned grid row-action group (DESIGN.md §5 "Data grids" → Row
+   actions). Typically a visible primary RadzenButton plus an IconButton
+   opening a ContextMenuService overflow menu. *@
+
+<div class="ag-row-actions">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
