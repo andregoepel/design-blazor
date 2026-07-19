@@ -6,6 +6,11 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
     <!-- Sample host only: never published to NuGet. -->
     <IsPackable>false</IsPackable>
+    <!-- Opt this sample out of lock-file management: the Web SDK pulls in
+         Microsoft.AspNetCore.App.Internal.Assets, whose version is pinned to the
+         installed runtime patch, so a committed lock file breaks locked-mode
+         restores whenever CI runs a newer 10.0.x patch than was used locally. -->
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
