@@ -62,4 +62,19 @@
   window.agTheme = api;
   // Apply immediately so the first paint already matches the preference.
   apply(preference());
+
+  // Blazor's enhanced navigation morphs <html> to the server response, which has
+  // no data-theme — wiping the attribute on every page change and reverting the
+  // shell to the default theme. Re-apply whenever data-theme diverges from the
+  // resolved preference. Runs before paint (microtask), so there's no flash, and
+  // it self-terminates because re-setting to the desired value is a no-op.
+  new MutationObserver(function () {
+    var desired = resolve(preference());
+    if (document.documentElement.getAttribute("data-theme") !== desired) {
+      document.documentElement.setAttribute("data-theme", desired);
+    }
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
 })();

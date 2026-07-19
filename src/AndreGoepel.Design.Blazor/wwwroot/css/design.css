@@ -202,6 +202,14 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   outline: none;
 }
 
+/* A dropdown's inner value label carries .rz-inputtext, so the input rule above
+   would draw a second border inside the .rz-dropdown's own frame. Strip it — the
+   .rz-dropdown wrapper already provides the border and fill. */
+.rz-dropdown .rz-dropdown-label.rz-inputtext {
+  border: none;
+  background: transparent;
+}
+
 /* Read-only / disabled fields read as greyed out (design's muted look). */
 .rz-textbox[readonly],
 .rz-textbox:disabled,
