@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <ResourcePreloader />
+
+    @* Design-system stylesheet stack — ORDER MATTERS:
+       self-hosted fonts → Radzen base → design tokens (must load AFTER Radzen). *@
+    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/fonts.css" />
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css" />
+    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/design.css" />
+    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <link rel="stylesheet" href="@Assets["AndreGoepel.Design.Blazor.Demo.styles.css"]" />
+
+    @* Applies the stored light/dark preference before first paint (no flash). *@
+    <script src="_content/AndreGoepel.Design.Blazor/js/theme.js"></script>
+
+    <ImportMap />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <ReconnectModal />
+    <script src="_content/AndreGoepel.Design.Blazor/js/nav.js"></script>
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+</body>
+
+</html>

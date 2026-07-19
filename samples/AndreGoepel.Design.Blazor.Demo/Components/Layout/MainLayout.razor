@@ -1,0 +1,25 @@
+@inherits LayoutComponentBase
+
+@* Radzen hosts (dialog / notification / tooltip / context menu) — rendered once. *@
+<RadzenComponents @rendermode="InteractiveServer" />
+
+<AppShell BrandName="Design Blazor">
+    <Sidebar>
+        <DemoNav />
+    </Sidebar>
+    <TopbarActions>
+        <ThemeToggle />
+    </TopbarActions>
+    <SidebarFooter>
+        <span class="ag-sidebar-note">AndreGoepel.Design.Blazor — component gallery</span>
+    </SidebarFooter>
+    <ChildContent>
+        @Body
+    </ChildContent>
+</AppShell>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>

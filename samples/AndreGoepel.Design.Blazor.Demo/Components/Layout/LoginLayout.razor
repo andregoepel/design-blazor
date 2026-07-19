@@ -1,0 +1,21 @@
+@inherits LayoutComponentBase
+
+@* Auth-page layout: centred LoginShell (brand + card) with no sidebar/topbar.
+   The page supplies the card contents via @Body. *@
+
+<RadzenComponents @rendermode="InteractiveServer" />
+
+<LoginShell BrandName="Design Blazor">
+    <ChildContent>
+        @Body
+    </ChildContent>
+    <Footer>
+        Component gallery — <a href="">back to overview</a>
+    </Footer>
+</LoginShell>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>

@@ -8,4 +8,7 @@
   <Folder Name="/src/">
     <Project Path="src/AndreGoepel.Design.Blazor/AndreGoepel.Design.Blazor.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/AndreGoepel.Design.Blazor.Demo/AndreGoepel.Design.Blazor.Demo.csproj" />
+  </Folder>
 </Solution>

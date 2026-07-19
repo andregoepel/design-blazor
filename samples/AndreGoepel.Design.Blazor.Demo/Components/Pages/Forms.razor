@@ -1,0 +1,76 @@
+@page "/forms"
+@rendermode InteractiveServer
+@inject NotificationService Notifications
+
+<AppPageTitle Title="Forms" Breadcrumb="Components / Forms" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Forms</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                The label-above field recipe, the two-column <code>ag-form-grid</code>, validators,
+                and the card action footer. A typed <code>CardForm</code> / <code>FormField</code>
+                component lands in issue #13.
+            </RadzenText>
+        </div>
+
+        <RadzenCard>
+            <RadzenTemplateForm TItem="Model" Data="_model" Submit="OnSubmit">
+                <RadzenStack Orientation="Orientation.Vertical" Gap="1.25rem" AlignItems="AlignItems.Stretch">
+                    <div class="ag-form-grid">
+                        <RadzenStack Gap="0.4rem">
+                            <RadzenLabel Text="First name" Component="FirstName" />
+                            <RadzenTextBox @bind-Value="_model.FirstName" Name="FirstName" Style="width:100%" />
+                            <RadzenRequiredValidator Component="FirstName" Text="First name is required" />
+                        </RadzenStack>
+                        <RadzenStack Gap="0.4rem">
+                            <RadzenLabel Text="Last name" Component="LastName" />
+                            <RadzenTextBox @bind-Value="_model.LastName" Name="LastName" Style="width:100%" />
+                            <RadzenRequiredValidator Component="LastName" Text="Last name is required" />
+                        </RadzenStack>
+                    </div>
+
+                    <RadzenStack Gap="0.4rem">
+                        <RadzenLabel Text="Email" Component="Email" />
+                        <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
+                        <RadzenRequiredValidator Component="Email" Text="Email is required" />
+                        <RadzenEmailValidator Component="Email" Text="That is not a valid email" />
+                    </RadzenStack>
+
+                    <RadzenStack Gap="0.4rem">
+                        <RadzenLabel Text="Role" Component="Role" />
+                        <RadzenDropDown @bind-Value="_model.Role" Data="_roles" Name="Role" Style="width:100%" />
+                    </RadzenStack>
+
+                    <RadzenStack Gap="0.4rem">
+                        <RadzenLabel Text="Notes" Component="Notes" />
+                        <RadzenTextArea @bind-Value="_model.Notes" Name="Notes" Rows="3" Style="width:100%" />
+                    </RadzenStack>
+
+                    <div class="ag-card-actions">
+                        <RadzenButton Text="Cancel" ButtonStyle="ButtonStyle.Light" ButtonType="ButtonType.Reset" />
+                        <RadzenButton Text="Save changes" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" />
+                    </div>
+                </RadzenStack>
+            </RadzenTemplateForm>
+        </RadzenCard>
+    </RadzenStack>
+</div>
+
+@code {
+    private readonly Model _model = new();
+    private readonly string[] _roles = ["Viewer", "Editor", "Administrator"];
+
+    private void OnSubmit() =>
+        Notifications.Notify(NotificationSeverity.Success, "Saved", $"Form submitted for {_model.Email}.");
+
+    private sealed class Model
+    {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string Role { get; set; } = "Viewer";
+        public string? Notes { get; set; }
+    }
+}

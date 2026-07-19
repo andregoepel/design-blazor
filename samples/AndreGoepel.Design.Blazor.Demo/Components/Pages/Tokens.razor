@@ -1,0 +1,74 @@
+@page "/tokens"
+
+<AppPageTitle Title="Tokens & typography" Breadcrumb="Getting started / Tokens" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">Tokens &amp; typography</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                The semantic <code>--ag-*</code> colour tokens and the type ramp. Switch the theme in the
+                top bar to see both palettes.
+            </RadzenText>
+        </div>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Colour tokens</RadzenText>
+                <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.75rem;">
+                    @foreach (var t in Swatches)
+                    {
+                        <div style="border:1px solid var(--ag-border); border-radius:8px; overflow:hidden;">
+                            <div style="height:56px; background:var(--@t.Var);"></div>
+                            <div style="padding:0.5rem 0.6rem;">
+                                <div style="font-weight:600; font-size:13px;">@t.Label</div>
+                                <div class="ag-mono" style="font-size:11px; color:var(--ag-muted);">--@t.Var</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="0.75rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Type ramp</RadzenText>
+                <RadzenText TextStyle="TextStyle.H1">H1 — Manrope display</RadzenText>
+                <RadzenText TextStyle="TextStyle.H2">H2 — section heading</RadzenText>
+                <RadzenText TextStyle="TextStyle.H3">H3 — section heading</RadzenText>
+                <RadzenText TextStyle="TextStyle.H4">H4 — card / dialog title</RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">H5 — page title</RadzenText>
+                <RadzenText TextStyle="TextStyle.H6">H6 — sub-section</RadzenText>
+                <RadzenText TextStyle="TextStyle.Subtitle1">Subtitle1 — panel / field label</RadzenText>
+                <RadzenText TextStyle="TextStyle.Subtitle2">Subtitle2 — smaller label</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">Body1 — primary paragraph copy for descriptions and content.</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">Body2 — secondary / muted copy.</RadzenText>
+                <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">Caption — help text.</RadzenText>
+                <span class="ag-mono">JetBrains Mono — 1234567890 ids &amp; code</span>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenStack>
+</div>
+
+@code {
+    private sealed record Token(string Var, string Label);
+
+    private static readonly Token[] Swatches =
+    [
+        new("ag-accent", "Accent"),
+        new("ag-accent-soft", "Accent soft"),
+        new("ag-surface", "Surface"),
+        new("ag-bg", "Background"),
+        new("ag-bg-sidebar", "Sidebar"),
+        new("ag-border", "Border"),
+        new("ag-text", "Text"),
+        new("ag-text2", "Text 2"),
+        new("ag-muted", "Muted"),
+        new("ag-danger", "Danger"),
+        new("ag-danger-soft", "Danger soft"),
+        new("ag-warn", "Warning"),
+        new("ag-warn-soft", "Warning soft"),
+        new("ag-info", "Info"),
+        new("ag-info-soft", "Info soft"),
+    ];
+}

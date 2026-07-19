@@ -1,0 +1,48 @@
+@page "/login"
+@layout LoginLayout
+@rendermode InteractiveServer
+
+<AppPageTitle Title="Log in" Suffix="Design Blazor" />
+
+<div class="ag-login-head">
+    <RadzenText TagName="TagName.H1" TextStyle="TextStyle.H4" Text="Welcome back" />
+    <RadzenText TextStyle="TextStyle.Body2" class="ag-login-sub" Text="Fill in your credentials to continue." />
+</div>
+
+<RadzenTemplateForm TItem="Model" Data="_model" Submit="OnSubmit">
+    <RadzenStack Gap="1.25rem">
+        <RadzenStack Gap="0.4rem">
+            <RadzenLabel Text="Email" Component="Email" />
+            <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
+            <RadzenRequiredValidator Component="Email" Text="Email is required" />
+        </RadzenStack>
+        <RadzenStack Gap="0.4rem">
+            <RadzenLabel Text="Password" Component="Password" />
+            <RadzenPassword @bind-Value="_model.Password" Name="Password" Style="width:100%" />
+            <RadzenRequiredValidator Component="Password" Text="Password is required" />
+        </RadzenStack>
+
+        <div class="ag-login-actions">
+            <RadzenButton Text="Log in" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Style="width:100%" />
+        </div>
+    </RadzenStack>
+</RadzenTemplateForm>
+
+<div class="ag-login-footer-links">
+    <span class="ag-login-resend">No account? <RadzenLink Path="" Text="Back to overview" /></span>
+</div>
+
+@code {
+    private readonly Model _model = new();
+
+    private void OnSubmit()
+    {
+        // Demo only — no authentication happens here.
+    }
+
+    private sealed class Model
+    {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
+}

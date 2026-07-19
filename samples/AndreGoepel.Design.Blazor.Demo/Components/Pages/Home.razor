@@ -1,0 +1,45 @@
+@page "/"
+
+<AppPageTitle Title="Overview" Breadcrumb="Getting started / Overview" Suffix="Design Blazor" />
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="1.5rem">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H1">AndreGoepel.Design.Blazor</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                A live gallery of the shared design system — shell, tokens, and component recipes.
+                Toggle light / dark with the switch in the top bar to review both themes.
+            </RadzenText>
+        </div>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">What you're looking at</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                    This sample boots the raw <code>AndreGoepel.Design.Blazor</code> package — no Aspire,
+                    no database — inside a plain Blazor Server host. The chrome around you (sidebar, top bar,
+                    responsive drawer, theme toggle) is the library's own <code>AppShell</code> +
+                    <code>ThemeToggle</code>. Use the sidebar to browse each surface.
+                </RadzenText>
+                <div class="ag-info-box">
+                    <span class="ag-info-box-label">Wave 1 status</span>
+                    <span class="ag-info-box-value">
+                        Existing components + the ag-* CSS recipes are shown today. New components
+                        (PageHeader, StatusBadge, EmptyState, CardForm, …) get their own gallery
+                        sections as they land.
+                    </span>
+                </div>
+            </RadzenStack>
+        </RadzenCard>
+
+        <div class="ag-page-head">
+            <div>
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">Page header pattern</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                    Heading left, primary action right — the <code>ag-page-head</code> recipe.
+                </RadzenText>
+            </div>
+            <RadzenButton Text="Primary action" Icon="add" ButtonStyle="ButtonStyle.Primary" />
+        </div>
+    </RadzenStack>
+</div>
