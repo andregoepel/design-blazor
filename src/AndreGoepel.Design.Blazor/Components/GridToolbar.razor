@@ -1,0 +1,48 @@
+@* The in-card grid toolbar (DESIGN.md §5 "Data grids"): a search box that
+   filters the grid, plus a right-aligned result count. Bind Search two-way
+   (@bind-Search) and drive your own filtering off it — this component only
+   renders the box, it doesn't filter anything itself. *@
+
+<div class="ag-grid-toolbar">
+    <div class="ag-search">
+        <span class="ag-search-icon"><AppIcon Name="search" Size="14" /></span>
+        <input class="ag-search-input" placeholder="@SearchPlaceholder" value="@Search" @oninput="OnInput" />
+    </div>
+    @if (Actions is not null)
+    {
+        @Actions
+    }
+    @if (!string.IsNullOrEmpty(Count))
+    {
+        <span class="ag-grid-count">@Count</span>
+    }
+</div>
+
+@code {
+    /// <summary>The current search text. Bind with <c>@@bind-Search</c>.</summary>
+    [Parameter]
+    public string Search { get; set; } = "";
+
+    /// <summary>Raised when the search text changes.</summary>
+    [Parameter]
+    public EventCallback<string> SearchChanged { get; set; }
+
+    /// <summary>Placeholder shown in the empty search box.</summary>
+    [Parameter]
+    public string SearchPlaceholder { get; set; } = "Search…";
+
+    /// <summary>Right-aligned result count, e.g. "9 of 12". Omit to hide it.</summary>
+    [Parameter]
+    public string? Count { get; set; }
+
+    /// <summary>Optional extra toolbar content rendered between the search box and the count.</summary>
+    [Parameter]
+    public RenderFragment? Actions { get; set; }
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        var value = e.Value?.ToString() ?? "";
+        Search = value;
+        await SearchChanged.InvokeAsync(value);
+    }
+}

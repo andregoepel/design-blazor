@@ -1,0 +1,13 @@
+@* The standard in-card data-grid wrapper (DESIGN.md §5 "Data grids"): a
+   RadzenCard with no padding so a GridToolbar + RadzenDataGrid sit flush
+   against its edges. *@
+
+<RadzenCard Style="padding: 0; overflow: hidden;">
+    @ChildContent
+</RadzenCard>
+
+@code {
+    /// <summary>Typically a <c>GridToolbar</c> followed by a <c>RadzenDataGrid</c>.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
