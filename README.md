@@ -33,7 +33,10 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
 ```razor
 <AppShell BrandName="Acme">
     <Sidebar>@* NavLinks + ag-nav-section groups *@</Sidebar>
-    <TopbarActions><ThemeToggle /></TopbarActions>
+    <TopbarActions>
+        <LanguageSwitcher />
+        <ThemeToggle />
+    </TopbarActions>
     <ChildContent>@Body</ChildContent>
 </AppShell>
 ```
@@ -45,16 +48,32 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
 - **`ag-*` helper classes** — cards, buttons, badges, forms, grids, empty states,
   the app shell, and the login card.
 - **Components** — `AppShell`, `AppPageTitle`, `LoginShell`, `AppIcon`,
-  `ThemeToggle`, `PageHeader`, `StatusBadge`, `EmptyState`, `RowActions`,
-  `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`, `CardForm`, `FormField`,
-  `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`, and the cascading
-  `BreadcrumbState`.
+  `ThemeToggle`, `LanguageSwitcher`, `PageHeader`, `StatusBadge`, `EmptyState`,
+  `RowActions`, `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`, `CardForm`,
+  `FormField`, `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`, and the
+  cascading `BreadcrumbState`.
 - **Services & options** — `ConfirmService` (standardised confirm/delete dialogs)
   and `DesignBlazorOptions` (e.g. the `BrandName` `AppPageTitle` appends to document
   titles), registered via `services.AddDesignBlazor(o => o.BrandName = "Acme")`
   (call after `AddRadzenComponents()`).
 - **Self-hosted fonts** (Manrope / Space Grotesk / JetBrains Mono) — nothing is
   fetched from Google at runtime. Regenerate with `scripts/fetch-fonts.py`.
+
+## Localization
+
+English and German ship out of the box — every string a component renders on its
+own falls back to a localized default, overridable per-parameter as always:
+
+```csharp
+builder.Services.AddDesignBlazor(o => o.BrandName = "Acme"); // en/de by default
+...
+app.UseDesignBlazorLocalization(); // before MapRazorComponents
+```
+
+`LanguageSwitcher` (above) links to the culture-switch endpoint this sets up. See
+[DESIGN.md §9](src/AndreGoepel.Design.Blazor/DESIGN.md#9-localization) for how a
+host app localizes its own pages the same way — the
+[demo app](samples/AndreGoepel.Design.Blazor.Demo) is a fully bilingual reference.
 
 See [`DESIGN.md`](src/AndreGoepel.Design.Blazor/DESIGN.md) for the full guidelines.
 

@@ -495,6 +495,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-cell-name`, `ag-cell-id` | name/email + truncated mono id in a grid cell |
 | `ag-login-*` | login-card building blocks (provided by `LoginLayout`) |
 | `ag-shell`, `ag-sidebar`, `ag-topbar`, `ag-topbar-left`, `ag-nav-item`, `ag-theme-toggle`, `ag-hamburger`, `ag-backdrop`, … | app shell (rendered by `AppShell`) |
+| `ag-lang-toggle`, `ag-lang-btn` | language switch pill (rendered by `LanguageSwitcher`, §9) |
 
 ### App shell
 
@@ -506,7 +507,7 @@ fills the slots:
 ```razor
 <AppShell BrandName="@AppName">
     <Sidebar>@* NavLinks + ag-nav-section groups *@</Sidebar>
-    <TopbarActions>@* theme toggle, user chip, sign-in/out *@</TopbarActions>
+    <TopbarActions>@* language switcher, theme toggle, user chip, sign-in/out *@</TopbarActions>
     <SidebarFooter>@* optional *@</SidebarFooter>
     <ChildContent>@Body</ChildContent>
 </AppShell>
@@ -647,3 +648,106 @@ component types:
       new pattern, add a token-based rule to `design.css` rather than a
       literal hex value.
 - [ ] Builds clean and renders without a horizontal scrollbar at desktop widths.
+- [ ] Any text the component renders on its own comes from
+      `IStringLocalizer<DesignStrings>` (§9), with a nullable parameter so a host
+      can still pass its own text.
+
+---
+
+## 9. Localization
+
+The library ships English and German out of the box: every string a component
+renders on its own (`CardForm`'s submit/cancel/busy text, `FilterBar`'s apply
+button, `GridToolbar`'s search placeholder, `ThemeToggle`'s labels, `AppShell`'s
+hamburger `aria-label`, `ConfirmService`'s dialog text) comes from
+`IStringLocalizer<DesignStrings>` — see
+[`Resources/DesignStrings.resx`](Resources/DesignStrings.resx) /
+[`DesignStrings.de.resx`](Resources/DesignStrings.de.resx). A host that never
+touches localization at all still gets English defaults for free.
+
+### Setup
+
+```csharp
+builder.Services.AddDesignBlazor(o =>
+{
+    o.DefaultCulture = "en";          // the default; only set if you want another
+    o.SupportedCultures = ["en", "de"]; // the default; list the cultures you offer
+});
+```
+
+```csharp
+// Before MapRazorComponents — the request that establishes a Blazor Server
+// circuit has to already carry the resolved culture.
+app.UseDesignBlazorLocalization();
+```
+
+`UseDesignBlazorLocalization` turns on `RequestLocalizationMiddleware` and maps
+the culture-switch endpoint (`GET /ag-culture?c={culture}&redirect={url}`) that
+`LanguageSwitcher` links to. The resolved culture, in order, is: a culture cookie
+the visitor previously chose, then the browser's `Accept-Language` header, then
+`DefaultCulture`. An explicit choice always wins over the browser's preference —
+otherwise a visitor who deliberately picked English would be switched back on
+every request.
+
+### `LanguageSwitcher`
+
+Drop it in `TopbarActions` next to `ThemeToggle`:
+
+```razor
+<AppShell BrandName="@AppName">
+    <TopbarActions>
+        <LanguageSwitcher />
+        <ThemeToggle />
+    </TopbarActions>
+    ...
+</AppShell>
+```
+
+It renders one item per configured culture, labelled with the culture's own
+native name (its *endonym* — "Deutsch", not "German" translated into whatever's
+currently active), so adding a culture to `SupportedCultures` needs no resource
+entry. The items are plain anchors, not buttons: the switch has to work without a
+Blazor circuit (e.g. on statically rendered pages), and it survives Blazor's
+enhanced navigation only because each link carries `data-enhance-nav="false"` —
+without it, enhanced navigation would morph in the response without rebuilding the
+circuit, leaving the UI rendered in the old culture despite the cookie being set.
+
+Because switching culture only takes effect on the request that (re-)builds the
+circuit, this is a full page load, not a live update — by design, not a
+limitation to work around.
+
+### A host app's own strings
+
+`DesignStrings` covers only the library's own built-in text. A host localizes its
+*own* pages the same way, with its *own* resource pair, separate from the
+library's — an app's translation work shouldn't be entangled with the design
+system's:
+
+```csharp
+// Resources/Strings.cs
+namespace YourApp.Resources;
+public sealed class Strings;
+```
+
+```
+Resources/Strings.resx      (English, neutral — the source of truth)
+Resources/Strings.de.resx
+```
+
+```razor
+@inject IStringLocalizer<Strings> L
+<PageHeader Title="@L["Profile.Title"]" Subtitle="@L["Profile.Subtitle"]" />
+```
+
+Key convention: `{Area}.{Purpose}` (e.g. `DataGrid.SearchUsers`,
+`Confirm.DeleteMessage`). The sample app
+([`samples/AndreGoepel.Design.Blazor.Demo`](../../samples/AndreGoepel.Design.Blazor.Demo))
+is translated end-to-end this way and doubles as the reference implementation —
+copy its `Program.cs`, `App.razor`, and `Resources/` wiring.
+
+> **Gotcha.** Don't compare against a *displayed* (localized) string to drive
+> logic — e.g. a status filter or a bound dropdown value. Once the display text
+> changes with the culture, an English literal comparison silently stops
+> matching in German. Bind a stable, culture-invariant key (`"active"`, not
+> `L["DataGrid.Active"]`) and only use the localized string for the label; see
+> `DataGrid.razor`'s `StatusOptions` in the sample app.
