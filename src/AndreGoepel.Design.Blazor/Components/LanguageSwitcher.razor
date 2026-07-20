@@ -1,0 +1,72 @@
+@* Language switch: one item per culture configured via AddDesignBlazor, styled
+   like ThemeToggle but labelled with the language code.
+
+   Deliberately NOT interactive. Each item is a plain anchor to the culture
+   endpoint mapped by UseDesignBlazorLocalization, so the switch also works on
+   statically rendered pages (e.g. the ASP.NET Core Identity pages) and needs no
+   circuit. Requires app.UseDesignBlazorLocalization(). *@
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using AndreGoepel.Design.Blazor.Resources
+@inject IStringLocalizer<DesignStrings> L
+@inject IOptions<DesignBlazorOptions> Options
+@inject NavigationManager Navigation
+
+<div class="ag-lang-toggle" role="group" aria-label="@L["Language.GroupLabel"]">
+    @foreach (var culture in Cultures)
+    {
+        <a class="ag-lang-btn @(culture.IsActive ? "ag-active" : string.Empty)"
+           href="@culture.Href"
+           title="@culture.Name"
+           aria-label="@culture.Name"
+           aria-current="@(culture.IsActive ? "true" : null)"
+           data-enhance-nav="false">@culture.Code</a>
+    }
+</div>
+
+@code {
+    private sealed record CultureLink(string Code, string Name, string Href, bool IsActive);
+
+    private IEnumerable<CultureLink> Cultures =>
+        Options.Value.SupportedCultures.Select(code => new CultureLink(
+            code.ToUpperInvariant(),
+            DisplayName(code),
+            BuildHref(code),
+            IsActive(code)
+        ));
+
+    // Endonym — the language named in itself, so someone who cannot read the
+    // current language still recognises their own. Also means a host adding a
+    // culture gets a correct label without touching any resource file.
+    private static string DisplayName(string code)
+    {
+        var name = CultureInfo.GetCultureInfo(code).NativeName;
+        return name.Length > 0 ? char.ToUpper(name[0], CultureInfo.InvariantCulture) + name[1..] : code;
+    }
+
+    private string BuildHref(string code)
+    {
+        // Base-relative on both counts: the href resolves against <base href>, and
+        // "~/…" is expanded against the path base by Results.LocalRedirect. Rooted
+        // paths would break an app hosted under a sub-path.
+        var current = "~/" + Navigation.ToBaseRelativePath(Navigation.Uri);
+        var endpoint = DesignBlazorOptions.CultureEndpointPath.TrimStart('/');
+        return $"{endpoint}?c={Uri.EscapeDataString(code)}&redirect={Uri.EscapeDataString(current)}";
+    }
+
+    // Walks up the parent chain so a request culture of "de-DE" still marks the
+    // supported "de" as active.
+    private static bool IsActive(string code)
+    {
+        for (var culture = CultureInfo.CurrentUICulture; !string.IsNullOrEmpty(culture.Name); culture = culture.Parent)
+        {
+            if (string.Equals(culture.Name, code, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

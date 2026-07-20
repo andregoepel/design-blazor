@@ -120,10 +120,4 @@
   <data name="Language.GroupLabel" xml:space="preserve">
     <value>Sprache</value>
   </data>
-  <data name="Language.English" xml:space="preserve">
-    <value>Englisch</value>
-  </data>
-  <data name="Language.German" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
 </root>

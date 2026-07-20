@@ -136,14 +136,6 @@
 
   <data name="Language.GroupLabel" xml:space="preserve">
     <value>Language</value>
-    <comment>Accessible group label for the LanguageSwitcher.</comment>
-  </data>
-  <data name="Language.English" xml:space="preserve">
-    <value>English</value>
-    <comment>Name of the English language, shown as the EN button's tooltip.</comment>
-  </data>
-  <data name="Language.German" xml:space="preserve">
-    <value>German</value>
-    <comment>Name of the German language, shown as the DE button's tooltip.</comment>
+    <comment>Accessible group label for the LanguageSwitcher. The individual language names are not resources — LanguageSwitcher uses each culture's own NativeName.</comment>
   </data>
 </root>
