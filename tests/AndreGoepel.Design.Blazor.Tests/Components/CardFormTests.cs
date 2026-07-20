@@ -6,7 +6,7 @@ using Radzen;
 
 namespace AndreGoepel.Design.Blazor.Tests.Components;
 
-public class CardFormTests : BunitContext
+public class CardFormTests : DesignBlazorTestContext
 {
     public sealed class Model
     {
@@ -87,6 +87,43 @@ public class CardFormTests : BunitContext
         );
 
         Assert.Contains("Saving…", cut.Markup);
+    }
+
+    [Fact]
+    public void Render_InGerman_ShowsGermanSubmitAndCancelText()
+    {
+        UseCulture("de");
+
+        var cut = RenderForm(
+            new Model(),
+            p => p.Add(c => c.Cancel, EventCallback.Factory.Create(this, () => { }))
+        );
+
+        var buttons = cut.FindAll(".ag-card-actions button");
+        Assert.Contains(buttons, b => b.TextContent.Contains("Änderungen speichern"));
+        Assert.Contains(buttons, b => b.TextContent.Contains("Abbrechen"));
+    }
+
+    [Fact]
+    public void Render_InGerman_WhenBusy_ShowsGermanBusyText()
+    {
+        UseCulture("de");
+
+        var cut = RenderForm(new Model(), p => p.Add(c => c.IsBusy, true));
+
+        Assert.Contains("Wird gespeichert…", cut.Markup);
+    }
+
+    [Fact]
+    public void Render_InGerman_WithCustomSubmitText_KeepsTheHostsText()
+    {
+        UseCulture("de");
+
+        var cut = RenderForm(new Model(), p => p.Add(c => c.SubmitText, "Create user"));
+
+        var buttons = cut.FindAll(".ag-card-actions button");
+        Assert.Contains(buttons, b => b.TextContent.Contains("Create user"));
+        Assert.DoesNotContain(buttons, b => b.TextContent.Contains("Änderungen speichern"));
     }
 
     [Fact]

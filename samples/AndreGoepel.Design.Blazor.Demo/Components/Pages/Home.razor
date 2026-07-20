@@ -1,57 +1,54 @@
 @page "/"
 @rendermode InteractiveServer
+@inject IStringLocalizer<Strings> L
 
-<AppPageTitle Title="Overview" Breadcrumb="Getting started / Overview" />
+<AppPageTitle Title="@L["Home.PageTitle"]" Breadcrumb="@L["Home.Breadcrumb"]" />
 
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
         <PageHeader Title="AndreGoepel.Design.Blazor"
-                    Subtitle="A live gallery of the shared design system — shell, tokens, and component recipes. Toggle light / dark with the switch in the top bar to review both themes." />
+                    Subtitle="@L["Home.Subtitle"]" />
 
         <RadzenCard>
             <RadzenStack Gap="1rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">What you're looking at</RadzenText>
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Home.WhatYoureLookingAt"]</RadzenText>
                 <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
-                    This sample boots the raw <code>AndreGoepel.Design.Blazor</code> package — no Aspire,
-                    no database — inside a plain Blazor Server host. The chrome around you (sidebar, top bar,
-                    responsive drawer, theme toggle) is the library's own <code>AppShell</code> +
-                    <code>ThemeToggle</code>. Use the sidebar to browse each surface.
+                    @((MarkupString)L["Home.Description"].Value)
                 </RadzenText>
-                <InfoBox Label="Component-library status"
-                         Value="Browse the sidebar for a live gallery of each shipped component. New components get their own gallery section as they land." />
+                <InfoBox Label="@L["Home.ComponentStatusLabel"]"
+                         Value="@L["Home.ComponentStatusValue"]" />
             </RadzenStack>
         </RadzenCard>
 
         <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            Below: the <code>PageHeader</code> component itself, live — title, subtitle, and a
-            right-aligned action.
+            @((MarkupString)L["Home.PageHeaderCaption"].Value)
         </RadzenText>
-        <PageHeader Title="Page header pattern" Subtitle="Heading left, primary action right.">
+        <PageHeader Title="@L["Home.PageHeaderPatternTitle"]" Subtitle="@L["Home.PageHeaderPatternSubtitle"]">
             <Actions>
-                <RadzenButton Text="Primary action" Icon="add" ButtonStyle="ButtonStyle.Primary" />
+                <RadzenButton Text="@L["Home.PrimaryAction"]" Icon="add" ButtonStyle="ButtonStyle.Primary" />
             </Actions>
         </PageHeader>
 
         <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            <code>StatTile</code> — a caption + a big value, optionally tinted and iconed.
+            @((MarkupString)L["Home.StatTileCaption"].Value)
         </RadzenText>
         <RadzenRow Gap="1rem">
             <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="Income" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
+                <StatTile Label="@L["Home.Income"]" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
             </RadzenColumn>
             <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="Expenses" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+                <StatTile Label="@L["Home.Expenses"]" Value="€1,890.40" Variant="BadgeVariant.Danger" />
             </RadzenColumn>
             <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="Net" Value="€2,359.60" />
+                <StatTile Label="@L["Home.Net"]" Value="€2,359.60" />
             </RadzenColumn>
         </RadzenRow>
 
         <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            <code>LinkButton</code> — a button that navigates on click, e.g. in a card footer.
+            @((MarkupString)L["Home.LinkButtonCaption"].Value)
         </RadzenText>
         <div class="ag-actions-inline">
-            <LinkButton Text="Jump to icons" Path="icons" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
+            <LinkButton Text="@L["Home.JumpToIcons"]" Path="icons" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
         </div>
     </RadzenStack>
 </div>

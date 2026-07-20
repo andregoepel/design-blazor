@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    English (neutral) UI strings for the demo app — the source of truth. Every
+    <value> is wrapped in CDATA so ampersands and inline HTML (e.g. <code>, <strong>)
+    do not need manual escaping. A few values are intentionally markup — see the
+    comment on each — and are rendered via (MarkupString) rather than as plain text.
+    Keep Strings.de.resx in sync.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Shell (MainLayout / LoginLayout / blazor-error-ui) -->
+  <data name="Shell.SidebarNote" xml:space="preserve"><value><![CDATA[AndreGoepel.Design.Blazor — component gallery]]></value></data>
+  <data name="Shell.UnhandledError" xml:space="preserve"><value><![CDATA[An unhandled error has occurred.]]></value></data>
+  <data name="Shell.Reload" xml:space="preserve"><value><![CDATA[Reload]]></value></data>
+  <data name="Shell.LoginFooterPrefix" xml:space="preserve"><value><![CDATA[Component gallery —]]></value></data>
+  <data name="Shell.BackToOverview" xml:space="preserve"><value><![CDATA[back to overview]]></value></data>
+
+  <!-- DemoNav -->
+  <data name="Nav.SectionGettingStarted" xml:space="preserve"><value><![CDATA[GETTING STARTED]]></value></data>
+  <data name="Nav.SectionComponents" xml:space="preserve"><value><![CDATA[COMPONENTS]]></value></data>
+  <data name="Nav.SectionPatterns" xml:space="preserve"><value><![CDATA[PATTERNS]]></value></data>
+  <data name="Nav.Overview" xml:space="preserve"><value><![CDATA[Overview]]></value></data>
+  <data name="Nav.TokensTypography" xml:space="preserve"><value><![CDATA[Tokens & typography]]></value></data>
+  <data name="Nav.Icons" xml:space="preserve"><value><![CDATA[Icons]]></value></data>
+  <data name="Nav.ButtonsBadges" xml:space="preserve"><value><![CDATA[Buttons & badges]]></value></data>
+  <data name="Nav.Forms" xml:space="preserve"><value><![CDATA[Forms]]></value></data>
+  <data name="Nav.DataGrid" xml:space="preserve"><value><![CDATA[Data grid]]></value></data>
+  <data name="Nav.Feedback" xml:space="preserve"><value><![CDATA[Feedback & empty states]]></value></data>
+  <data name="Nav.Settings" xml:space="preserve"><value><![CDATA[Settings toggles]]></value></data>
+  <data name="Nav.LoginShell" xml:space="preserve"><value><![CDATA[Login shell]]></value></data>
+
+  <!-- ReconnectModal (framework reconnect UI) -->
+  <data name="Reconnect.Rejoining" xml:space="preserve"><value><![CDATA[Rejoining the server...]]></value></data>
+  <data name="Reconnect.RejoinFailedPrefix" xml:space="preserve">
+    <value><![CDATA[Rejoin failed... trying again in]]></value>
+    <comment>Followed by a live seconds-remaining counter, then RejoinFailedSuffix.</comment>
+  </data>
+  <data name="Reconnect.RejoinFailedSuffix" xml:space="preserve"><value><![CDATA[seconds.]]></value></data>
+  <data name="Reconnect.FailedLine1" xml:space="preserve"><value><![CDATA[Failed to rejoin.]]></value></data>
+  <data name="Reconnect.FailedLine2" xml:space="preserve"><value><![CDATA[Please retry or reload the page.]]></value></data>
+  <data name="Reconnect.Retry" xml:space="preserve"><value><![CDATA[Retry]]></value></data>
+  <data name="Reconnect.Paused" xml:space="preserve"><value><![CDATA[The session has been paused by the server.]]></value></data>
+  <data name="Reconnect.ResumeFailedLine1" xml:space="preserve"><value><![CDATA[Failed to resume the session.]]></value></data>
+  <data name="Reconnect.ResumeFailedLine2" xml:space="preserve"><value><![CDATA[Please retry or reload the page.]]></value></data>
+  <data name="Reconnect.Resume" xml:space="preserve"><value><![CDATA[Resume]]></value></data>
+
+  <!-- Home.razor -->
+  <data name="Home.PageTitle" xml:space="preserve"><value><![CDATA[Overview]]></value></data>
+  <data name="Home.Breadcrumb" xml:space="preserve"><value><![CDATA[Getting started / Overview]]></value></data>
+  <data name="Home.Subtitle" xml:space="preserve"><value><![CDATA[A live gallery of the shared design system — shell, tokens, and component recipes. Toggle light / dark with the switch in the top bar to review both themes.]]></value></data>
+  <data name="Home.WhatYoureLookingAt" xml:space="preserve"><value><![CDATA[What you're looking at]]></value></data>
+  <data name="Home.Description" xml:space="preserve">
+    <value><![CDATA[This sample boots the raw <code>AndreGoepel.Design.Blazor</code> package — no Aspire, no database — inside a plain Blazor Server host. The chrome around you (sidebar, top bar, responsive drawer, theme toggle) is the library's own <code>AppShell</code> + <code>ThemeToggle</code>. Use the sidebar to browse each surface.]]></value>
+    <comment>Rendered as HTML (MarkupString) — contains &lt;code&gt; tags.</comment>
+  </data>
+  <data name="Home.ComponentStatusLabel" xml:space="preserve"><value><![CDATA[Component-library status]]></value></data>
+  <data name="Home.ComponentStatusValue" xml:space="preserve"><value><![CDATA[Browse the sidebar for a live gallery of each shipped component. New components get their own gallery section as they land.]]></value></data>
+  <data name="Home.PageHeaderCaption" xml:space="preserve">
+    <value><![CDATA[Below: the <code>PageHeader</code> component itself, live — title, subtitle, and a right-aligned action.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Home.PageHeaderPatternTitle" xml:space="preserve"><value><![CDATA[Page header pattern]]></value></data>
+  <data name="Home.PageHeaderPatternSubtitle" xml:space="preserve"><value><![CDATA[Heading left, primary action right.]]></value></data>
+  <data name="Home.PrimaryAction" xml:space="preserve"><value><![CDATA[Primary action]]></value></data>
+  <data name="Home.StatTileCaption" xml:space="preserve">
+    <value><![CDATA[<code>StatTile</code> — a caption + a big value, optionally tinted and iconed.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Home.Income" xml:space="preserve"><value><![CDATA[Income]]></value></data>
+  <data name="Home.Expenses" xml:space="preserve"><value><![CDATA[Expenses]]></value></data>
+  <data name="Home.Net" xml:space="preserve"><value><![CDATA[Net]]></value></data>
+  <data name="Home.LinkButtonCaption" xml:space="preserve">
+    <value><![CDATA[<code>LinkButton</code> — a button that navigates on click, e.g. in a card footer.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Home.JumpToIcons" xml:space="preserve"><value><![CDATA[Jump to icons]]></value></data>
+
+  <!-- Buttons.razor -->
+  <data name="Buttons.PageTitle" xml:space="preserve"><value><![CDATA[Buttons & badges]]></value></data>
+  <data name="Buttons.Breadcrumb" xml:space="preserve"><value><![CDATA[Components / Buttons]]></value></data>
+  <data name="Buttons.Subtitle" xml:space="preserve"><value><![CDATA[Radzen buttons reskinned by the design tokens, and the ag-badge status pills.]]></value></data>
+  <data name="Buttons.ButtonStyles" xml:space="preserve"><value><![CDATA[Button styles]]></value></data>
+  <data name="Buttons.Primary" xml:space="preserve"><value><![CDATA[Primary]]></value></data>
+  <data name="Buttons.LightCancel" xml:space="preserve"><value><![CDATA[Light / cancel]]></value></data>
+  <data name="Buttons.Secondary" xml:space="preserve"><value><![CDATA[Secondary]]></value></data>
+  <data name="Buttons.Success" xml:space="preserve"><value><![CDATA[Success]]></value></data>
+  <data name="Buttons.Warning" xml:space="preserve"><value><![CDATA[Warning]]></value></data>
+  <data name="Buttons.Danger" xml:space="preserve"><value><![CDATA[Danger]]></value></data>
+  <data name="Buttons.Disabled" xml:space="preserve"><value><![CDATA[Disabled]]></value></data>
+  <data name="Buttons.SizesBusyState" xml:space="preserve"><value><![CDATA[Sizes & busy state]]></value></data>
+  <data name="Buttons.Medium" xml:space="preserve"><value><![CDATA[Medium]]></value></data>
+  <data name="Buttons.Small" xml:space="preserve"><value><![CDATA[Small]]></value></data>
+  <data name="Buttons.ExtraSmall" xml:space="preserve"><value><![CDATA[Extra small]]></value></data>
+  <data name="Buttons.Working" xml:space="preserve"><value><![CDATA[Working…]]></value></data>
+  <data name="Buttons.RunWithBusyState" xml:space="preserve"><value><![CDATA[Run with busy state]]></value></data>
+  <data name="Buttons.StatusBadges" xml:space="preserve"><value><![CDATA[Status badges]]></value></data>
+  <data name="Buttons.Active" xml:space="preserve"><value><![CDATA[Active]]></value></data>
+  <data name="Buttons.Deleted" xml:space="preserve"><value><![CDATA[Deleted]]></value></data>
+  <data name="Buttons.Invited" xml:space="preserve"><value><![CDATA[Invited]]></value></data>
+  <data name="Buttons.Syncing" xml:space="preserve"><value><![CDATA[Syncing]]></value></data>
+  <data name="Buttons.Draft" xml:space="preserve"><value><![CDATA[Draft]]></value></data>
+  <data name="Buttons.StatusBadgeCaption" xml:space="preserve">
+    <value><![CDATA[The <code>StatusBadge</code> component maps a semantic <code>Variant</code> (Success / Danger / Warning / Info / Neutral) to the matching <code>ag-badge-*</code> class.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Buttons.CardActionRow" xml:space="preserve"><value><![CDATA[Card action row]]></value></data>
+  <data name="Buttons.CardActionRowCaption" xml:space="preserve">
+    <value><![CDATA[The bordered, right-aligned <code>ag-card-actions</code> footer.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Buttons.Cancel" xml:space="preserve"><value><![CDATA[Cancel]]></value></data>
+  <data name="Buttons.SaveChanges" xml:space="preserve"><value><![CDATA[Save changes]]></value></data>
+
+  <!-- DataGrid.razor -->
+  <data name="DataGrid.PageTitle" xml:space="preserve"><value><![CDATA[Data grid]]></value></data>
+  <data name="DataGrid.Breadcrumb" xml:space="preserve"><value><![CDATA[Components / Data grid]]></value></data>
+  <data name="DataGrid.Subtitle" xml:space="preserve"><value><![CDATA[The in-card grid recipe: a FilterBar of structured filters, then DataCard + GridToolbar (search + count), name/id cells, status badges, and a row-action overflow menu.]]></value></data>
+  <data name="DataGrid.NewUser" xml:space="preserve"><value><![CDATA[New user]]></value></data>
+  <data name="DataGrid.StatusLabel" xml:space="preserve"><value><![CDATA[Status]]></value></data>
+  <data name="DataGrid.All" xml:space="preserve"><value><![CDATA[All]]></value></data>
+  <data name="DataGrid.Active" xml:space="preserve"><value><![CDATA[Active]]></value></data>
+  <data name="DataGrid.Disabled" xml:space="preserve"><value><![CDATA[Disabled]]></value></data>
+  <data name="DataGrid.Reset" xml:space="preserve"><value><![CDATA[Reset]]></value></data>
+  <data name="DataGrid.SearchUsers" xml:space="preserve"><value><![CDATA[Search users…]]></value></data>
+  <data name="DataGrid.Count" xml:space="preserve">
+    <value><![CDATA[{0} of {1}]]></value>
+    <comment>{0} is the filtered count, {1} the total count.</comment>
+  </data>
+  <data name="DataGrid.NoUsersMatch" xml:space="preserve"><value><![CDATA[No users match your search]]></value></data>
+  <data name="DataGrid.TryDifferentTerm" xml:space="preserve"><value><![CDATA[Try a different term, or clear the search box.]]></value></data>
+  <data name="DataGrid.UserColumn" xml:space="preserve"><value><![CDATA[User]]></value></data>
+  <data name="DataGrid.EmailColumn" xml:space="preserve"><value><![CDATA[Email]]></value></data>
+  <data name="DataGrid.StatusColumn" xml:space="preserve"><value><![CDATA[Status]]></value></data>
+  <data name="DataGrid.Edit" xml:space="preserve"><value><![CDATA[Edit]]></value></data>
+  <data name="DataGrid.MoreActions" xml:space="preserve"><value><![CDATA[More actions]]></value></data>
+  <data name="DataGrid.EmptyTextCaption" xml:space="preserve">
+    <value><![CDATA[Radzen's own built-in <code>EmptyText</code> — for a plain no-rows message where a full <code>EmptyState</code> would be overkill.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="DataGrid.NoArchivedUsers" xml:space="preserve"><value><![CDATA[No archived users.]]></value></data>
+  <data name="DataGrid.Enable" xml:space="preserve"><value><![CDATA[Enable]]></value></data>
+  <data name="DataGrid.Disable" xml:space="preserve"><value><![CDATA[Disable]]></value></data>
+  <data name="DataGrid.DeleteAction" xml:space="preserve"><value><![CDATA[Delete]]></value></data>
+  <data name="DataGrid.AddedNotificationTitle" xml:space="preserve"><value><![CDATA[Added]]></value></data>
+  <data name="DataGrid.AddedNotificationMessage" xml:space="preserve"><value><![CDATA[A demo user was added.]]></value></data>
+  <data name="DataGrid.EditNotificationTitle" xml:space="preserve"><value><![CDATA[Edit]]></value></data>
+  <data name="DataGrid.EditNotificationMessage" xml:space="preserve">
+    <value><![CDATA[Would open the editor for {0}.]]></value>
+    <comment>{0} is the user's name.</comment>
+  </data>
+  <data name="DataGrid.DeletedNotificationTitle" xml:space="preserve"><value><![CDATA[Deleted]]></value></data>
+  <data name="DataGrid.DeletedNotificationMessage" xml:space="preserve">
+    <value><![CDATA[{0} was removed.]]></value>
+    <comment>{0} is the user's name.</comment>
+  </data>
+
+  <!-- Feedback.razor -->
+  <data name="Feedback.PageTitle" xml:space="preserve"><value><![CDATA[Feedback & empty states]]></value></data>
+  <data name="Feedback.Breadcrumb" xml:space="preserve"><value><![CDATA[Components / Feedback]]></value></data>
+  <data name="Feedback.Subtitle" xml:space="preserve"><value><![CDATA[Alerts, toast notifications, the info box, and the dashed empty state. An EmptyState component lands in issue #9.]]></value></data>
+  <data name="Feedback.InfoBanner" xml:space="preserve"><value><![CDATA[Informational banner — sits outside the card.]]></value></data>
+  <data name="Feedback.SuccessBanner" xml:space="preserve"><value><![CDATA[Success — the change was saved.]]></value></data>
+  <data name="Feedback.WarningBanner" xml:space="preserve"><value><![CDATA[Warning — consent expires in 7 days.]]></value></data>
+  <data name="Feedback.DangerBanner" xml:space="preserve"><value><![CDATA[Danger — the connection failed.]]></value></data>
+  <data name="Feedback.ToastNotifications" xml:space="preserve"><value><![CDATA[Toast notifications]]></value></data>
+  <data name="Feedback.Info" xml:space="preserve"><value><![CDATA[Info]]></value></data>
+  <data name="Feedback.Success" xml:space="preserve"><value><![CDATA[Success]]></value></data>
+  <data name="Feedback.Warning" xml:space="preserve"><value><![CDATA[Warning]]></value></data>
+  <data name="Feedback.Error" xml:space="preserve"><value><![CDATA[Error]]></value></data>
+  <data name="Feedback.InfoBox" xml:space="preserve"><value><![CDATA[Info box]]></value></data>
+  <data name="Feedback.NextScheduledRun" xml:space="preserve"><value><![CDATA[Next scheduled run]]></value></data>
+  <data name="Feedback.TomorrowAt" xml:space="preserve">
+    <value><![CDATA[Tomorrow at 03:00 —]]></value>
+    <comment>Followed by a monospaced cron expression.</comment>
+  </data>
+  <data name="Feedback.Environment" xml:space="preserve"><value><![CDATA[Environment]]></value></data>
+  <data name="Feedback.Production" xml:space="preserve"><value><![CDATA[Production]]></value></data>
+  <data name="Feedback.EmptyState" xml:space="preserve"><value><![CDATA[Empty state]]></value></data>
+  <data name="Feedback.NoPasskeys" xml:space="preserve"><value><![CDATA[No passkeys registered yet]]></value></data>
+  <data name="Feedback.PasskeysDescription" xml:space="preserve"><value><![CDATA[Passkeys let you sign in without a password.]]></value></data>
+  <data name="Feedback.RegisterPasskey" xml:space="preserve"><value><![CDATA[Register passkey]]></value></data>
+  <data name="Feedback.NotificationMessage" xml:space="preserve"><value><![CDATA[This is a sample notification.]]></value></data>
+
+  <!-- Forms.razor -->
+  <data name="Forms.PageTitle" xml:space="preserve"><value><![CDATA[Forms]]></value></data>
+  <data name="Forms.Breadcrumb" xml:space="preserve"><value><![CDATA[Components / Forms]]></value></data>
+  <data name="Forms.Subtitle" xml:space="preserve"><value><![CDATA[CardForm wraps the card + template form + action footer; FormField is the label-above field. Submit only fires when validation passes.]]></value></data>
+  <data name="Forms.FirstName" xml:space="preserve"><value><![CDATA[First name]]></value></data>
+  <data name="Forms.FirstNameRequired" xml:space="preserve"><value><![CDATA[First name is required]]></value></data>
+  <data name="Forms.LastName" xml:space="preserve"><value><![CDATA[Last name]]></value></data>
+  <data name="Forms.LastNameRequired" xml:space="preserve"><value><![CDATA[Last name is required]]></value></data>
+  <data name="Forms.Email" xml:space="preserve"><value><![CDATA[Email]]></value></data>
+  <data name="Forms.EmailHint" xml:space="preserve"><value><![CDATA[We'll only use this to contact you.]]></value></data>
+  <data name="Forms.EmailRequired" xml:space="preserve"><value><![CDATA[Email is required]]></value></data>
+  <data name="Forms.EmailInvalid" xml:space="preserve"><value><![CDATA[That is not a valid email]]></value></data>
+  <data name="Forms.Role" xml:space="preserve"><value><![CDATA[Role]]></value></data>
+  <data name="Forms.Notes" xml:space="preserve"><value><![CDATA[Notes]]></value></data>
+  <data name="Forms.Viewer" xml:space="preserve"><value><![CDATA[Viewer]]></value></data>
+  <data name="Forms.Editor" xml:space="preserve"><value><![CDATA[Editor]]></value></data>
+  <data name="Forms.Administrator" xml:space="preserve"><value><![CDATA[Administrator]]></value></data>
+  <data name="Forms.SavedNotificationTitle" xml:space="preserve"><value><![CDATA[Saved]]></value></data>
+  <data name="Forms.SavedNotificationMessage" xml:space="preserve">
+    <value><![CDATA[Form submitted for {0}.]]></value>
+    <comment>{0} is the submitted email address.</comment>
+  </data>
+  <data name="Forms.CancelledNotificationTitle" xml:space="preserve"><value><![CDATA[Cancelled]]></value></data>
+  <data name="Forms.CancelledNotificationMessage" xml:space="preserve"><value><![CDATA[The form was reset.]]></value></data>
+
+  <!-- Icons.razor -->
+  <data name="Icons.PageTitle" xml:space="preserve"><value><![CDATA[Icons]]></value></data>
+  <data name="Icons.Breadcrumb" xml:space="preserve"><value><![CDATA[Getting started / Icons]]></value></data>
+  <data name="Icons.Subtitle" xml:space="preserve"><value><![CDATA[The AppIcon inline-SVG set (stroke-based, inherits currentColor).]]></value></data>
+
+  <!-- Login.razor -->
+  <data name="Login.PageTitle" xml:space="preserve"><value><![CDATA[Log in]]></value></data>
+  <data name="Login.WelcomeBack" xml:space="preserve"><value><![CDATA[Welcome back]]></value></data>
+  <data name="Login.FillCredentials" xml:space="preserve"><value><![CDATA[Fill in your credentials to continue.]]></value></data>
+  <data name="Login.Email" xml:space="preserve"><value><![CDATA[Email]]></value></data>
+  <data name="Login.EmailRequired" xml:space="preserve"><value><![CDATA[Email is required]]></value></data>
+  <data name="Login.Password" xml:space="preserve"><value><![CDATA[Password]]></value></data>
+  <data name="Login.PasswordRequired" xml:space="preserve"><value><![CDATA[Password is required]]></value></data>
+  <data name="Login.LogIn" xml:space="preserve"><value><![CDATA[Log in]]></value></data>
+  <data name="Login.NoAccount" xml:space="preserve"><value><![CDATA[No account?]]></value></data>
+  <data name="Login.BackToOverview" xml:space="preserve"><value><![CDATA[Back to overview]]></value></data>
+
+  <!-- NotFound.razor -->
+  <data name="NotFound.Title" xml:space="preserve"><value><![CDATA[Not Found]]></value></data>
+  <data name="NotFound.Message" xml:space="preserve"><value><![CDATA[Sorry, the content you are looking for does not exist.]]></value></data>
+
+  <!-- Settings.razor -->
+  <data name="Settings.PageTitle" xml:space="preserve"><value><![CDATA[Settings toggles]]></value></data>
+  <data name="Settings.Breadcrumb" xml:space="preserve"><value><![CDATA[Components / Settings]]></value></data>
+  <data name="Settings.Subtitle" xml:space="preserve"><value><![CDATA[SettingToggleRow: label + description + switch, stacked in a card. The last row drops its bottom border automatically.]]></value></data>
+  <data name="Settings.SelfServiceRegistration" xml:space="preserve"><value><![CDATA[Self-service registration]]></value></data>
+  <data name="Settings.SelfServiceRegistrationDescription" xml:space="preserve"><value><![CDATA[Lets visitors create their own account.]]></value></data>
+  <data name="Settings.TwoFactorAuth" xml:space="preserve"><value><![CDATA[Two-factor authentication]]></value></data>
+  <data name="Settings.TwoFactorAuthDescription" xml:space="preserve"><value><![CDATA[Authenticator-app setup for sign-in.]]></value></data>
+  <data name="Settings.Passkeys" xml:space="preserve"><value><![CDATA[Passkeys]]></value></data>
+  <data name="Settings.PasskeysDescription" xml:space="preserve"><value><![CDATA[WebAuthn passkey registration and sign-in.]]></value></data>
+  <data name="Settings.CurrentValues" xml:space="preserve">
+    <value><![CDATA[Current values: registration={0}, two-factor={1}, passkeys={2} (disabled)]]></value>
+    <comment>{0}/{1}/{2} are the three toggle states (bool).</comment>
+  </data>
+
+  <!-- Tokens.razor -->
+  <data name="Tokens.PageTitle" xml:space="preserve"><value><![CDATA[Tokens & typography]]></value></data>
+  <data name="Tokens.Breadcrumb" xml:space="preserve"><value><![CDATA[Getting started / Tokens]]></value></data>
+  <data name="Tokens.Subtitle" xml:space="preserve"><value><![CDATA[The semantic --ag-* colour tokens and the type ramp. Switch the theme in the top bar to see both palettes.]]></value></data>
+  <data name="Tokens.ColourTokens" xml:space="preserve"><value><![CDATA[Colour tokens]]></value></data>
+  <data name="Tokens.TypeRamp" xml:space="preserve"><value><![CDATA[Type ramp]]></value></data>
+  <data name="Tokens.Accent" xml:space="preserve"><value><![CDATA[Accent]]></value></data>
+  <data name="Tokens.AccentSoft" xml:space="preserve"><value><![CDATA[Accent soft]]></value></data>
+  <data name="Tokens.Surface" xml:space="preserve"><value><![CDATA[Surface]]></value></data>
+  <data name="Tokens.Background" xml:space="preserve"><value><![CDATA[Background]]></value></data>
+  <data name="Tokens.Sidebar" xml:space="preserve"><value><![CDATA[Sidebar]]></value></data>
+  <data name="Tokens.Border" xml:space="preserve"><value><![CDATA[Border]]></value></data>
+  <data name="Tokens.Text" xml:space="preserve"><value><![CDATA[Text]]></value></data>
+  <data name="Tokens.Text2" xml:space="preserve"><value><![CDATA[Text 2]]></value></data>
+  <data name="Tokens.Muted" xml:space="preserve"><value><![CDATA[Muted]]></value></data>
+  <data name="Tokens.Danger" xml:space="preserve"><value><![CDATA[Danger]]></value></data>
+  <data name="Tokens.DangerSoft" xml:space="preserve"><value><![CDATA[Danger soft]]></value></data>
+  <data name="Tokens.Warning" xml:space="preserve"><value><![CDATA[Warning]]></value></data>
+  <data name="Tokens.WarningSoft" xml:space="preserve"><value><![CDATA[Warning soft]]></value></data>
+  <data name="Tokens.Info" xml:space="preserve"><value><![CDATA[Info]]></value></data>
+  <data name="Tokens.InfoSoft" xml:space="preserve"><value><![CDATA[Info soft]]></value></data>
+  <data name="Tokens.H1" xml:space="preserve"><value><![CDATA[H1 — Manrope display]]></value></data>
+  <data name="Tokens.H2" xml:space="preserve"><value><![CDATA[H2 — section heading]]></value></data>
+  <data name="Tokens.H3" xml:space="preserve"><value><![CDATA[H3 — section heading]]></value></data>
+  <data name="Tokens.H4" xml:space="preserve"><value><![CDATA[H4 — card / dialog title]]></value></data>
+  <data name="Tokens.H5" xml:space="preserve"><value><![CDATA[H5 — page title]]></value></data>
+  <data name="Tokens.H6" xml:space="preserve"><value><![CDATA[H6 — sub-section]]></value></data>
+  <data name="Tokens.Subtitle1" xml:space="preserve"><value><![CDATA[Subtitle1 — panel / field label]]></value></data>
+  <data name="Tokens.Subtitle2" xml:space="preserve"><value><![CDATA[Subtitle2 — smaller label]]></value></data>
+  <data name="Tokens.Body1" xml:space="preserve"><value><![CDATA[Body1 — primary paragraph copy for descriptions and content.]]></value></data>
+  <data name="Tokens.Body2" xml:space="preserve"><value><![CDATA[Body2 — secondary / muted copy.]]></value></data>
+  <data name="Tokens.Caption" xml:space="preserve"><value><![CDATA[Caption — help text.]]></value></data>
+  <data name="Tokens.MonoSample" xml:space="preserve"><value><![CDATA[JetBrains Mono — 1234567890 ids & code]]></value></data>
+
+  <!-- Error.razor -->
+  <data name="Error.PageTitle" xml:space="preserve"><value><![CDATA[Error]]></value></data>
+  <data name="Error.Heading" xml:space="preserve"><value><![CDATA[Error.]]></value></data>
+  <data name="Error.Subheading" xml:space="preserve"><value><![CDATA[An error occurred while processing your request.]]></value></data>
+  <data name="Error.RequestIdLabel" xml:space="preserve"><value><![CDATA[Request ID:]]></value></data>
+  <data name="Error.DevelopmentMode" xml:space="preserve"><value><![CDATA[Development Mode]]></value></data>
+  <data name="Error.DevModeParagraph1" xml:space="preserve">
+    <value><![CDATA[Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Error.DevModeParagraph2" xml:space="preserve">
+    <value><![CDATA[<strong>The Development environment shouldn't be enabled for deployed applications.</strong> It can result in displaying sensitive information from exceptions to end users. For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong> and restarting the app.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+</root>

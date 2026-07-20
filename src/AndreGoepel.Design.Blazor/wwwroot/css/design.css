@@ -935,6 +935,50 @@ a:hover, .rz-link:hover {
   color: var(--ag-accent-text);
 }
 
+/* language toggle pill — same shell as the theme toggle, but the items carry a
+   language code instead of an icon, so they size to their text rather than to a
+   26px circle. */
+.ag-lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 16px;
+  background: var(--ag-input);
+  border: 1px solid var(--ag-border);
+}
+
+.ag-lang-btn {
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 13px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ag-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  /* The items are anchors (see LanguageSwitcher), so the link defaults have to
+     be neutralised to match the button-based theme toggle. */
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.ag-lang-btn:hover {
+  color: var(--ag-text);
+}
+
+.ag-lang-btn.ag-active {
+  background: var(--ag-accent-soft);
+  border-color: var(--ag-accent);
+  color: var(--ag-accent-text);
+}
+
 /* user chip */
 .ag-user-chip {
   display: flex;

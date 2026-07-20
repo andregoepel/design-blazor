@@ -6,7 +6,7 @@ using Radzen;
 
 namespace AndreGoepel.Design.Blazor.Tests.Components;
 
-public class FilterBarTests : BunitContext
+public class FilterBarTests : DesignBlazorTestContext
 {
     public FilterBarTests() => Services.AddRadzenComponents();
 
@@ -34,6 +34,27 @@ public class FilterBarTests : BunitContext
         var cut = Render<FilterBar>(parameters => parameters.Add(p => p.ApplyText, "Search"));
 
         Assert.Contains(cut.FindAll("button"), b => b.TextContent.Contains("Search"));
+    }
+
+    [Fact]
+    public void Render_InGerman_ShowsGermanApplyText()
+    {
+        UseCulture("de");
+
+        var cut = Render<FilterBar>();
+
+        Assert.Contains(cut.FindAll("button"), b => b.TextContent.Contains("Anwenden"));
+    }
+
+    [Fact]
+    public void Render_InGerman_WithCustomApplyText_KeepsTheHostsText()
+    {
+        UseCulture("de");
+
+        var cut = Render<FilterBar>(parameters => parameters.Add(p => p.ApplyText, "Filtern"));
+
+        Assert.Contains(cut.FindAll("button"), b => b.TextContent.Contains("Filtern"));
+        Assert.DoesNotContain(cut.FindAll("button"), b => b.TextContent.Contains("Anwenden"));
     }
 
     [Fact]

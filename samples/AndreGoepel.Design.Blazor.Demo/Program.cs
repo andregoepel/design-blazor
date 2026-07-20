@@ -12,8 +12,12 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddRadzenComponents();
 
 // Design-system services (ConfirmService, …) — must follow AddRadzenComponents.
-// BrandName is appended to every page's document title by AppPageTitle.
+// BrandName is appended to every page's document title by AppPageTitle. Cultures
+// default to en/de, which is what this demo (and the design system) ships.
 builder.Services.AddDesignBlazor(o => o.BrandName = "Design Blazor");
+
+// The demo's own strings (nav, page copy, …), separate from the library's.
+builder.Services.AddLocalization();
 
 var app = builder.Build();
 
@@ -25,6 +29,11 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
+
+// Must run before MapRazorComponents: it sets CurrentUICulture on the request
+// that establishes the Blazor Server circuit, and maps the endpoint LanguageSwitcher
+// links to.
+app.UseDesignBlazorLocalization();
 
 app.UseAntiforgery();
 

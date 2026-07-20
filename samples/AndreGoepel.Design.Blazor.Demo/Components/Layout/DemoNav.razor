@@ -1,23 +1,24 @@
 @* Sidebar navigation for the component gallery, using the design system's
    ag-nav-* markup so entries match the shell's own sections. *@
+@inject IStringLocalizer<Strings> L
 
-<div class="ag-nav-section">GETTING STARTED</div>
+<div class="ag-nav-section">@L["Nav.SectionGettingStarted"]</div>
 <div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="" Match="NavLinkMatch.All">Overview</NavLink>
-    <NavLink class="ag-nav-item" href="tokens">Tokens &amp; typography</NavLink>
-    <NavLink class="ag-nav-item" href="icons">Icons</NavLink>
+    <NavLink class="ag-nav-item" href="" Match="NavLinkMatch.All">@L["Nav.Overview"]</NavLink>
+    <NavLink class="ag-nav-item" href="tokens">@L["Nav.TokensTypography"]</NavLink>
+    <NavLink class="ag-nav-item" href="icons">@L["Nav.Icons"]</NavLink>
 </div>
 
-<div class="ag-nav-section">COMPONENTS</div>
+<div class="ag-nav-section">@L["Nav.SectionComponents"]</div>
 <div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="buttons">Buttons &amp; badges</NavLink>
-    <NavLink class="ag-nav-item" href="forms">Forms</NavLink>
-    <NavLink class="ag-nav-item" href="data-grid">Data grid</NavLink>
-    <NavLink class="ag-nav-item" href="feedback">Feedback &amp; empty states</NavLink>
-    <NavLink class="ag-nav-item" href="settings">Settings toggles</NavLink>
+    <NavLink class="ag-nav-item" href="buttons">@L["Nav.ButtonsBadges"]</NavLink>
+    <NavLink class="ag-nav-item" href="forms">@L["Nav.Forms"]</NavLink>
+    <NavLink class="ag-nav-item" href="data-grid">@L["Nav.DataGrid"]</NavLink>
+    <NavLink class="ag-nav-item" href="feedback">@L["Nav.Feedback"]</NavLink>
+    <NavLink class="ag-nav-item" href="settings">@L["Nav.Settings"]</NavLink>
 </div>
 
-<div class="ag-nav-section">PATTERNS</div>
+<div class="ag-nav-section">@L["Nav.SectionPatterns"]</div>
 <div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="login">Login shell</NavLink>
+    <NavLink class="ag-nav-item" href="login">@L["Nav.LoginShell"]</NavLink>
 </div>

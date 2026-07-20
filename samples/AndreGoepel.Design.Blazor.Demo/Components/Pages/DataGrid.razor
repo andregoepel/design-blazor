@@ -3,38 +3,40 @@
 @inject ConfirmService Confirm
 @inject ContextMenuService ContextMenu
 @inject NotificationService Notifications
+@inject IStringLocalizer<Strings> L
 
-<AppPageTitle Title="Data grid" Breadcrumb="Components / Data grid" />
+<AppPageTitle Title="@L["DataGrid.PageTitle"]" Breadcrumb="@L["DataGrid.Breadcrumb"]" />
 
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
-        <PageHeader Title="Data grid"
-                    Subtitle="The in-card grid recipe: a FilterBar of structured filters, then DataCard + GridToolbar (search + count), name/id cells, status badges, and a row-action overflow menu.">
+        <PageHeader Title="@L["DataGrid.PageTitle"]"
+                    Subtitle="@L["DataGrid.Subtitle"]">
             <Actions>
-                <RadzenButton Text="New user" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
+                <RadzenButton Text="@L["DataGrid.NewUser"]" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
             </Actions>
         </PageHeader>
 
-        <FilterBar OnApply="ApplyFilters" ApplyText="Apply">
+        <FilterBar OnApply="ApplyFilters">
             <ChildContent>
-                <FormField Label="Status" For="StatusFilter">
-                    <RadzenDropDown @bind-Value="_pendingStatus" Data="_statuses" Name="StatusFilter" Style="min-width: 12rem;" />
+                <FormField Label="@L["DataGrid.StatusLabel"]" For="StatusFilter">
+                    <RadzenDropDown @bind-Value="_pendingStatus" Data="StatusOptions" TextProperty="Label" ValueProperty="Key"
+                                    Name="StatusFilter" Style="min-width: 12rem;" />
                 </FormField>
             </ChildContent>
             <Actions>
-                <RadzenButton Text="Reset" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
+                <RadzenButton Text="@L["DataGrid.Reset"]" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
             </Actions>
         </FilterBar>
 
         <DataCard>
-            <GridToolbar @bind-Search="_search" SearchPlaceholder="Search users…"
-                         Count="@($"{Filtered.Count} of {_users.Count}")" />
+            <GridToolbar @bind-Search="_search" SearchPlaceholder="@L["DataGrid.SearchUsers"]"
+                         Count="@L["DataGrid.Count", Filtered.Count, _users.Count]" />
 
             @if (Filtered.Count == 0)
             {
                 <div class="rz-p-4 rz-p-md-6">
-                    <EmptyState Icon="@("👤︎")" Title="No users match your search"
-                                Text="Try a different term, or clear the search box." />
+                    <EmptyState Icon="@("👤︎")" Title="@L["DataGrid.NoUsersMatch"]"
+                                Text="@L["DataGrid.TryDifferentTerm"]" />
                 </div>
             }
             else
@@ -43,7 +45,7 @@
                                 AllowFiltering="false" AllowColumnResize="false"
                                 AllowPaging="true" PageSize="8" AllowSorting="true">
                     <Columns>
-                        <RadzenDataGridColumn TItem="User" Property="Name" Title="User">
+                        <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]">
                             <Template Context="u">
                                 <div style="display:flex; flex-direction:column; gap:2px;">
                                     <span class="ag-cell-name">@u.Name</span>
@@ -51,25 +53,25 @@
                                 </div>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" />
-                        <RadzenDataGridColumn TItem="User" Property="Active" Title="Status" Width="120px">
+                        <RadzenDataGridColumn TItem="User" Property="Email" Title="@L["DataGrid.EmailColumn"]" />
+                        <RadzenDataGridColumn TItem="User" Property="Active" Title="@L["DataGrid.StatusColumn"]" Width="120px">
                             <Template Context="u">
                                 @if (u.Active)
                                 {
-                                    <StatusBadge Text="Active" Variant="BadgeVariant.Success" />
+                                    <StatusBadge Text="@L["DataGrid.Active"]" Variant="BadgeVariant.Success" />
                                 }
                                 else
                                 {
-                                    <StatusBadge Text="Disabled" Variant="BadgeVariant.Danger" />
+                                    <StatusBadge Text="@L["DataGrid.Disabled"]" Variant="BadgeVariant.Danger" />
                                 }
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="User" Title="" Width="160px" TextAlign="TextAlign.End" Sortable="false">
                             <Template Context="u">
                                 <RowActions>
-                                    <RadzenButton Text="Edit" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                                    <RadzenButton Text="@L["DataGrid.Edit"]" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
                                                   Click="@(() => Edit(u))" />
-                                    <IconButton Icon="more_horiz" Title="More actions" Click="@(args => OpenRowMenu(args, u))" />
+                                    <IconButton Icon="more_horiz" Title="@L["DataGrid.MoreActions"]" Click="@(args => OpenRowMenu(args, u))" />
                                 </RowActions>
                             </Template>
                         </RadzenDataGridColumn>
@@ -79,15 +81,14 @@
         </DataCard>
 
         <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            Radzen's own built-in <code>EmptyText</code> — for a plain "no rows" message where a
-            full <code>EmptyState</code> would be overkill.
+            @((MarkupString)L["DataGrid.EmptyTextCaption"].Value)
         </RadzenText>
         <DataCard>
-            <RadzenDataGrid TItem="User" Data="@(new List<User>())" EmptyText="No archived users."
+            <RadzenDataGrid TItem="User" Data="@(new List<User>())" EmptyText="@L["DataGrid.NoArchivedUsers"]"
                             Density="Density.Compact" AllowPaging="false">
                 <Columns>
-                    <RadzenDataGridColumn TItem="User" Property="Name" Title="User" />
-                    <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" />
+                    <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]" />
+                    <RadzenDataGridColumn TItem="User" Property="Email" Title="@L["DataGrid.EmailColumn"]" />
                 </Columns>
             </RadzenDataGrid>
         </DataCard>
@@ -95,12 +96,23 @@
 </div>
 
 @code {
+    private sealed record StatusOption(string Key, string Label);
+
+    // Stable, culture-invariant keys for the filter's own comparisons — the dropdown
+    // shows StatusOption.Label (localized), but "all"/"active"/"disabled" must not
+    // change with the UI language or the equality checks below would stop matching.
+    private List<StatusOption> StatusOptions =>
+        [
+            new("all", L["DataGrid.All"]),
+            new("active", L["DataGrid.Active"]),
+            new("disabled", L["DataGrid.Disabled"]),
+        ];
+
     private string _search = string.Empty;
     private readonly List<User> _users = Seed();
 
-    private readonly string[] _statuses = ["All", "Active", "Disabled"];
-    private string _pendingStatus = "All"; // bound to the dropdown
-    private string _appliedStatus = "All"; // committed on Apply
+    private string _pendingStatus = "all"; // bound to the dropdown
+    private string _appliedStatus = "all"; // committed on Apply
 
     private List<User> Filtered =>
         _users
@@ -110,9 +122,9 @@
                 || u.Email.Contains(_search, StringComparison.OrdinalIgnoreCase)
             )
             .Where(u =>
-                _appliedStatus == "All"
-                || (_appliedStatus == "Active" && u.Active)
-                || (_appliedStatus == "Disabled" && !u.Active)
+                _appliedStatus == "all"
+                || (_appliedStatus == "active" && u.Active)
+                || (_appliedStatus == "disabled" && !u.Active)
             )
             .ToList();
 
@@ -120,26 +132,26 @@
 
     private void ResetFilters()
     {
-        _pendingStatus = "All";
-        _appliedStatus = "All";
+        _pendingStatus = "all";
+        _appliedStatus = "all";
     }
 
     private void AddOne()
     {
         var n = _users.Count + 1;
         _users.Add(new User($"USR-{n:000}", $"New User {n}", $"user{n}@example.com", true));
-        Notifications.Notify(NotificationSeverity.Success, "Added", "A demo user was added.");
+        Notifications.Notify(NotificationSeverity.Success, L["DataGrid.AddedNotificationTitle"], L["DataGrid.AddedNotificationMessage"]);
     }
 
     private void Edit(User u) =>
-        Notifications.Notify(NotificationSeverity.Info, "Edit", $"Would open the editor for {u.Name}.");
+        Notifications.Notify(NotificationSeverity.Info, L["DataGrid.EditNotificationTitle"], L["DataGrid.EditNotificationMessage", u.Name]);
 
     private void OpenRowMenu(MouseEventArgs args, User u)
     {
         var items = new List<ContextMenuItem>
         {
-            new() { Text = u.Active ? "Disable" : "Enable", Value = "toggle", Icon = "sync" },
-            new() { Text = "Delete", Value = "delete", Icon = "delete", IconColor = "var(--ag-danger)" },
+            new() { Text = u.Active ? L["DataGrid.Disable"] : L["DataGrid.Enable"], Value = "toggle", Icon = "sync" },
+            new() { Text = L["DataGrid.DeleteAction"], Value = "delete", Icon = "delete", IconColor = "var(--ag-danger)" },
         };
 
         ContextMenu.Open(args, items, async e =>
@@ -163,7 +175,7 @@
         if (await Confirm.ConfirmDeleteAsync(u.Name))
         {
             _users.Remove(u);
-            Notifications.Notify(NotificationSeverity.Success, "Deleted", $"{u.Name} was removed.");
+            Notifications.Notify(NotificationSeverity.Success, L["DataGrid.DeletedNotificationTitle"], L["DataGrid.DeletedNotificationMessage", u.Name]);
             StateHasChanged();
         }
     }

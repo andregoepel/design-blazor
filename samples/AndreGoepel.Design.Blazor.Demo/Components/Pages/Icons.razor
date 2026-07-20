@@ -1,11 +1,12 @@
 @page "/icons"
+@inject IStringLocalizer<Strings> L
 
-<AppPageTitle Title="Icons" Breadcrumb="Getting started / Icons" />
+<AppPageTitle Title="@L["Icons.PageTitle"]" Breadcrumb="@L["Icons.Breadcrumb"]" />
 
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
-        <PageHeader Title="Icons"
-                    Subtitle="The AppIcon inline-SVG set (stroke-based, inherits currentColor)." />
+        <PageHeader Title="@L["Icons.PageTitle"]"
+                    Subtitle="@L["Icons.Subtitle"]" />
 
         <RadzenCard>
             <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:0.75rem;">

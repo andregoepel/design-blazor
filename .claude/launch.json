@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "design-blazor-demo",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/AndreGoepel.Design.Blazor.Demo", "--urls", "http://localhost:5280"],
+      "port": 5280
+    }
+  ]
+}
