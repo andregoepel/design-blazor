@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    English (neutral) UI strings for the design-system components — the source of
+    truth. Every visible string a component renders by itself lives here; keys are
+    "{Component}.{Purpose}". Keep DesignStrings.de.resx in sync.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="CardForm.Submit" xml:space="preserve">
+    <value>Save changes</value>
+    <comment>CardForm's default submit button label.</comment>
+  </data>
+  <data name="CardForm.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>CardForm's default cancel button label.</comment>
+  </data>
+  <data name="CardForm.Busy" xml:space="preserve">
+    <value>Saving…</value>
+    <comment>CardForm's submit button label while the form is submitting.</comment>
+  </data>
+
+  <data name="FilterBar.Apply" xml:space="preserve">
+    <value>Apply</value>
+    <comment>FilterBar's default apply button label.</comment>
+  </data>
+
+  <data name="GridToolbar.SearchPlaceholder" xml:space="preserve">
+    <value>Search…</value>
+    <comment>Placeholder in GridToolbar's search box.</comment>
+  </data>
+
+  <data name="Theme.GroupLabel" xml:space="preserve">
+    <value>Theme</value>
+    <comment>Accessible group label for the light/auto/dark toggle.</comment>
+  </data>
+  <data name="Theme.Light" xml:space="preserve">
+    <value>Light</value>
+    <comment>Light theme option.</comment>
+  </data>
+  <data name="Theme.Auto" xml:space="preserve">
+    <value>Match system</value>
+    <comment>Theme option that follows the operating system's colour scheme.</comment>
+  </data>
+  <data name="Theme.Dark" xml:space="preserve">
+    <value>Dark</value>
+    <comment>Dark theme option.</comment>
+  </data>
+
+  <data name="Shell.ToggleNavigation" xml:space="preserve">
+    <value>Toggle navigation</value>
+    <comment>Accessible label for the AppShell hamburger button.</comment>
+  </data>
+
+  <data name="Confirm.Title" xml:space="preserve">
+    <value>Confirm</value>
+    <comment>Default title of a ConfirmService confirmation dialog.</comment>
+  </data>
+  <data name="Confirm.Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Default confirming button in a ConfirmService dialog.</comment>
+  </data>
+  <data name="Confirm.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Default dismissing button in a ConfirmService dialog.</comment>
+  </data>
+  <data name="Confirm.DeleteTitle" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Title of the standard destructive-delete confirmation.</comment>
+  </data>
+  <data name="Confirm.DeleteAction" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Confirming button of the standard destructive-delete confirmation.</comment>
+  </data>
+  <data name="Confirm.DeleteMessage" xml:space="preserve">
+    <value>Delete {0}? This cannot be undone.</value>
+    <comment>Body of the destructive-delete confirmation. {0} is the item's name.</comment>
+  </data>
+
+  <data name="Language.GroupLabel" xml:space="preserve">
+    <value>Language</value>
+    <comment>Accessible group label for the LanguageSwitcher.</comment>
+  </data>
+  <data name="Language.English" xml:space="preserve">
+    <value>English</value>
+    <comment>Name of the English language, shown as the EN button's tooltip.</comment>
+  </data>
+  <data name="Language.German" xml:space="preserve">
+    <value>German</value>
+    <comment>Name of the German language, shown as the DE button's tooltip.</comment>
+  </data>
+</root>
