@@ -75,6 +75,38 @@ public class GridToolbarTests : DesignBlazorTestContext
     }
 
     [Fact]
+    public void Render_InGerman_UsesGermanPlaceholder()
+    {
+        // Arrange
+        UseCulture("de");
+
+        // Act
+        var cut = Render<GridToolbar>(parameters => parameters.Add(p => p.Search, ""));
+
+        // Assert
+        Assert.Equal("Suchen…", cut.Find("input.ag-search-input").GetAttribute("placeholder"));
+    }
+
+    [Fact]
+    public void Render_InGerman_WithCustomPlaceholder_KeepsTheHostsText()
+    {
+        // Arrange — an explicit parameter has to win over the localizer, otherwise
+        // hosts that already pass their own text would silently lose it.
+        UseCulture("de");
+
+        // Act
+        var cut = Render<GridToolbar>(parameters =>
+            parameters.Add(p => p.SearchPlaceholder, "Search users…")
+        );
+
+        // Assert
+        Assert.Equal(
+            "Search users…",
+            cut.Find("input.ag-search-input").GetAttribute("placeholder")
+        );
+    }
+
+    [Fact]
     public void Render_WithActions_RendersActionContent()
     {
         // Act

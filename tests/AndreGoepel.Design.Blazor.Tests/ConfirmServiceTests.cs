@@ -1,14 +1,19 @@
 using AndreGoepel.Design.Blazor;
+using AndreGoepel.Design.Blazor.Resources;
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using NSubstitute;
 using Radzen;
 
 namespace AndreGoepel.Design.Blazor.Tests;
 
-public class ConfirmServiceTests : BunitContext
+public class ConfirmServiceTests : DesignBlazorTestContext
 {
+    private IStringLocalizer<DesignStrings> Localizer =>
+        Services.GetRequiredService<IStringLocalizer<DesignStrings>>();
+
     // Radzen's DialogService.Confirm is virtual, so NSubstitute can override it.
     // Its ctor needs a NavigationManager + IJSRuntime — bUnit supplies fakes.
     private DialogService MockDialog(bool? confirmResult)
@@ -82,6 +87,86 @@ public class ConfirmServiceTests : BunitContext
                 "Delete Ada Lovelace? This cannot be undone.",
                 "Delete",
                 Arg.Is<ConfirmOptions>(o => o != null && o.OkButtonText == "Delete")
+            );
+    }
+
+    [Fact]
+    public async Task ConfirmAsync_WithLocalizer_UsesTheCurrentCultureForTitleAndButtons()
+    {
+        UseCulture("de");
+        var dialog = MockDialog(true);
+        var svc = new ConfirmService(dialog, Localizer);
+
+        await svc.ConfirmAsync("Wirklich?");
+
+        await dialog
+            .Received(1)
+            .Confirm(
+                "Wirklich?",
+                "Bestätigen",
+                Arg.Is<ConfirmOptions>(o =>
+                    o != null && o.OkButtonText == "OK" && o.CancelButtonText == "Abbrechen"
+                )
+            );
+    }
+
+    [Fact]
+    public async Task ConfirmDeleteAsync_WithLocalizer_FormatsTheGermanMessage()
+    {
+        UseCulture("de");
+        var dialog = MockDialog(true);
+        var svc = new ConfirmService(dialog, Localizer);
+
+        await svc.ConfirmDeleteAsync("Ada Lovelace");
+
+        await dialog
+            .Received(1)
+            .Confirm(
+                "Ada Lovelace löschen? Das kann nicht rückgängig gemacht werden.",
+                "Löschen",
+                Arg.Is<ConfirmOptions>(o => o != null && o.OkButtonText == "Löschen")
+            );
+    }
+
+    [Fact]
+    public async Task ConfirmAsync_WithLocalizer_StillHonoursExplicitText()
+    {
+        UseCulture("de");
+        var dialog = MockDialog(true);
+        var svc = new ConfirmService(dialog, Localizer);
+
+        await svc.ConfirmAsync("Really?", "My title", okText: "Yes", cancelText: "No");
+
+        await dialog
+            .Received(1)
+            .Confirm(
+                "Really?",
+                "My title",
+                Arg.Is<ConfirmOptions>(o =>
+                    o != null && o.OkButtonText == "Yes" && o.CancelButtonText == "No"
+                )
+            );
+    }
+
+    [Fact]
+    public async Task ConfirmAsync_WithoutLocalizer_FallsBackToEnglish()
+    {
+        // Hosts that construct the service directly get no localizer; that must not
+        // throw or produce empty dialog text.
+        UseCulture("de");
+        var dialog = MockDialog(true);
+        var svc = new ConfirmService(dialog);
+
+        await svc.ConfirmAsync("Really?");
+
+        await dialog
+            .Received(1)
+            .Confirm(
+                "Really?",
+                "Confirm",
+                Arg.Is<ConfirmOptions>(o =>
+                    o != null && o.OkButtonText == "OK" && o.CancelButtonText == "Cancel"
+                )
             );
     }
 }
