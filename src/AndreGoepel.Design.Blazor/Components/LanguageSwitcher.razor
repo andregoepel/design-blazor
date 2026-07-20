@@ -7,11 +7,11 @@
    circuit. Requires app.UseDesignBlazorLocalization(). *@
 @using System.Globalization
 @using Microsoft.Extensions.Options
-@inject IStringLocalizer<DesignStrings> L
+@inject IServiceProvider Services
 @inject IOptions<DesignBlazorOptions> Options
 @inject NavigationManager Navigation
 
-<div class="ag-lang-toggle" role="group" aria-label="@L["Language.GroupLabel"]">
+<div class="ag-lang-toggle" role="group" aria-label="@T("Language.GroupLabel")">
     @foreach (var culture in Cultures)
     {
         <a class="ag-lang-btn @(culture.IsActive ? "ag-active" : string.Empty)"
@@ -67,4 +67,8 @@
 
         return false;
     }
+
+    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
+    // component still renders on a host (or bUnit test) without localization registered.
+    private string T(string key) => Services.DesignText(key);
 }

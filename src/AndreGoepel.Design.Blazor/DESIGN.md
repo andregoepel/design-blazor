@@ -648,9 +648,11 @@ component types:
       new pattern, add a token-based rule to `design.css` rather than a
       literal hex value.
 - [ ] Builds clean and renders without a horizontal scrollbar at desktop widths.
-- [ ] Any text the component renders on its own comes from
-      `IStringLocalizer<DesignStrings>` (§9), with a nullable parameter so a host
-      can still pass its own text.
+- [ ] Any text the component renders on its own comes from the design-system
+      resources via `Services.DesignText("Key")` (§9), with a nullable parameter so
+      a host can still pass its own text. Do **not** `@inject IStringLocalizer`
+      directly — that is a required injection and breaks hosts and tests that never
+      registered localization.
 
 ---
 
@@ -660,10 +662,18 @@ The library ships English and German out of the box: every string a component
 renders on its own (`CardForm`'s submit/cancel/busy text, `FilterBar`'s apply
 button, `GridToolbar`'s search placeholder, `ThemeToggle`'s labels, `AppShell`'s
 hamburger `aria-label`, `ConfirmService`'s dialog text) comes from
-`IStringLocalizer<DesignStrings>` — see
+the design-system resources — see
 [`Resources/DesignStrings.resx`](Resources/DesignStrings.resx) /
-[`DesignStrings.de.resx`](Resources/DesignStrings.de.resx). A host that never
-touches localization at all still gets English defaults for free.
+[`DesignStrings.de.resx`](Resources/DesignStrings.de.resx).
+
+Components read them through `Services.DesignText("Key")`, which prefers a registered
+`IStringLocalizer<DesignStrings>` (so a host can substitute one) and otherwise falls
+back to the embedded resources directly, keyed off `CultureInfo.CurrentUICulture`.
+That indirection is deliberate: injecting `IStringLocalizer` into a component makes it
+a *required* service, so a host — or a consuming repo's bUnit test — that never
+registered localization would throw merely from rendering a `CardForm`. A host that
+never touches localization at all still gets correct English, and a host that sets up
+request localization gets German, in both cases without registering anything extra.
 
 ### Setup
 
