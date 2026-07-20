@@ -1,35 +1,36 @@
 @page "/login"
 @layout LoginLayout
 @rendermode InteractiveServer
+@inject IStringLocalizer<Strings> L
 
-<AppPageTitle Title="Log in" />
+<AppPageTitle Title="@L["Login.PageTitle"]" />
 
 <div class="ag-login-head">
-    <RadzenText TagName="TagName.H1" TextStyle="TextStyle.H4" Text="Welcome back" />
-    <RadzenText TextStyle="TextStyle.Body2" class="ag-login-sub" Text="Fill in your credentials to continue." />
+    <RadzenText TagName="TagName.H1" TextStyle="TextStyle.H4" Text="@L["Login.WelcomeBack"]" />
+    <RadzenText TextStyle="TextStyle.Body2" class="ag-login-sub" Text="@L["Login.FillCredentials"]" />
 </div>
 
 <RadzenTemplateForm TItem="Model" Data="_model" Submit="OnSubmit">
     <RadzenStack Gap="1.25rem">
         <RadzenStack Gap="0.4rem">
-            <RadzenLabel Text="Email" Component="Email" />
+            <RadzenLabel Text="@L["Login.Email"]" Component="Email" />
             <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
-            <RadzenRequiredValidator Component="Email" Text="Email is required" />
+            <RadzenRequiredValidator Component="Email" Text="@L["Login.EmailRequired"]" />
         </RadzenStack>
         <RadzenStack Gap="0.4rem">
-            <RadzenLabel Text="Password" Component="Password" />
+            <RadzenLabel Text="@L["Login.Password"]" Component="Password" />
             <RadzenPassword @bind-Value="_model.Password" Name="Password" Style="width:100%" />
-            <RadzenRequiredValidator Component="Password" Text="Password is required" />
+            <RadzenRequiredValidator Component="Password" Text="@L["Login.PasswordRequired"]" />
         </RadzenStack>
 
         <div class="ag-login-actions">
-            <RadzenButton Text="Log in" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Style="width:100%" />
+            <RadzenButton Text="@L["Login.LogIn"]" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Style="width:100%" />
         </div>
     </RadzenStack>
 </RadzenTemplateForm>
 
 <div class="ag-login-footer-links">
-    <span class="ag-login-resend">No account? <RadzenLink Path="" Text="Back to overview" /></span>
+    <span class="ag-login-resend">@L["Login.NoAccount"] <RadzenLink Path="" Text="@L["Login.BackToOverview"]" /></span>
 </div>
 
 @code {

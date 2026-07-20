@@ -1,28 +1,29 @@
 @page "/settings"
 @rendermode InteractiveServer
 @inject NotificationService Notifications
+@inject IStringLocalizer<Strings> L
 
-<AppPageTitle Title="Settings toggles" Breadcrumb="Components / Settings" />
+<AppPageTitle Title="@L["Settings.PageTitle"]" Breadcrumb="@L["Settings.Breadcrumb"]" />
 
 <div class="rz-p-4 rz-p-md-6">
     <RadzenStack Gap="1.5rem">
-        <PageHeader Title="Settings toggles"
-                    Subtitle="SettingToggleRow: label + description + switch, stacked in a card. The last row drops its bottom border automatically." />
+        <PageHeader Title="@L["Settings.PageTitle"]"
+                    Subtitle="@L["Settings.Subtitle"]" />
 
         <RadzenCard Style="padding: 8px 30px;">
-            <SettingToggleRow Label="Self-service registration"
-                               Description="Lets visitors create their own account."
+            <SettingToggleRow Label="@L["Settings.SelfServiceRegistration"]"
+                               Description="@L["Settings.SelfServiceRegistrationDescription"]"
                                @bind-Value="_registration" />
-            <SettingToggleRow Label="Two-factor authentication"
-                               Description="Authenticator-app setup for sign-in."
+            <SettingToggleRow Label="@L["Settings.TwoFactorAuth"]"
+                               Description="@L["Settings.TwoFactorAuthDescription"]"
                                @bind-Value="_twoFactor" />
-            <SettingToggleRow Label="Passkeys"
-                               Description="WebAuthn passkey registration and sign-in."
+            <SettingToggleRow Label="@L["Settings.Passkeys"]"
+                               Description="@L["Settings.PasskeysDescription"]"
                                @bind-Value="_passkeys" Disabled="true" />
         </RadzenCard>
 
         <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            Current values: registration=@_registration, two-factor=@_twoFactor, passkeys=@_passkeys (disabled)
+            @L["Settings.CurrentValues", _registration, _twoFactor, _passkeys]
         </RadzenText>
     </RadzenStack>
 </div>

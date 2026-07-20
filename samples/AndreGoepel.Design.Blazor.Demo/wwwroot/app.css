@@ -6,6 +6,15 @@ code {
     font-size: 0.9em;
 }
 
+/* LoginLayout has no topbar to host the switcher, so it floats top-right over the
+   centred LoginShell card. */
+.ag-login-lang {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+}
+
 #blazor-error-ui {
     color-scheme: light dark;
     background: var(--ag-warn-soft, lightyellow);

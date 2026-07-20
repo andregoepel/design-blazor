@@ -1,4 +1,5 @@
 @inherits LayoutComponentBase
+@inject IStringLocalizer<Strings> L
 
 @* Radzen hosts (dialog / notification / tooltip / context menu) — rendered once. *@
 <RadzenComponents @rendermode="InteractiveServer" />
@@ -8,10 +9,11 @@
         <DemoNav />
     </Sidebar>
     <TopbarActions>
+        <LanguageSwitcher />
         <ThemeToggle />
     </TopbarActions>
     <SidebarFooter>
-        <span class="ag-sidebar-note">AndreGoepel.Design.Blazor — component gallery</span>
+        <span class="ag-sidebar-note">@L["Shell.SidebarNote"]</span>
     </SidebarFooter>
     <ChildContent>
         @Body
@@ -19,7 +21,7 @@
 </AppShell>
 
 <div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
+    @L["Shell.UnhandledError"]
+    <a href="." class="reload">@L["Shell.Reload"]</a>
     <span class="dismiss">🗙</span>
 </div>
