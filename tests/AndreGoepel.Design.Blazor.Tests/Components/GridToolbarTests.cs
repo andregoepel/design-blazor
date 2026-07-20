@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace AndreGoepel.Design.Blazor.Tests.Components;
 
-public class GridToolbarTests : BunitContext
+public class GridToolbarTests : DesignBlazorTestContext
 {
     [Fact]
     public void Render_ShowsSearchValueAndDefaultPlaceholder()

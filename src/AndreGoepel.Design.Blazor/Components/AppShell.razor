@@ -1,4 +1,5 @@
 @implements IDisposable
+@inject IStringLocalizer<DesignStrings> L
 
 @* Reusable application shell: a fixed sidebar (brand + nav + optional footer) and
    a main column with a topbar (hamburger + breadcrumb + actions) and the page body.
@@ -29,7 +30,7 @@
         <div class="ag-main">
             <div class="ag-topbar">
                 <div class="ag-topbar-left">
-                    <button class="ag-hamburger" type="button" onclick="agNav.toggle()" aria-label="Toggle navigation">☰</button>
+                    <button class="ag-hamburger" type="button" onclick="agNav.toggle()" aria-label="@L["Shell.ToggleNavigation"]">☰</button>
                     <span class="ag-topbar-title">@_breadcrumb.Value</span>
                 </div>
                 <div class="ag-topbar-actions">

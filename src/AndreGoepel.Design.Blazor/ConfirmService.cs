@@ -1,3 +1,5 @@
+using AndreGoepel.Design.Blazor.Resources;
+using Microsoft.Extensions.Localization;
 using Radzen;
 
 namespace AndreGoepel.Design.Blazor;
@@ -8,31 +10,54 @@ namespace AndreGoepel.Design.Blazor;
 /// nullable <c>bool?</c> result — <c>null</c> (dismissed) counts as "no". Register
 /// via <c>services.AddDesignBlazor()</c>; requires <c>AddRadzenComponents()</c>.
 /// </summary>
-public sealed class ConfirmService(DialogService dialogService)
+/// <remarks>
+/// The localizer is optional so hosts that construct the service directly, rather
+/// than through <c>AddDesignBlazor</c>, keep working — those fall back to English.
+/// </remarks>
+public sealed class ConfirmService(
+    DialogService dialogService,
+    IStringLocalizer<DesignStrings>? localizer = null
+)
 {
     /// <summary>
     /// Shows a confirm dialog. Returns <c>true</c> only when the user explicitly
-    /// confirms; cancelling or dismissing returns <c>false</c>.
+    /// confirms; cancelling or dismissing returns <c>false</c>. Title and button
+    /// text default to their localized equivalents.
     /// </summary>
     public async Task<bool> ConfirmAsync(
         string message,
-        string title = "Confirm",
-        string okText = "OK",
-        string cancelText = "Cancel"
+        string? title = null,
+        string? okText = null,
+        string? cancelText = null
     )
     {
         var result = await dialogService.Confirm(
             message,
-            title,
-            new ConfirmOptions { OkButtonText = okText, CancelButtonText = cancelText }
+            title ?? Localized("Confirm.Title", "Confirm"),
+            new ConfirmOptions
+            {
+                OkButtonText = okText ?? Localized("Confirm.Ok", "OK"),
+                CancelButtonText = cancelText ?? Localized("Confirm.Cancel", "Cancel"),
+            }
         );
         return result == true;
     }
 
     /// <summary>
     /// Shows a standard destructive-delete confirmation for <paramref name="name"/>
-    /// ("Delete {name}? This cannot be undone." with a "Delete" primary button).
+    /// ("Delete {name}? This cannot be undone." with a "Delete" primary button), in
+    /// the current culture.
     /// </summary>
-    public Task<bool> ConfirmDeleteAsync(string name, string title = "Delete") =>
-        ConfirmAsync($"Delete {name}? This cannot be undone.", title, okText: "Delete");
+    public Task<bool> ConfirmDeleteAsync(string name, string? title = null) =>
+        ConfirmAsync(
+            Localized("Confirm.DeleteMessage", "Delete {0}? This cannot be undone.", name),
+            title ?? Localized("Confirm.DeleteTitle", "Delete"),
+            okText: Localized("Confirm.DeleteAction", "Delete")
+        );
+
+    private string Localized(string key, string fallback) =>
+        localizer is null ? fallback : localizer[key];
+
+    private string Localized(string key, string fallback, params object[] arguments) =>
+        localizer is null ? string.Format(fallback, arguments) : localizer[key, arguments];
 }

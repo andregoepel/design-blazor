@@ -6,7 +6,7 @@ using Radzen;
 
 namespace AndreGoepel.Design.Blazor.Tests.Components;
 
-public class FilterBarTests : BunitContext
+public class FilterBarTests : DesignBlazorTestContext
 {
     public FilterBarTests() => Services.AddRadzenComponents();
 

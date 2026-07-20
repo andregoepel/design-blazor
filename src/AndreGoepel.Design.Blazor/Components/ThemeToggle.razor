@@ -3,8 +3,9 @@
 @rendermode InteractiveServer
 @using Microsoft.JSInterop
 @inject IJSRuntime JS
+@inject IStringLocalizer<DesignStrings> L
 
-<div class="ag-theme-toggle" role="group" aria-label="Theme">
+<div class="ag-theme-toggle" role="group" aria-label="@L["Theme.GroupLabel"]">
     @foreach (var mode in Modes)
     {
         <button type="button"
@@ -23,12 +24,14 @@
 
     private sealed record Mode(string Key, string Icon, string Title);
 
-    private static readonly Mode[] Modes =
-    [
-        new("light", "sun", "Light"),
-        new("auto", "monitor", "Match system"),
-        new("dark", "moon", "Dark"),
-    ];
+    // Instance-level, not a static array: the titles are culture-dependent, so they
+    // have to be resolved per render rather than once per process.
+    private Mode[] Modes =>
+        [
+            new("light", "sun", L["Theme.Light"]),
+            new("auto", "monitor", L["Theme.Auto"]),
+            new("dark", "moon", L["Theme.Dark"]),
+        ];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

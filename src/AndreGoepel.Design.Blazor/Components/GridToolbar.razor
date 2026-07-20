@@ -2,11 +2,12 @@
    filters the grid, plus a right-aligned result count. Bind Search two-way
    (@bind-Search) and drive your own filtering off it — this component only
    renders the box, it doesn't filter anything itself. *@
+@inject IStringLocalizer<DesignStrings> L
 
 <div class="ag-grid-toolbar">
     <div class="ag-search">
         <span class="ag-search-icon"><AppIcon Name="search" Size="14" /></span>
-        <input class="ag-search-input" placeholder="@SearchPlaceholder" value="@Search" @oninput="OnInput" />
+        <input class="ag-search-input" placeholder="@SearchPlaceholderLabel" value="@Search" @oninput="OnInput" />
     </div>
     @if (Actions is not null)
     {
@@ -27,9 +28,9 @@
     [Parameter]
     public EventCallback<string> SearchChanged { get; set; }
 
-    /// <summary>Placeholder shown in the empty search box.</summary>
+    /// <summary>Placeholder shown in the empty search box. Defaults to a localized "Search…".</summary>
     [Parameter]
-    public string SearchPlaceholder { get; set; } = "Search…";
+    public string? SearchPlaceholder { get; set; }
 
     /// <summary>Right-aligned result count, e.g. "9 of 12". Omit to hide it.</summary>
     [Parameter]
@@ -38,6 +39,9 @@
     /// <summary>Optional extra toolbar content rendered between the search box and the count.</summary>
     [Parameter]
     public RenderFragment? Actions { get; set; }
+
+    private string SearchPlaceholderLabel =>
+        SearchPlaceholder ?? L["GridToolbar.SearchPlaceholder"];
 
     private async Task OnInput(ChangeEventArgs e)
     {

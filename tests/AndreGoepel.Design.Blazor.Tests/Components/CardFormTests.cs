@@ -6,7 +6,7 @@ using Radzen;
 
 namespace AndreGoepel.Design.Blazor.Tests.Components;
 
-public class CardFormTests : BunitContext
+public class CardFormTests : DesignBlazorTestContext
 {
     public sealed class Model
     {
