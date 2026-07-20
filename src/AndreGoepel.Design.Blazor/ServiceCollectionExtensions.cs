@@ -70,10 +70,18 @@ public static class ServiceCollectionExtensions
         localization.SupportedUICultures = supported;
         localization.ApplyCurrentCultureToResponseHeaders = true;
 
-        // Cookie only — deliberately dropping the framework's Accept-Language and
-        // query-string providers. Issue #25 specifies English until the visitor
-        // chooses otherwise, whereas Accept-Language would silently open a German
-        // browser in German and make the default culture unobservable.
-        localization.RequestCultureProviders = [new CookieRequestCultureProvider()];
+        // Order is significant — the first provider that yields a supported culture
+        // wins. An explicit choice (cookie) has to outrank the browser's preference,
+        // otherwise a German visitor who picked English would be switched back on
+        // every request. Without either, DefaultCulture applies.
+        //
+        // The framework's query-string provider is left out on purpose: the culture
+        // endpoint is the one way to change language, and ?culture= would be a second
+        // path that sets the culture for a single request without persisting it.
+        localization.RequestCultureProviders =
+        [
+            new CookieRequestCultureProvider(),
+            new AcceptLanguageHeaderRequestCultureProvider(),
+        ];
     }
 }
