@@ -3,9 +3,9 @@
 @rendermode InteractiveServer
 @using Microsoft.JSInterop
 @inject IJSRuntime JS
-@inject IStringLocalizer<DesignStrings> L
+@inject IServiceProvider Services
 
-<div class="ag-theme-toggle" role="group" aria-label="@L["Theme.GroupLabel"]">
+<div class="ag-theme-toggle" role="group" aria-label="@T("Theme.GroupLabel")">
     @foreach (var mode in Modes)
     {
         <button type="button"
@@ -28,9 +28,9 @@
     // have to be resolved per render rather than once per process.
     private Mode[] Modes =>
         [
-            new("light", "sun", L["Theme.Light"]),
-            new("auto", "monitor", L["Theme.Auto"]),
-            new("dark", "moon", L["Theme.Dark"]),
+            new("light", "sun", T("Theme.Light")),
+            new("auto", "monitor", T("Theme.Auto")),
+            new("dark", "moon", T("Theme.Dark")),
         ];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -53,4 +53,8 @@
 
     private async Task SetAsync(string mode) =>
         _current = await JS.InvokeAsync<string>("agTheme.set", mode);
+
+    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
+    // component still renders on a host (or bUnit test) without localization registered.
+    private string T(string key) => Services.DesignText(key);
 }

@@ -3,7 +3,7 @@
    button, and optional extra Actions after it. Fields are bottom-aligned so
    label-above FormFields line their controls up. Give controls a sensible
    min-width; the bar itself only lays them out. *@
-@inject IStringLocalizer<DesignStrings> L
+@inject IServiceProvider Services
 
 <RadzenCard>
     <RadzenStack
@@ -48,5 +48,9 @@
     [Parameter]
     public RenderFragment? Actions { get; set; }
 
-    private string ApplyLabel => ApplyText ?? L["FilterBar.Apply"];
+    private string ApplyLabel => ApplyText ?? T("FilterBar.Apply");
+
+    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
+    // component still renders on a host (or bUnit test) without localization registered.
+    private string T(string key) => Services.DesignText(key);
 }

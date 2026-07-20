@@ -2,7 +2,7 @@
    filters the grid, plus a right-aligned result count. Bind Search two-way
    (@bind-Search) and drive your own filtering off it — this component only
    renders the box, it doesn't filter anything itself. *@
-@inject IStringLocalizer<DesignStrings> L
+@inject IServiceProvider Services
 
 <div class="ag-grid-toolbar">
     <div class="ag-search">
@@ -41,7 +41,7 @@
     public RenderFragment? Actions { get; set; }
 
     private string SearchPlaceholderLabel =>
-        SearchPlaceholder ?? L["GridToolbar.SearchPlaceholder"];
+        SearchPlaceholder ?? T("GridToolbar.SearchPlaceholder");
 
     private async Task OnInput(ChangeEventArgs e)
     {
@@ -49,4 +49,8 @@
         Search = value;
         await SearchChanged.InvokeAsync(value);
     }
+
+    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
+    // component still renders on a host (or bUnit test) without localization registered.
+    private string T(string key) => Services.DesignText(key);
 }
