@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="UI">
-    <PackageVersion Include="Radzen.Blazor" Version="11.1.5" />
+    <PackageVersion Include="Radzen.Blazor" Version="11.1.6" />
   </ItemGroup>
 
   <ItemGroup Label="Testing">
@@ -12,7 +12,7 @@
     <!-- Direct pin: bunit 2.7.2 drags in AngleSharp 1.4.0, which has a known
          moderate-severity advisory (GHSA-pgww-w46g-26qg). Force the patched
          version via an explicit PackageReference in the test project. -->
-    <PackageVersion Include="AngleSharp" Version="1.5.1" />
+    <PackageVersion Include="AngleSharp" Version="1.5.2" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
     <PackageVersion Include="NSubstitute" Version="6.0.0" />
