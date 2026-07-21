@@ -1,5 +1,5 @@
+@inherits LocalizedComponentBase
 @implements IDisposable
-@inject IServiceProvider Services
 
 @* Reusable application shell: a fixed sidebar (brand + nav + optional footer) and
    a main column with a topbar (hamburger + breadcrumb + actions) and the page body.
@@ -83,8 +83,4 @@
     private void OnBreadcrumbChanged() => InvokeAsync(StateHasChanged);
 
     public void Dispose() => _breadcrumb.Changed -= OnBreadcrumbChanged;
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }

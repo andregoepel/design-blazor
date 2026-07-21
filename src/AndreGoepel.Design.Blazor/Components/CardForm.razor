@@ -1,10 +1,10 @@
 @typeparam TItem
+@inherits LocalizedComponentBase
 
 @* Add/edit form scaffold (DESIGN.md §4/§5): a RadzenCard wrapping a
    RadzenTemplateForm, its fields (put FormFields in ChildContent), and the
    bordered ag-card-actions footer with a Primary submit + optional Light cancel.
    Submit fires only when validation passes. Set IsBusy while saving. *@
-@inject IServiceProvider Services
 
 <RadzenCard>
     <RadzenTemplateForm TItem="TItem" Data="Data" Submit="Submit">
@@ -81,8 +81,4 @@
     private string CancelLabel => CancelText ?? T("CardForm.Cancel");
 
     private string BusyLabel => BusyText ?? T("CardForm.Busy");
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }
