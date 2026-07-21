@@ -1,8 +1,9 @@
+@inherits LocalizedComponentBase
+
 @* The in-card grid toolbar (DESIGN.md §5 "Data grids"): a search box that
    filters the grid, plus a right-aligned result count. Bind Search two-way
    (@bind-Search) and drive your own filtering off it — this component only
    renders the box, it doesn't filter anything itself. *@
-@inject IServiceProvider Services
 
 <div class="ag-grid-toolbar">
     <div class="ag-search">
@@ -49,8 +50,4 @@
         Search = value;
         await SearchChanged.InvokeAsync(value);
     }
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }

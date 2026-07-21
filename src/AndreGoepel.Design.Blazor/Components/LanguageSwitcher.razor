@@ -1,3 +1,7 @@
+@inherits LocalizedComponentBase
+@using System.Globalization
+@using Microsoft.Extensions.Options
+
 @* Language switch: one item per culture configured via AddDesignBlazor, styled
    like ThemeToggle but labelled with the language code.
 
@@ -5,9 +9,6 @@
    endpoint mapped by UseDesignBlazorLocalization, so the switch also works on
    statically rendered pages (e.g. the ASP.NET Core Identity pages) and needs no
    circuit. Requires app.UseDesignBlazorLocalization(). *@
-@using System.Globalization
-@using Microsoft.Extensions.Options
-@inject IServiceProvider Services
 @inject IOptions<DesignBlazorOptions> Options
 @inject NavigationManager Navigation
 
@@ -67,8 +68,4 @@
 
         return false;
     }
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }

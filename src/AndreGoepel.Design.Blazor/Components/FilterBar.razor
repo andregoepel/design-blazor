@@ -1,9 +1,10 @@
+@inherits LocalizedComponentBase
+
 @* A filter/search bar: a card holding a horizontal, wrapping row of filter
    fields (put FormFields — or any controls — in ChildContent) with an Apply
    button, and optional extra Actions after it. Fields are bottom-aligned so
    label-above FormFields line their controls up. Give controls a sensible
    min-width; the bar itself only lays them out. *@
-@inject IServiceProvider Services
 
 <RadzenCard>
     <RadzenStack
@@ -49,8 +50,4 @@
     public RenderFragment? Actions { get; set; }
 
     private string ApplyLabel => ApplyText ?? T("FilterBar.Apply");
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }

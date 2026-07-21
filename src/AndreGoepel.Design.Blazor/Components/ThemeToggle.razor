@@ -1,9 +1,10 @@
-@* Light / auto / dark theme switch. Interactive so button clicks reach the
-   browser-side agTheme helper that owns data-theme + localStorage. *@
+@inherits LocalizedComponentBase
 @rendermode InteractiveServer
 @using Microsoft.JSInterop
 @inject IJSRuntime JS
-@inject IServiceProvider Services
+
+@* Light / auto / dark theme switch. Interactive so button clicks reach the
+   browser-side agTheme helper that owns data-theme + localStorage. *@
 
 <div class="ag-theme-toggle" role="group" aria-label="@T("Theme.GroupLabel")">
     @foreach (var mode in Modes)
@@ -53,8 +54,4 @@
 
     private async Task SetAsync(string mode) =>
         _current = await JS.InvokeAsync<string>("agTheme.set", mode);
-
-    // Resolved through IServiceProvider rather than an injected IStringLocalizer so the
-    // component still renders on a host (or bUnit test) without localization registered.
-    private string T(string key) => Services.DesignText(key);
 }
