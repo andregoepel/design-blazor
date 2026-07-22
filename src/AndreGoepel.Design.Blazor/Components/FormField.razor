@@ -4,7 +4,13 @@
    label doesn't match the design. *@
 
 <RadzenStack Gap="0.4rem">
-    <RadzenLabel Text="@Label" Component="@For" />
+    <RadzenLabel Component="@For">
+        @Label
+        @if (Required)
+        {
+            <span class="ag-required" aria-hidden="true">*</span>
+        }
+    </RadzenLabel>
     @ChildContent
     @if (!string.IsNullOrWhiteSpace(Hint))
     {
@@ -30,4 +36,9 @@
     /// <summary>Optional muted help text shown under the control.</summary>
     [Parameter]
     public string? Hint { get; set; }
+
+    /// <summary>Whether to show a red asterisk after the label. Purely visual — pair
+    /// it with a <c>RadzenRequiredValidator</c> on the control for actual validation.</summary>
+    [Parameter]
+    public bool Required { get; set; }
 }

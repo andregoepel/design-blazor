@@ -62,4 +62,27 @@ public class FormFieldTests : BunitContext
         // Assert
         Assert.Empty(cut.FindAll(".rz-text-caption"));
     }
+
+    [Fact]
+    public void Render_Required_ShowsAsteriskAfterLabel()
+    {
+        // Act
+        var cut = Render<FormField>(parameters =>
+            parameters.Add(p => p.Label, "Email").Add(p => p.Required, true)
+        );
+
+        // Assert
+        Assert.Contains("Email", cut.Find("label").TextContent);
+        Assert.NotNull(cut.Find("label .ag-required"));
+    }
+
+    [Fact]
+    public void Render_NotRequired_OmitsAsterisk()
+    {
+        // Act
+        var cut = Render<FormField>(parameters => parameters.Add(p => p.Label, "Email"));
+
+        // Assert
+        Assert.Empty(cut.FindAll(".ag-required"));
+    }
 }

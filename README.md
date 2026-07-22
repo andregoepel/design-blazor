@@ -48,10 +48,10 @@ Then build with Radzen components and the `ag-*` helper classes, and use the she
 - **`ag-*` helper classes** — cards, buttons, badges, forms, grids, empty states,
   the app shell, and the login card.
 - **Components** — `AppShell`, `AppPageTitle`, `LoginShell`, `AppIcon`,
-  `ThemeToggle`, `LanguageSwitcher`, `PageHeader`, `StatusBadge`, `EmptyState`,
-  `RowActions`, `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`, `CardForm`,
-  `FormField`, `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`, and the
-  cascading `BreadcrumbState`.
+  `ThemeToggle`, `LanguageSwitcher`, `PageHeader`, `DialogHeader`, `StatusBadge`,
+  `EmptyState`, `RowActions`, `IconButton`, `DataCard`, `GridToolbar`, `FilterBar`,
+  `CardForm`, `FormField`, `SettingToggleRow`, `StatTile`, `LinkButton`, `InfoBox`,
+  and the cascading `BreadcrumbState`.
 - **Services & options** — `ConfirmService` (standardised confirm/delete dialogs)
   and `DesignBlazorOptions` (e.g. the `BrandName` `AppPageTitle` appends to document
   titles), registered via `services.AddDesignBlazor(o => o.BrandName = "Acme")`
