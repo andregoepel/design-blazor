@@ -640,6 +640,12 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   }
 }
 
+/* Required-field marker: a small red asterisk after a FormField's label. */
+.ag-required {
+  color: var(--ag-danger);
+  margin-left: 2px;
+}
+
 /* A settings toggle row: label + description on the left, a switch on the
    right. Stack them in a card; the last row should drop its border (add
    .ag-toggle-row-last, or let SettingToggleRow's own :last-child rule
@@ -735,6 +741,17 @@ a:hover, .rz-link:hover {
 
 .ag-card-actions.ag-start {
   justify-content: flex-start;
+}
+
+/* Rich dialog title (title + optional subtitle), rendered inside Radzen's own
+   title-bar chrome via `DialogHeader` — a bottom border separates it from the
+   dialog body, matching a card's ag-card-actions footer border. */
+.ag-dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ag-border);
 }
 
 /* ===================================================== APP SHELL (host) === */

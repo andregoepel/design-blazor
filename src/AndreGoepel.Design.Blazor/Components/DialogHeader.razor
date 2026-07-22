@@ -1,0 +1,23 @@
+@* Rich dialog title (DESIGN.md §5 "Dialogs"): a title + optional subtitle, with a
+   bottom border separating it from the dialog body — pass this as the
+   `titleContent` RenderFragment to `DialogService.OpenAsync` instead of a plain
+   string when the dialog needs more than a bare title. Radzen still renders its
+   own close button around whatever `titleContent` returns. *@
+
+<div class="ag-dialog-header">
+    <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@Title</RadzenText>
+    @if (!string.IsNullOrWhiteSpace(Subtitle))
+    {
+        <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">@Subtitle</RadzenText>
+    }
+</div>
+
+@code {
+    /// <summary>The dialog title.</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "";
+
+    /// <summary>Optional short description shown under the title.</summary>
+    [Parameter]
+    public string? Subtitle { get; set; }
+}

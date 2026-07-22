@@ -148,7 +148,7 @@ label doesn't match the design. Put the control + any validators in each
 
 ```razor
 <CardForm TItem="InputModel" Data="Input" Submit="SaveAsync" Cancel="Cancel" IsBusy="_saving">
-    <FormField Label="Email" For="Email" Hint="We'll only use this to contact you.">
+    <FormField Label="Email" For="Email" Required="true" Hint="We'll only use this to contact you.">
         <RadzenTextBox @bind-Value="Input.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
         <RadzenRequiredValidator Component="Email" Text="Email is required" />
         <RadzenEmailValidator Component="Email" Text="That is not a valid email" />
@@ -158,7 +158,9 @@ label doesn't match the design. Put the control + any validators in each
 
 `Submit` fires only when validation passes; while `IsBusy` is true the primary
 button shows `BusyText` and both buttons disable. `Cancel` is optional — omit it and
-no cancel button is shown.
+no cancel button is shown. `FormField`'s `Required` is purely the visual red
+asterisk — it doesn't validate anything, so pair it with a
+`RadzenRequiredValidator` as above.
 
 Two fields side by side (collapses to one column on narrow screens): wrap them in
 `<div class="ag-form-grid">…</div>` inside the `CardForm`.
@@ -437,6 +439,27 @@ private void OpenRowMenu(MouseEventArgs args, Role role)
 
 The host layout must render `<RadzenContextMenu />` once (the Aspire sample does).
 
+### Dialogs
+
+`DialogService.OpenAsync(string title, ...)` only takes a plain title string —
+fine for a one-liner, but a form dialog that needs a subtitle (and a border
+separating the header from the body) should pass `DialogHeader` as the
+`titleContent` RenderFragment instead. Radzen still renders its own close button
+and wrapper around whatever `titleContent` returns:
+
+```razor
+var result = await Dialogs.OpenAsync<TItem>(
+    titleContent: _ =>
+        @<DialogHeader Title="New customer" Subtitle="Add a customer to the studio's portal." />,
+    childContent: _ => @<NewCustomerForm />
+);
+```
+
+Inside the dialog body, use `CardForm`/`FormField` as usual — a `FormField`
+that's required visually should set `Required="true"` for the red asterisk
+(pair it with a `RadzenRequiredValidator` for the actual validation), and pair
+naturally-related fields (e.g. email + mobile) in an `ag-form-grid` as normal.
+
 ### Confirmations
 
 Don't call `DialogService.Confirm` directly — inject `ConfirmService` and use it,
@@ -483,9 +506,11 @@ A page just provides the heading block + form + a centred footer link:
 | Class | Purpose |
 |---|---|
 | `ag-page-head` | header row: heading left, action right (rendered by `PageHeader`) |
+| `ag-dialog-header` | bordered dialog title + optional subtitle (rendered by `DialogHeader`) |
 | `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left; rendered by `CardForm`) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
+| `ag-required` | red asterisk after a required field's label (rendered by `FormField`) |
 | `ag-toggle-row`, `ag-toggle-row-text`, `ag-toggle-row-label`, `ag-toggle-row-description` | settings toggle row: label + description + switch (rendered by `SettingToggleRow`) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |
