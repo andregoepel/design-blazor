@@ -6,9 +6,10 @@ namespace AndreGoepel.Design.Blazor;
 
 /// <summary>
 /// Thin wrapper over Radzen's <see cref="DialogService"/> that standardises the
-/// confirm-dialog boilerplate (title, OK/Cancel button text) and collapses the
-/// nullable <c>bool?</c> result — <c>null</c> (dismissed) counts as "no". Register
-/// via <c>services.AddDesignBlazor()</c>; requires <c>AddRadzenComponents()</c>.
+/// confirm- and alert-dialog boilerplate (title, button text) and, for confirms,
+/// collapses the nullable <c>bool?</c> result — <c>null</c> (dismissed) counts as
+/// "no". Register via <c>services.AddDesignBlazor()</c>; requires
+/// <c>AddRadzenComponents()</c>.
 /// </summary>
 /// <remarks>
 /// The localizer is optional so hosts that construct the service directly, rather
@@ -53,6 +54,17 @@ public sealed class ConfirmService(
             Localized("Confirm.DeleteMessage", "Delete {0}? This cannot be undone.", name),
             title ?? Localized("Confirm.DeleteTitle", "Delete"),
             okText: Localized("Confirm.DeleteAction", "Delete")
+        );
+
+    /// <summary>
+    /// Shows a single-button alert dialog (an acknowledgement, not a choice). Title
+    /// and button text default to their localized equivalents.
+    /// </summary>
+    public Task AlertAsync(string message, string? title = null, string? okText = null) =>
+        dialogService.Alert(
+            message,
+            title ?? Localized("Alert.Title", "Alert"),
+            new AlertOptions { OkButtonText = okText ?? Localized("Alert.Ok", "OK") }
         );
 
     private string Localized(string key, string fallback) =>
