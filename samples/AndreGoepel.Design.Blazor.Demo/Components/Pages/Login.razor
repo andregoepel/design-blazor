@@ -12,16 +12,20 @@
 
 <RadzenTemplateForm TItem="Model" Data="_model" Submit="OnSubmit">
     <RadzenStack Gap="1.25rem">
-        <RadzenStack Gap="0.4rem">
-            <RadzenLabel Text="@L["Login.Email"]" Component="Email" />
+        <FormField Label="@L["Login.Email"]" For="Email">
             <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
             <RadzenRequiredValidator Component="Email" Text="@L["Login.EmailRequired"]" />
-        </RadzenStack>
-        <RadzenStack Gap="0.4rem">
-            <RadzenLabel Text="@L["Login.Password"]" Component="Password" />
-            <RadzenPassword @bind-Value="_model.Password" Name="Password" Style="width:100%" />
-            <RadzenRequiredValidator Component="Password" Text="@L["Login.PasswordRequired"]" />
-        </RadzenStack>
+        </FormField>
+        @* LabelActions puts the "Forgot password?" link on the label row, right-aligned next to "Password". *@
+        <FormField Label="@L["Login.Password"]" For="Password">
+            <LabelActions>
+                <RadzenLink Path="" Text="@L["Login.ForgotPassword"]" class="ag-field-head-link" />
+            </LabelActions>
+            <ChildContent>
+                <RadzenPassword @bind-Value="_model.Password" Name="Password" Style="width:100%" />
+                <RadzenRequiredValidator Component="Password" Text="@L["Login.PasswordRequired"]" />
+            </ChildContent>
+        </FormField>
 
         <div class="ag-login-actions">
             <RadzenButton Text="@L["Login.LogIn"]" ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Style="width:100%" />

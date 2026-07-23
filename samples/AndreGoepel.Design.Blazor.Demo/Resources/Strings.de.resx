@@ -280,6 +280,7 @@
   <data name="Login.EmailRequired" xml:space="preserve"><value><![CDATA[E-Mail ist erforderlich]]></value></data>
   <data name="Login.Password" xml:space="preserve"><value><![CDATA[Passwort]]></value></data>
   <data name="Login.PasswordRequired" xml:space="preserve"><value><![CDATA[Passwort ist erforderlich]]></value></data>
+  <data name="Login.ForgotPassword" xml:space="preserve"><value><![CDATA[Passwort vergessen?]]></value></data>
   <data name="Login.LogIn" xml:space="preserve"><value><![CDATA[Anmelden]]></value></data>
   <data name="Login.NoAccount" xml:space="preserve"><value><![CDATA[Noch kein Konto?]]></value></data>
   <data name="Login.BackToOverview" xml:space="preserve"><value><![CDATA[Zurück zur Übersicht]]></value></data>

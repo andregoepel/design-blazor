@@ -1,16 +1,21 @@
 @* Label-above form field (DESIGN.md §5 "Forms"): a label over the control, full
    width. Put the input (and any validators) in ChildContent; set For to the
    input's Name so the label links to it. Never use RadzenFormField — its floating
-   label doesn't match the design. *@
+   label doesn't match the design. LabelActions is an optional trailing slot on
+   the label row (e.g. a "Forgot password?" link next to "Password"). *@
 
 <RadzenStack Gap="0.4rem">
-    <RadzenLabel Component="@For">
-        @Label
-        @if (Required)
-        {
-            <span class="ag-required" aria-hidden="true">*</span>
-        }
-    </RadzenLabel>
+    @if (LabelActions is null)
+    {
+        @RenderLabel
+    }
+    else
+    {
+        <div class="ag-field-head">
+            @RenderLabel
+            @LabelActions
+        </div>
+    }
     @ChildContent
     @if (!string.IsNullOrWhiteSpace(Hint))
     {
@@ -41,4 +46,18 @@
     /// it with a <c>RadzenRequiredValidator</c> on the control for actual validation.</summary>
     [Parameter]
     public bool Required { get; set; }
+
+    /// <summary>Optional trailing content on the label row, right-aligned next to the
+    /// label (e.g. a "Forgot password?" <c>RadzenLink</c>). Omit for a plain label.</summary>
+    [Parameter]
+    public RenderFragment? LabelActions { get; set; }
+
+    private RenderFragment RenderLabel =>
+        @<RadzenLabel Component="@For">
+            @Label
+            @if (Required)
+            {
+                <span class="ag-required" aria-hidden="true">*</span>
+            }
+        </RadzenLabel>;
 }
