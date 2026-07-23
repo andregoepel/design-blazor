@@ -162,6 +162,11 @@ no cancel button is shown. `FormField`'s `Required` is purely the visual red
 asterisk — it doesn't validate anything, so pair it with a
 `RadzenRequiredValidator` as above.
 
+For a form whose primary action is destructive (e.g. "Permanently delete my
+account"), set `Danger="true"` to render the submit button `ButtonStyle.Danger`
+instead of `Primary`. Everything else about `CardForm` — validation, `IsBusy`,
+the optional `Light` cancel — behaves the same.
+
 Two fields side by side (collapses to one column on narrow screens): wrap them in
 `<div class="ag-form-grid">…</div>` inside the `CardForm`.
 

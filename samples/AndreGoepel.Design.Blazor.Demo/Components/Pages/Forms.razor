@@ -38,6 +38,16 @@
                 <RadzenTextArea @bind-Value="_model.Notes" Name="Notes" Rows="3" Style="width:100%" />
             </FormField>
         </CardForm>
+
+        @* Danger="true" swaps the submit button to ButtonStyle.Danger — for a
+           form whose primary action is destructive (e.g. account deletion). *@
+        <CardForm TItem="DeleteAccountModel" Data="_deleteAccountModel" Submit="OnDeleteAccount"
+                  Title="@L["Forms.DeleteAccountTitle"]" SubmitText="@L["Forms.DeleteAccountSubmit"]" Danger="true">
+            <FormField Label="@L["Forms.DeleteAccountConfirm"]" For="Confirm">
+                <RadzenTextBox @bind-Value="_deleteAccountModel.Confirm" Name="Confirm" Style="width:100%" />
+                <RadzenRequiredValidator Component="Confirm" Text="@L["Forms.DeleteAccountConfirmRequired"]" />
+            </FormField>
+        </CardForm>
     </RadzenStack>
 </div>
 
@@ -55,6 +65,7 @@
 
     private readonly Model _model = new();
     private bool _saving;
+    private readonly DeleteAccountModel _deleteAccountModel = new();
 
     private async Task OnSubmit()
     {
@@ -71,6 +82,12 @@
         Notifications.Notify(NotificationSeverity.Info, L["Forms.CancelledNotificationTitle"], L["Forms.CancelledNotificationMessage"]);
     }
 
+    private void OnDeleteAccount()
+    {
+        _deleteAccountModel.Confirm = null;
+        Notifications.Notify(NotificationSeverity.Success, L["Forms.DeleteAccountNotificationTitle"], L["Forms.DeleteAccountNotificationMessage"]);
+    }
+
     private sealed class Model
     {
         public string? FirstName { get; set; }
@@ -78,5 +95,10 @@
         public string? Email { get; set; }
         public string Role { get; set; } = "viewer";
         public string? Notes { get; set; }
+    }
+
+    private sealed class DeleteAccountModel
+    {
+        public string? Confirm { get; set; }
     }
 }

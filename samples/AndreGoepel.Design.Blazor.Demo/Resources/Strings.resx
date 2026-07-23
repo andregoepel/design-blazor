@@ -263,6 +263,12 @@
   </data>
   <data name="Forms.CancelledNotificationTitle" xml:space="preserve"><value><![CDATA[Cancelled]]></value></data>
   <data name="Forms.CancelledNotificationMessage" xml:space="preserve"><value><![CDATA[The form was reset.]]></value></data>
+  <data name="Forms.DeleteAccountTitle" xml:space="preserve"><value><![CDATA[Delete account]]></value></data>
+  <data name="Forms.DeleteAccountConfirm" xml:space="preserve"><value><![CDATA[Type DELETE to confirm]]></value></data>
+  <data name="Forms.DeleteAccountConfirmRequired" xml:space="preserve"><value><![CDATA[Type DELETE to confirm]]></value></data>
+  <data name="Forms.DeleteAccountSubmit" xml:space="preserve"><value><![CDATA[Permanently delete my account]]></value></data>
+  <data name="Forms.DeleteAccountNotificationTitle" xml:space="preserve"><value><![CDATA[Account deleted]]></value></data>
+  <data name="Forms.DeleteAccountNotificationMessage" xml:space="preserve"><value><![CDATA[This is a demo — nothing was actually deleted.]]></value></data>
 
   <!-- Icons.razor -->
   <data name="Icons.PageTitle" xml:space="preserve"><value><![CDATA[Icons]]></value></data>
