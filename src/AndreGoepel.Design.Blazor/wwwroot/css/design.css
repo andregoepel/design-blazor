@@ -959,7 +959,13 @@ a:hover, .rz-link:hover {
   box-sizing: border-box;
 }
 
-.ag-theme-btn.ag-active {
+/* Active state is driven by the data-theme-pref attribute theme.js maintains
+   on <html>, so it works on statically rendered pages with no circuit.
+   .ag-active is kept for markup that still sets the class itself. */
+.ag-theme-btn.ag-active,
+:root[data-theme-pref="light"] .ag-theme-btn[data-mode="light"],
+:root[data-theme-pref="auto"] .ag-theme-btn[data-mode="auto"],
+:root[data-theme-pref="dark"] .ag-theme-btn[data-mode="dark"] {
   background: var(--ag-accent-soft);
   border-color: var(--ag-accent);
   color: var(--ag-accent-text);
@@ -1053,6 +1059,19 @@ a:hover, .rz-link:hover {
   padding: 40px 20px;
   box-sizing: border-box;
   background: var(--ag-bg);
+  /* anchor for the top-right chrome */
+  position: relative;
+}
+
+/* top-right chrome on the auth pages: the theme toggle plus any host-supplied
+   controls (e.g. a language switcher), matching the app shell topbar corner. */
+.ag-login-topright {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .ag-login-inner {

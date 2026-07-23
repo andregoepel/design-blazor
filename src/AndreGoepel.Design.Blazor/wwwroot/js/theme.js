@@ -26,8 +26,25 @@
     return pref;
   }
 
+  // ThemeToggle buttons are rendered statically (no circuit), so the server
+  // cannot know the stored preference; pressed state is stamped from here.
+  // The visual active state comes from CSS via data-theme-pref instead.
+  function syncButtons(pref) {
+    document.querySelectorAll(".ag-theme-btn[data-mode]").forEach(function (btn) {
+      btn.setAttribute(
+        "aria-pressed",
+        String(btn.getAttribute("data-mode") === pref)
+      );
+    });
+  }
+
   function apply(pref) {
+    // data-theme is the resolved theme ("light" | "dark") the stylesheets key
+    // off; data-theme-pref is the raw preference (incl. "auto") so CSS can
+    // highlight the active ThemeToggle button without any interop.
     document.documentElement.setAttribute("data-theme", resolve(pref));
+    document.documentElement.setAttribute("data-theme-pref", pref);
+    syncButtons(pref);
   }
 
   // Re-resolve when the OS theme changes, but only while "auto" is active.
@@ -64,17 +81,27 @@
   apply(preference());
 
   // Blazor's enhanced navigation morphs <html> to the server response, which has
-  // no data-theme — wiping the attribute on every page change and reverting the
-  // shell to the default theme. Re-apply whenever data-theme diverges from the
-  // resolved preference. Runs before paint (microtask), so there's no flash, and
-  // it self-terminates because re-setting to the desired value is a no-op.
+  // no data-theme — wiping the attributes on every page change and reverting the
+  // shell to the default theme. Re-apply whenever they diverge from the stored
+  // preference. Runs before paint (microtask), so there's no flash, and it
+  // self-terminates because re-setting to the desired values is a no-op.
+  // apply() also re-stamps aria-pressed on any freshly morphed-in buttons.
   new MutationObserver(function () {
-    var desired = resolve(preference());
-    if (document.documentElement.getAttribute("data-theme") !== desired) {
-      document.documentElement.setAttribute("data-theme", desired);
+    var pref = preference();
+    if (
+      document.documentElement.getAttribute("data-theme") !== resolve(pref) ||
+      document.documentElement.getAttribute("data-theme-pref") !== pref
+    ) {
+      apply(pref);
     }
   }).observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ["data-theme"],
+    attributeFilter: ["data-theme", "data-theme-pref"],
+  });
+
+  // The immediate apply() above runs from <head>, before the body is parsed, so
+  // the buttons it wants to stamp don't exist yet — sync once the DOM is in.
+  document.addEventListener("DOMContentLoaded", function () {
+    syncButtons(preference());
   });
 })();
