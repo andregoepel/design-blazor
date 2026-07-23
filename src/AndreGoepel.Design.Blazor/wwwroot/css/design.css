@@ -646,6 +646,19 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   margin-left: 2px;
 }
 
+/* FormField's label row when LabelActions is set — label left, actions
+   (e.g. a "Forgot password?" link) right-aligned on the same baseline. */
+.ag-field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.ag-field-head-link {
+  font: 600 12px "Manrope", sans-serif;
+  color: var(--ag-accent-text);
+}
+
 /* A settings toggle row: label + description on the left, a switch on the
    right. Stack them in a card; the last row should drop its border (add
    .ag-toggle-row-last, or let SettingToggleRow's own :last-child rule
@@ -1150,18 +1163,6 @@ a:hover, .rz-link:hover {
 .ag-login-card .rz-button[data-af="passkey"]:hover {
   background: var(--ag-hover);
   filter: none;
-}
-
-/* Password label row with the inline "Forgot password?" link. */
-.ag-login-field-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.ag-login-forgot {
-  font: 600 12px "Manrope", sans-serif;
-  color: var(--ag-accent-text);
 }
 
 .ag-login-footer-links {

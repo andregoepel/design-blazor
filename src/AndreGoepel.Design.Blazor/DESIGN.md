@@ -170,6 +170,27 @@ the optional `Light` cancel — behaves the same.
 Two fields side by side (collapses to one column on narrow screens): wrap them in
 `<div class="ag-form-grid">…</div>` inside the `CardForm`.
 
+A field whose label row needs a trailing action (e.g. "Forgot password?" next
+to "Password") — pass `LabelActions`; it renders right-aligned next to the
+label instead of a plain label:
+
+```razor
+<FormField Label="Password" For="Password">
+    <LabelActions>
+        <RadzenLink Path="forgot-password" Text="Forgot password?" class="ag-field-head-link" />
+    </LabelActions>
+    <ChildContent>
+        <RadzenPassword @bind-Value="Input.Password" Name="Password" Style="width:100%" />
+        <RadzenRequiredValidator Component="Password" Text="Password is required" />
+    </ChildContent>
+</FormField>
+```
+
+(When `LabelActions` is used alongside field content, Razor requires the
+content to be wrapped in an explicit `<ChildContent>` tag too — see RZ9996.)
+
+Omit `LabelActions` for the plain-label case (the default).
+
 Read-only fields render greyed automatically (`.rz-textbox[readonly]`). Just set
 `ReadOnly="true"`; you do not need extra inline styles.
 
@@ -504,6 +525,9 @@ A page just provides the heading block + form + a centred footer link:
 </div>
 ```
 
+Fields still use `FormField` as usual — a password field with a "Forgot
+password?" link is `FormField`'s `LabelActions` slot (see §5 "Forms").
+
 ---
 
 ## 6. `ag-*` class reference
@@ -516,6 +540,7 @@ A page just provides the heading block + form + a centred footer link:
 | `ag-actions-inline` | inline button group that doesn't stretch |
 | `ag-form-grid` | two-column field grid (collapses ≤640px) |
 | `ag-required` | red asterisk after a required field's label (rendered by `FormField`) |
+| `ag-field-head`, `ag-field-head-link` | label row + trailing action, e.g. "Forgot password?" (rendered by `FormField` when `LabelActions` is set) |
 | `ag-toggle-row`, `ag-toggle-row-text`, `ag-toggle-row-label`, `ag-toggle-row-description` | settings toggle row: label + description + switch (rendered by `SettingToggleRow`) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |

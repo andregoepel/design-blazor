@@ -85,4 +85,31 @@ public class FormFieldTests : BunitContext
         // Assert
         Assert.Empty(cut.FindAll(".ag-required"));
     }
+
+    [Fact]
+    public void Render_WithoutLabelActions_OmitsFieldHead()
+    {
+        // Act
+        var cut = Render<FormField>(parameters => parameters.Add(p => p.Label, "Password"));
+
+        // Assert
+        Assert.Empty(cut.FindAll(".ag-field-head"));
+        Assert.Equal("Password", cut.Find("label").TextContent);
+    }
+
+    [Fact]
+    public void Render_WithLabelActions_RendersInFieldHeadNextToLabel()
+    {
+        // Act
+        var cut = Render<FormField>(parameters =>
+            parameters
+                .Add(p => p.Label, "Password")
+                .Add(p => p.LabelActions, "<a href=\"#\">Forgot password?</a>")
+        );
+
+        // Assert
+        var head = cut.Find(".ag-field-head");
+        Assert.Contains("Password", head.QuerySelector("label")!.TextContent);
+        Assert.Contains("Forgot password?", head.TextContent);
+    }
 }
