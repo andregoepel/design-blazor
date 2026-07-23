@@ -30,7 +30,7 @@
                 <RadzenButton
                     ButtonType="ButtonType.Submit"
                     Text="@SubmitLabel"
-                    ButtonStyle="ButtonStyle.Primary"
+                    ButtonStyle="@(Danger ? ButtonStyle.Danger : ButtonStyle.Primary)"
                     IsBusy="IsBusy"
                     BusyText="@BusyLabel"
                 />
@@ -75,6 +75,10 @@
     /// <summary>Busy-state text on the submit button. Defaults to a localized "Saving…".</summary>
     [Parameter]
     public string? BusyText { get; set; }
+
+    /// <summary>Tints the submit button for a destructive action instead of the default Primary.</summary>
+    [Parameter]
+    public bool Danger { get; set; }
 
     private string SubmitLabel => SubmitText ?? T("CardForm.Submit");
 

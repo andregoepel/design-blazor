@@ -260,6 +260,12 @@
   </data>
   <data name="Forms.CancelledNotificationTitle" xml:space="preserve"><value><![CDATA[Abgebrochen]]></value></data>
   <data name="Forms.CancelledNotificationMessage" xml:space="preserve"><value><![CDATA[Das Formular wurde zurückgesetzt.]]></value></data>
+  <data name="Forms.DeleteAccountTitle" xml:space="preserve"><value><![CDATA[Konto löschen]]></value></data>
+  <data name="Forms.DeleteAccountConfirm" xml:space="preserve"><value><![CDATA[Geben Sie DELETE ein, um zu bestätigen]]></value></data>
+  <data name="Forms.DeleteAccountConfirmRequired" xml:space="preserve"><value><![CDATA[Geben Sie DELETE ein, um zu bestätigen]]></value></data>
+  <data name="Forms.DeleteAccountSubmit" xml:space="preserve"><value><![CDATA[Mein Konto endgültig löschen]]></value></data>
+  <data name="Forms.DeleteAccountNotificationTitle" xml:space="preserve"><value><![CDATA[Konto gelöscht]]></value></data>
+  <data name="Forms.DeleteAccountNotificationMessage" xml:space="preserve"><value><![CDATA[Dies ist eine Demo — es wurde nichts tatsächlich gelöscht.]]></value></data>
 
   <!-- Icons.razor -->
   <data name="Icons.PageTitle" xml:space="preserve"><value><![CDATA[Icons]]></value></data>

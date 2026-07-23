@@ -127,6 +127,26 @@ public class CardFormTests : DesignBlazorTestContext
     }
 
     [Fact]
+    public void Render_Default_SubmitButtonIsPrimary()
+    {
+        var cut = RenderForm(new Model());
+
+        var submit = cut.Find(".ag-card-actions button[type=submit]");
+        Assert.Contains("rz-primary", submit.ClassList);
+        Assert.DoesNotContain("rz-danger", submit.ClassList);
+    }
+
+    [Fact]
+    public void Render_WithDanger_SubmitButtonIsDanger()
+    {
+        var cut = RenderForm(new Model(), p => p.Add(c => c.Danger, true));
+
+        var submit = cut.Find(".ag-card-actions button[type=submit]");
+        Assert.Contains("rz-danger", submit.ClassList);
+        Assert.DoesNotContain("rz-primary", submit.ClassList);
+    }
+
+    [Fact]
     public void Submit_WhenFormSubmitted_RaisesSubmitWithData()
     {
         var model = new Model { Name = "Ada" };
