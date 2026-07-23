@@ -14,8 +14,8 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     private IStringLocalizer<DesignStrings> Localizer =>
         Services.GetRequiredService<IStringLocalizer<DesignStrings>>();
 
-    // Radzen's DialogService.Confirm is virtual, so NSubstitute can override it.
-    // Its ctor needs a NavigationManager + IJSRuntime — bUnit supplies fakes.
+    // Radzen's DialogService.Confirm/Alert are virtual, so NSubstitute can override
+    // them. Its ctor needs a NavigationManager + IJSRuntime — bUnit supplies fakes.
     private DialogService MockDialog(bool? confirmResult)
     {
         var dialog = Substitute.For<DialogService>(
@@ -25,6 +25,18 @@ public class ConfirmServiceTests : DesignBlazorTestContext
         dialog
             .Confirm(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<ConfirmOptions>())
             .Returns(Task.FromResult(confirmResult));
+        return dialog;
+    }
+
+    private DialogService MockAlertDialog()
+    {
+        var dialog = Substitute.For<DialogService>(
+            Services.GetRequiredService<NavigationManager>(),
+            JSInterop.JSRuntime
+        );
+        dialog
+            .Alert(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<AlertOptions>())
+            .Returns(Task.FromResult<bool?>(true));
         return dialog;
     }
 
@@ -167,6 +179,76 @@ public class ConfirmServiceTests : DesignBlazorTestContext
                 Arg.Is<ConfirmOptions>(o =>
                     o != null && o.OkButtonText == "OK" && o.CancelButtonText == "Cancel"
                 )
+            );
+    }
+
+    [Fact]
+    public async Task AlertAsync_UsesDefaultTitleAndOkButton()
+    {
+        var dialog = MockAlertDialog();
+        var svc = new ConfirmService(dialog);
+
+        await svc.AlertAsync("Something happened.");
+
+        await dialog
+            .Received(1)
+            .Alert(
+                "Something happened.",
+                "Alert",
+                Arg.Is<AlertOptions>(o => o != null && o.OkButtonText == "OK")
+            );
+    }
+
+    [Fact]
+    public async Task AlertAsync_PassesTitleAndOkTextThrough()
+    {
+        var dialog = MockAlertDialog();
+        var svc = new ConfirmService(dialog);
+
+        await svc.AlertAsync("You're all set.", "Done", okText: "Got it");
+
+        await dialog
+            .Received(1)
+            .Alert(
+                "You're all set.",
+                "Done",
+                Arg.Is<AlertOptions>(o => o != null && o.OkButtonText == "Got it")
+            );
+    }
+
+    [Fact]
+    public async Task AlertAsync_WithLocalizer_UsesTheCurrentCultureForTitleAndButton()
+    {
+        UseCulture("de");
+        var dialog = MockAlertDialog();
+        var svc = new ConfirmService(dialog, Localizer);
+
+        await svc.AlertAsync("Etwas ist passiert.");
+
+        await dialog
+            .Received(1)
+            .Alert(
+                "Etwas ist passiert.",
+                "Hinweis",
+                Arg.Is<AlertOptions>(o => o != null && o.OkButtonText == "OK")
+            );
+    }
+
+    [Fact]
+    public async Task AlertAsync_WithoutLocalizer_FallsBackToEnglish()
+    {
+        UseCulture("de");
+        var dialog = MockAlertDialog();
+        var svc = new ConfirmService(dialog);
+
+        await svc.AlertAsync("Something happened.");
+
+        await dialog
+            .Received(1)
+            .Alert(
+                "Something happened.",
+                "Alert",
+                Arg.Is<AlertOptions>(o => o != null && o.OkButtonText == "OK")
             );
     }
 }

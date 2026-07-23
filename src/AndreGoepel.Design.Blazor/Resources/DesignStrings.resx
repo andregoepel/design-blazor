@@ -134,6 +134,15 @@
     <comment>Body of the destructive-delete confirmation. {0} is the item's name.</comment>
   </data>
 
+  <data name="Alert.Title" xml:space="preserve">
+    <value>Alert</value>
+    <comment>Default title of a ConfirmService.AlertAsync dialog.</comment>
+  </data>
+  <data name="Alert.Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Default acknowledging button in a ConfirmService.AlertAsync dialog.</comment>
+  </data>
+
   <data name="Language.GroupLabel" xml:space="preserve">
     <value>Language</value>
     <comment>Accessible group label for the LanguageSwitcher. The individual language names are not resources — LanguageSwitcher uses each culture's own NativeName.</comment>

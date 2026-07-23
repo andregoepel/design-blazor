@@ -238,6 +238,11 @@
   <data name="Feedback.PasskeysDescription" xml:space="preserve"><value><![CDATA[Passkeys let you sign in without a password.]]></value></data>
   <data name="Feedback.RegisterPasskey" xml:space="preserve"><value><![CDATA[Register passkey]]></value></data>
   <data name="Feedback.NotificationMessage" xml:space="preserve"><value><![CDATA[This is a sample notification.]]></value></data>
+  <data name="Feedback.AlertDialog" xml:space="preserve"><value><![CDATA[Alert dialog]]></value></data>
+  <data name="Feedback.AlertDialogDescription" xml:space="preserve"><value><![CDATA[ConfirmService.AlertAsync — a single-button acknowledgement dialog, for when a toast isn't blocking enough.]]></value></data>
+  <data name="Feedback.ShowAlert" xml:space="preserve"><value><![CDATA[Show alert]]></value></data>
+  <data name="Feedback.AlertTitle" xml:space="preserve"><value><![CDATA[Heads up]]></value></data>
+  <data name="Feedback.AlertMessage" xml:space="preserve"><value><![CDATA[This is a sample alert dialog.]]></value></data>
 
   <!-- Forms.razor -->
   <data name="Forms.PageTitle" xml:space="preserve"><value><![CDATA[Forms]]></value></data>

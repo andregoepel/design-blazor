@@ -1,6 +1,7 @@
 @page "/feedback"
 @rendermode InteractiveServer
 @inject NotificationService Notifications
+@inject ConfirmService Confirm
 @inject IStringLocalizer<Strings> L
 
 <AppPageTitle Title="@L["Feedback.PageTitle"]" Breadcrumb="@L["Feedback.Breadcrumb"]" />
@@ -25,6 +26,16 @@
                     <RadzenButton Text="@L["Feedback.Success"]" ButtonStyle="ButtonStyle.Success" Click="@(() => Notify(NotificationSeverity.Success))" />
                     <RadzenButton Text="@L["Feedback.Warning"]" ButtonStyle="ButtonStyle.Warning" Click="@(() => Notify(NotificationSeverity.Warning))" />
                     <RadzenButton Text="@L["Feedback.Error"]" ButtonStyle="ButtonStyle.Danger" Click="@(() => Notify(NotificationSeverity.Error))" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenCard>
+            <RadzenStack Gap="1rem">
+                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Feedback.AlertDialog"]</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">@L["Feedback.AlertDialogDescription"]</RadzenText>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap">
+                    <RadzenButton Text="@L["Feedback.ShowAlert"]" ButtonStyle="ButtonStyle.Light" Click="ShowAlert" />
                 </RadzenStack>
             </RadzenStack>
         </RadzenCard>
@@ -56,6 +67,8 @@
 @code {
     private void Notify(NotificationSeverity severity) =>
         Notifications.Notify(severity, TitleFor(severity), L["Feedback.NotificationMessage"]);
+
+    private Task ShowAlert() => Confirm.AlertAsync(L["Feedback.AlertMessage"], L["Feedback.AlertTitle"]);
 
     // severity.ToString() would give the English enum name regardless of culture.
     private string TitleFor(NotificationSeverity severity) =>
