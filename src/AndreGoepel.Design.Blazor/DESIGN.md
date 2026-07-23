@@ -505,6 +505,14 @@ if (await Confirm.ConfirmAsync("Sign everyone out?", "End sessions", okText: "Si
     await EndSessionsAsync();
 ```
 
+For a single-button acknowledgement (no choice, just "OK") — e.g. surfacing an
+error a `RadzenAlert`/`Notification` doesn't fit — don't call `DialogService.Alert`
+directly either; use `ConfirmService.AlertAsync` the same way:
+
+```csharp
+await Confirm.AlertAsync("That invite link has already been used.", "Invite expired");
+```
+
 ### Auth / login pages
 
 Auth pages use `LoginLayout`, which supplies the centred card, brand, and footer.
