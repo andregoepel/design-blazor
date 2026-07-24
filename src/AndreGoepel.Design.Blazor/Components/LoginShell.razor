@@ -3,6 +3,16 @@
    Styling comes from the ag-login-* / ag-brand-* rules in design.css. *@
 
 <div class="ag-login">
+    @if (ShowThemeToggle || TopRightActions is not null)
+    {
+        <div class="ag-login-topright">
+            @TopRightActions
+            @if (ShowThemeToggle)
+            {
+                <ThemeToggle />
+            }
+        </div>
+    }
     <div class="ag-login-inner">
         <div class="ag-login-brand">
             <div class="ag-brand-mark">@Initial</div>
@@ -34,6 +44,20 @@
     /// <summary>Optional footer line rendered under the card.</summary>
     [Parameter]
     public RenderFragment? Footer { get; set; }
+
+    /// <summary>
+    /// Renders a <see cref="ThemeToggle"/> in the top-right corner so the auth
+    /// pages get a light/dark control by default, matching the app shell topbar.
+    /// </summary>
+    [Parameter]
+    public bool ShowThemeToggle { get; set; } = true;
+
+    /// <summary>
+    /// Optional extra top-right chrome (e.g. a <see cref="LanguageSwitcher"/>),
+    /// rendered before the theme toggle.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? TopRightActions { get; set; }
 
     private string Initial =>
         !string.IsNullOrEmpty(BrandInitial) ? BrandInitial!

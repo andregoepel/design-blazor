@@ -1,28 +1,29 @@
 @inherits LocalizedComponentBase
-@rendermode InteractiveServer
-@using Microsoft.JSInterop
-@inject IJSRuntime JS
 
-@* Light / auto / dark theme switch. Interactive so button clicks reach the
-   browser-side agTheme helper that owns data-theme + localStorage. *@
+@* Light / auto / dark theme switch.
+
+   Deliberately NOT interactive. Each button carries a plain onclick that calls
+   the browser-side agTheme helper (theme.js), which owns data-theme +
+   localStorage — so the toggle also works on statically rendered pages (e.g.
+   the auth pages hosted in LoginShell) and needs no circuit. The active state
+   is applied by CSS from the data-theme-pref attribute agTheme maintains on
+   <html>; aria-pressed is stamped by theme.js for the same reason. *@
 
 <div class="ag-theme-toggle" role="group" aria-label="@T("Theme.GroupLabel")">
     @foreach (var mode in Modes)
     {
         <button type="button"
-                class="ag-theme-btn @(mode.Key == _current ? "ag-active" : string.Empty)"
+                class="ag-theme-btn"
+                data-mode="@mode.Key"
                 title="@mode.Title"
                 aria-label="@mode.Title"
-                aria-pressed="@(mode.Key == _current)"
-                @onclick="() => SetAsync(mode.Key)">
+                onclick="agTheme.set('@mode.Key')">
             <AppIcon Name="@mode.Icon" Size="14" />
         </button>
     }
 </div>
 
 @code {
-    private string _current = "auto";
-
     private sealed record Mode(string Key, string Icon, string Title);
 
     // Instance-level, not a static array: the titles are culture-dependent, so they
@@ -33,25 +34,4 @@
             new("auto", "monitor", T("Theme.Auto")),
             new("dark", "moon", T("Theme.Dark")),
         ];
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (!firstRender)
-        {
-            return;
-        }
-
-        try
-        {
-            _current = await JS.InvokeAsync<string>("agTheme.get");
-            StateHasChanged();
-        }
-        catch (JSException)
-        {
-            // Script not ready yet (e.g. during prerender) — keep the default.
-        }
-    }
-
-    private async Task SetAsync(string mode) =>
-        _current = await JS.InvokeAsync<string>("agTheme.set", mode);
 }
