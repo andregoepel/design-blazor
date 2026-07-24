@@ -6,11 +6,10 @@
 
 <RadzenComponents @rendermode="InteractiveServer" />
 
-<div class="ag-login-lang">
-    <LanguageSwitcher />
-</div>
-
 <LoginShell BrandName="Design Blazor">
+    <TopRightActions>
+        <LanguageSwitcher />
+    </TopRightActions>
     <ChildContent>
         @Body
     </ChildContent>
