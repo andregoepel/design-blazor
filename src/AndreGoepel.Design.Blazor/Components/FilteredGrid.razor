@@ -1,0 +1,115 @@
+@typeparam TItem where TItem : notnull
+@inherits LocalizedComponentBase
+
+@* The standard filtered-list composition (DESIGN.md §5 "Data grids"): DataCard +
+   GridToolbar + RadzenDataGrid, with the two empty-state branches every hand-rolled
+   grid repeats — "nothing here yet" vs "nothing matches the search". Filtering
+   itself stays the caller's job: pass the already-filtered Items plus the
+   unfiltered TotalCount, this component only decides which empty state (if any)
+   to show and renders the toolbar/grid chrome around it. *@
+
+<DataCard>
+    <GridToolbar Search="Search"
+                 SearchChanged="SearchChanged"
+                 SearchPlaceholder="@SearchPlaceholder"
+                 Count="@CountLabel"
+                 Actions="ToolbarActions" />
+
+    @if (!Items.Any())
+    {
+        <div class="rz-p-4 rz-p-md-6">
+            <EmptyState Title="@(TotalCount == 0 ? EmptyTitle : NoMatchTitleLabel)"
+                        Text="@(TotalCount == 0 ? EmptyText : NoMatchText)" />
+        </div>
+    }
+    else
+    {
+        <RadzenDataGrid Data="Items"
+                        TItem="TItem"
+                        AllowSorting="AllowSorting"
+                        AllowPaging="AllowPaging"
+                        PageSize="PageSize"
+                        RowSelect="RowSelect">
+            <Columns>
+                @Columns
+            </Columns>
+        </RadzenDataGrid>
+    }
+</DataCard>
+
+@code {
+    /// <summary>The already-filtered rows to display — filtering stays the caller's job.</summary>
+    [Parameter, EditorRequired]
+    public IEnumerable<TItem> Items { get; set; } = [];
+
+    /// <summary>
+    /// Count of the unfiltered source. Distinguishes the two empty states (nothing
+    /// exists yet vs. nothing matches the current search) and, unless <see cref="Count"/>
+    /// is set, drives the toolbar's default "<c>n of total</c>" count text.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public int TotalCount { get; set; }
+
+    /// <summary>The current search text. Bind with <c>@@bind-Search</c>.</summary>
+    [Parameter]
+    public string Search { get; set; } = "";
+
+    /// <summary>Raised when the search text changes.</summary>
+    [Parameter]
+    public EventCallback<string> SearchChanged { get; set; }
+
+    /// <summary>Placeholder shown in the empty search box. Defaults to a localized "Search…".</summary>
+    [Parameter]
+    public string? SearchPlaceholder { get; set; }
+
+    /// <summary>
+    /// Overrides the toolbar's result count text. Defaults to "<c>n of total</c>" from
+    /// <see cref="Items"/> and <see cref="TotalCount"/>; pass an empty string to hide it.
+    /// </summary>
+    [Parameter]
+    public string? Count { get; set; }
+
+    /// <summary>Extra toolbar content rendered between the search box and the count.</summary>
+    [Parameter]
+    public RenderFragment? ToolbarActions { get; set; }
+
+    /// <summary>Headline shown when <see cref="TotalCount"/> is zero — there is nothing yet.</summary>
+    [Parameter, EditorRequired]
+    public string EmptyTitle { get; set; } = "";
+
+    /// <summary>Supporting copy for the "nothing yet" empty state.</summary>
+    [Parameter]
+    public string? EmptyText { get; set; }
+
+    /// <summary>
+    /// Headline shown when <see cref="TotalCount"/> is non-zero but <see cref="Items"/> is
+    /// empty — the search/filter matched nothing. Defaults to a localized "No matches".
+    /// </summary>
+    [Parameter]
+    public string? NoMatchTitle { get; set; }
+
+    /// <summary>Supporting copy for the "no matches" empty state.</summary>
+    [Parameter]
+    public string? NoMatchText { get; set; }
+
+    /// <summary>The <c>RadzenDataGridColumn</c> declarations.</summary>
+    [Parameter, EditorRequired]
+    public RenderFragment Columns { get; set; } = default!;
+
+    /// <summary>Raised when a row is selected.</summary>
+    [Parameter]
+    public EventCallback<TItem> RowSelect { get; set; }
+
+    [Parameter]
+    public bool AllowSorting { get; set; } = true;
+
+    [Parameter]
+    public bool AllowPaging { get; set; } = true;
+
+    [Parameter]
+    public int PageSize { get; set; } = 25;
+
+    private string NoMatchTitleLabel => NoMatchTitle ?? T("FilteredGrid.NoMatchTitle");
+
+    private string? CountLabel => Count ?? T("FilteredGrid.CountFormat", Items.Count(), TotalCount);
+}

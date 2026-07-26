@@ -81,6 +81,13 @@
     <value>Suchen…</value>
   </data>
 
+  <data name="FilteredGrid.NoMatchTitle" xml:space="preserve">
+    <value>Keine Treffer</value>
+  </data>
+  <data name="FilteredGrid.CountFormat" xml:space="preserve">
+    <value>{0} von {1}</value>
+  </data>
+
   <data name="Theme.GroupLabel" xml:space="preserve">
     <value>Design</value>
   </data>
