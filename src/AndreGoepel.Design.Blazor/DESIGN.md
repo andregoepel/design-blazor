@@ -603,7 +603,9 @@ password?" link is `FormField`'s `LabelActions` slot (see §5 "Forms").
 | `ag-row-actions`, `ag-icon-btn` | grid row actions (rendered by `RowActions`) + compact `⋯` button (rendered by `IconButton`) |
 | `ag-cell-name`, `ag-cell-id` | name/email + truncated mono id in a grid cell |
 | `ag-login-*` | login-card building blocks (provided by `LoginLayout`) |
-| `ag-shell`, `ag-sidebar`, `ag-topbar`, `ag-topbar-left`, `ag-nav-item`, `ag-theme-toggle`, `ag-hamburger`, `ag-backdrop`, … | app shell (rendered by `AppShell`) |
+| `ag-shell`, `ag-sidebar`, `ag-topbar`, `ag-topbar-left`, `ag-theme-toggle`, `ag-hamburger`, `ag-backdrop`, … | app shell (rendered by `AppShell`) |
+| `ag-nav-section`, `ag-nav-group` | sidebar section label + link group (rendered by `NavSection`) |
+| `ag-nav-item` | sidebar nav link, active-state included (rendered by `NavItem`) |
 | `ag-lang-toggle`, `ag-lang-btn` | language switch pill (rendered by `LanguageSwitcher`, §9) |
 
 ### App shell
@@ -615,12 +617,26 @@ fills the slots:
 
 ```razor
 <AppShell BrandName="@AppName">
-    <Sidebar>@* NavLinks + ag-nav-section groups *@</Sidebar>
+    <Sidebar>
+        <NavSection Title="Account">
+            <NavItem Href="Account/Manage/Profile" Text="Profile" />
+            <NavItem Href="Account/Manage/Email" Text="Email" />
+        </NavSection>
+    </Sidebar>
     <TopbarActions>@* language switcher, theme toggle, user chip, sign-in/out *@</TopbarActions>
     <SidebarFooter>@* optional *@</SidebarFooter>
     <ChildContent>@Body</ChildContent>
 </AppShell>
 ```
+
+Build the `Sidebar` out of `NavSection` (a label over a group of links) and
+`NavItem` (wraps Blazor's own `NavLink`, so the "active" highlighting on the
+matched route keeps working for free) instead of hand-typing the
+`ag-nav-section`/`ag-nav-group`/`ag-nav-item` markup. `NavItem`'s `Match`
+defaults to `NavLinkMatch.Prefix` (same as `NavLink`'s own default) — pass
+`NavLinkMatch.All` for a section's own overview/index page, the same as you
+would on a plain `NavLink`. Pass `Icon` (an `AppIcon` glyph name) for an item
+that needs a leading icon; omit it for a text-only item.
 
 The host only needs to load `nav.js` (see the Aspire sample's `App.razor`);
 `AppShell` emits the hamburger, backdrop and `data-nav-open` itself.

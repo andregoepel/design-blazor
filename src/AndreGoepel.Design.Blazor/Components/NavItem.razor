@@ -1,0 +1,35 @@
+@* Sidebar nav link (DESIGN.md §6, ag-nav-item): wraps Blazor's own NavLink so the
+   active-state highlighting (the "active" class NavLink applies on the matched
+   route) keeps working for free. Extracted from the hand-typed
+   `<NavLink class="ag-nav-item" href="...">…</NavLink>` markup repeated across
+   app-foundation's NavMenu.razor and this repo's own demo nav. *@
+
+<NavLink class="ag-nav-item" href="@Href" Match="Match">
+    @if (!string.IsNullOrWhiteSpace(Icon))
+    {
+        <AppIcon Name="@Icon" />
+    }
+    @Text
+</NavLink>
+
+@code {
+    /// <summary>The link target, relative to the app's base path.</summary>
+    [Parameter, EditorRequired]
+    public string Href { get; set; } = "";
+
+    /// <summary>The link label.</summary>
+    [Parameter, EditorRequired]
+    public string Text { get; set; } = "";
+
+    /// <summary>
+    /// Whether the link is only "active" on an exact match (<see cref="NavLinkMatch.All"/>,
+    /// e.g. the section's own overview page) or on any prefix match
+    /// (<see cref="NavLinkMatch.Prefix"/> — the default, same as <c>NavLink</c>'s own).
+    /// </summary>
+    [Parameter]
+    public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+
+    /// <summary>Optional leading <c>AppIcon</c> glyph name. Omit for a text-only item.</summary>
+    [Parameter]
+    public string? Icon { get; set; }
+}

@@ -1,0 +1,20 @@
+@* Sidebar nav section (DESIGN.md §6, ag-nav-section / ag-nav-group): a section
+   label over a group of nav links, typically NavItems. Extracted from the
+   hand-typed `<div class="ag-nav-section">…</div><div class="ag-nav-group">…</div>`
+   markup repeated across app-foundation's NavMenu.razor and this repo's own
+   demo nav. *@
+
+<div class="ag-nav-section">@Title</div>
+<div class="ag-nav-group">
+    @ChildContent
+</div>
+
+@code {
+    /// <summary>The section label, e.g. "Account".</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "";
+
+    /// <summary>Typically a stack of <c>NavItem</c>s.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}
