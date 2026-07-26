@@ -513,6 +513,26 @@ directly either; use `ConfirmService.AlertAsync` the same way:
 await Confirm.AlertAsync("That invite link has already been used.", "Invite expired");
 ```
 
+### Notifications (toasts)
+
+For the common "toast on success / toast with a detail line on failure" idiom, use
+the `Success`/`Error`/`Warning` extension methods on Radzen's `NotificationService`
+instead of building a `NotificationMessage` or calling the severity/summary/detail
+overload of `Notify` by hand. `detail` is optional; duration matches
+`NotificationService`'s own default:
+
+```csharp
+@inject NotificationService Notifications
+
+Notifications.Success("Saved");
+Notifications.Error("Save failed", result.Error);
+Notifications.Warning("Missing category", "Pick a category first.");
+```
+
+> **Deferred.** A `Result<T>`-aware overload (e.g. `Notifications.Notify(result)`) is
+> intentionally not included yet — the `AndreGoepel.Core.Result` migration is still in
+> flight in consuming repos. Revisit once it has landed everywhere.
+
 ### Auth / login pages
 
 Auth pages use `LoginLayout`, which supplies the centred card, brand, and footer.
