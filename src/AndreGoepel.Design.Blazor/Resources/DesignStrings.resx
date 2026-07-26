@@ -87,6 +87,15 @@
     <comment>Placeholder in GridToolbar's search box.</comment>
   </data>
 
+  <data name="FilteredGrid.NoMatchTitle" xml:space="preserve">
+    <value>No matches</value>
+    <comment>FilteredGrid's empty-state title when a search/filter matches nothing.</comment>
+  </data>
+  <data name="FilteredGrid.CountFormat" xml:space="preserve">
+    <value>{0} of {1}</value>
+    <comment>FilteredGrid's default toolbar count text. {0} is the filtered count, {1} the total.</comment>
+  </data>
+
   <data name="Theme.GroupLabel" xml:space="preserve">
     <value>Theme</value>
     <comment>Accessible group label for the light/auto/dark toggle.</comment>

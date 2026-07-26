@@ -449,6 +449,27 @@ named fragment). With no `Actions`, the fields can sit directly inside.
   Keep the toolbar mounted even when the grid is replaced by an `EmptyState` —
   otherwise the user has no way to clear a search that matched nothing.
 
+  This whole shape — `DataCard` + `GridToolbar` + the two empty-state branches
+  (nothing exists yet vs. nothing matches the search) + the grid — is exactly
+  what `FilteredGrid<TItem>` packages up. Filtering itself still stays your
+  job (pass the filtered `Items` and the unfiltered `TotalCount`); the
+  component only decides which empty state to show and wires the rest
+  together:
+
+```razor
+<FilteredGrid TItem="Role" Items="Filtered" TotalCount="_roles.Count"
+              @bind-Search="_search" SearchPlaceholder="Search roles…"
+              EmptyTitle="No roles yet" NoMatchTitle="No roles match your search">
+    <Columns>
+        <RadzenDataGridColumn TItem="Role" Property="Name" Title="Role name" />
+    </Columns>
+</FilteredGrid>
+```
+
+  Reach for the manual composition instead when a page needs something
+  `FilteredGrid` doesn't expose — e.g. a second empty-state branch, or grid
+  chrome beyond `AllowSorting`/`AllowPaging`/`PageSize`/`RowSelect`.
+
 - Status columns use `.ag-badge` (see above).
 - **Row actions:** use `RowActions` + `IconButton` — keep the primary action
   visible and hide the rest behind a compact `⋯` overflow menu via
