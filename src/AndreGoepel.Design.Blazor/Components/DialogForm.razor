@@ -1,0 +1,84 @@
+@typeparam TItem
+@inherits LocalizedComponentBase
+@inject DialogService DialogService
+
+@* CardForm's counterpart for a Radzen dialog body (DESIGN.md §5 "Dialogs"): the
+   same RadzenTemplateForm + ag-card-actions footer shape, but without the
+   RadzenCard wrapper — the dialog chrome already supplies that. Unlike
+   CardForm, the Cancel button is always shown: with no Cancel handler it
+   closes the dialog itself (DialogService.Close(null), matching the
+   convention every hand-written dialog in the ecosystem already follows), so
+   a consumer only needs to override it for a non-default close behaviour. *@
+
+<RadzenTemplateForm TItem="TItem" Data="Data" Submit="Submit">
+    <RadzenStack Orientation="Orientation.Vertical" Gap="1.25rem" AlignItems="AlignItems.Stretch">
+        @ChildContent
+
+        <div class="ag-card-actions">
+            <RadzenButton
+                Text="@CancelLabel"
+                ButtonStyle="ButtonStyle.Light"
+                ButtonType="ButtonType.Button"
+                Click="OnCancel"
+                Disabled="IsBusy"
+            />
+            <RadzenButton
+                ButtonType="ButtonType.Submit"
+                Text="@SubmitLabel"
+                ButtonStyle="@(Danger ? ButtonStyle.Danger : ButtonStyle.Primary)"
+                IsBusy="IsBusy"
+                BusyText="@BusyLabel"
+            />
+        </div>
+    </RadzenStack>
+</RadzenTemplateForm>
+
+@code {
+    /// <summary>The form model bound by the fields inside <see cref="ChildContent"/>.</summary>
+    [Parameter, EditorRequired]
+    public TItem Data { get; set; } = default!;
+
+    /// <summary>The fields — typically a stack of <c>FormField</c>s (and validators).</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Raised with <see cref="Data"/> when the form is submitted and valid.</summary>
+    [Parameter]
+    public EventCallback<TItem> Submit { get; set; }
+
+    /// <summary>
+    /// Optional cancel override. When unset, cancelling closes the dialog via
+    /// <c>DialogService.Close(null)</c> instead.
+    /// </summary>
+    [Parameter]
+    public EventCallback Cancel { get; set; }
+
+    /// <summary>Primary submit button text. Defaults to a localized "Save changes".</summary>
+    [Parameter]
+    public string? SubmitText { get; set; }
+
+    /// <summary>Cancel button text. Defaults to a localized "Cancel".</summary>
+    [Parameter]
+    public string? CancelText { get; set; }
+
+    /// <summary>While true, the submit button shows <see cref="BusyText"/> and both buttons disable.</summary>
+    [Parameter]
+    public bool IsBusy { get; set; }
+
+    /// <summary>Busy-state text on the submit button. Defaults to a localized "Saving…".</summary>
+    [Parameter]
+    public string? BusyText { get; set; }
+
+    /// <summary>Tints the submit button for a destructive action instead of the default Primary.</summary>
+    [Parameter]
+    public bool Danger { get; set; }
+
+    private string SubmitLabel => SubmitText ?? T("CardForm.Submit");
+
+    private string CancelLabel => CancelText ?? T("CardForm.Cancel");
+
+    private string BusyLabel => BusyText ?? T("CardForm.Busy");
+
+    private Task OnCancel() =>
+        Cancel.HasDelegate ? Cancel.InvokeAsync() : InvokeAsync(() => DialogService.Close(null));
+}
