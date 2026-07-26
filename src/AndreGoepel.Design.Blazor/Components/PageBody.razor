@@ -1,0 +1,18 @@
+@* The standard routed-page content wrapper (DESIGN.md §4): the responsive page
+   padding plus the vertical RadzenStack every page opens with, so a page's
+   markup doesn't repeat this two-line shell on every route. Put PageHeader,
+   status banners, and the page's card(s)/form(s) in ChildContent. *@
+
+<div class="rz-p-4 rz-p-md-6">
+    <RadzenStack Gap="@Gap">@ChildContent</RadzenStack>
+</div>
+
+@code {
+    /// <summary>The page's content — typically a <c>PageHeader</c> followed by cards/forms.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>Gap between direct children of the stack. Defaults to the standard "1.5rem".</summary>
+    [Parameter]
+    public string Gap { get; set; } = "1.5rem";
+}

@@ -5,28 +5,26 @@
 
 <AppPageTitle Title="@L["Settings.PageTitle"]" Breadcrumb="@L["Settings.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["Settings.PageTitle"]"
-                    Subtitle="@L["Settings.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="@L["Settings.PageTitle"]"
+                Subtitle="@L["Settings.Subtitle"]" />
 
-        <RadzenCard Style="padding: 8px 30px;">
-            <SettingToggleRow Label="@L["Settings.SelfServiceRegistration"]"
-                               Description="@L["Settings.SelfServiceRegistrationDescription"]"
-                               @bind-Value="_registration" />
-            <SettingToggleRow Label="@L["Settings.TwoFactorAuth"]"
-                               Description="@L["Settings.TwoFactorAuthDescription"]"
-                               @bind-Value="_twoFactor" />
-            <SettingToggleRow Label="@L["Settings.Passkeys"]"
-                               Description="@L["Settings.PasskeysDescription"]"
-                               @bind-Value="_passkeys" Disabled="true" />
-        </RadzenCard>
+    <RadzenCard Style="padding: 8px 30px;">
+        <SettingToggleRow Label="@L["Settings.SelfServiceRegistration"]"
+                           Description="@L["Settings.SelfServiceRegistrationDescription"]"
+                           @bind-Value="_registration" />
+        <SettingToggleRow Label="@L["Settings.TwoFactorAuth"]"
+                           Description="@L["Settings.TwoFactorAuthDescription"]"
+                           @bind-Value="_twoFactor" />
+        <SettingToggleRow Label="@L["Settings.Passkeys"]"
+                           Description="@L["Settings.PasskeysDescription"]"
+                           @bind-Value="_passkeys" Disabled="true" />
+    </RadzenCard>
 
-        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            @L["Settings.CurrentValues", _registration, _twoFactor, _passkeys]
-        </RadzenText>
-    </RadzenStack>
-</div>
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @L["Settings.CurrentValues", _registration, _twoFactor, _passkeys]
+    </RadzenText>
+</PageBody>
 
 @code {
     private bool _registration = true;

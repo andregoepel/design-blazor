@@ -101,24 +101,28 @@ colour or it reads too bright.
 ## 4. Page structure
 
 Every content page follows the same skeleton. The heading lives **outside** the
-card; the card holds the form/content; actions sit in a bordered footer.
+card; the card holds the form/content; actions sit in a bordered footer. Use
+`PageBody` for the outer padding + vertical stack instead of hand-typing
+`<div class="rz-p-4 rz-p-md-6"><RadzenStack Gap="1.5rem">…</RadzenStack></div>`
+on every page:
 
 ```razor
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
+<PageBody>
 
-        <PageHeader Title="Page title" Subtitle="Short description." />
+    <PageHeader Title="Page title" Subtitle="Short description." />
 
-        @* Status banners (if any) go here — OUTSIDE the card *@
+    @* Status banners (if any) go here — OUTSIDE the card *@
 
-        @* A form page: CardForm supplies the card + template form + action footer. *@
-        <CardForm TItem="InputModel" Data="Input" Submit="SaveAsync">
-            @* FormFields … (see §5) *@
-        </CardForm>
+    @* A form page: CardForm supplies the card + template form + action footer. *@
+    <CardForm TItem="InputModel" Data="Input" Submit="SaveAsync">
+        @* FormFields … (see §5) *@
+    </CardForm>
 
-    </RadzenStack>
-</div>
+</PageBody>
 ```
+
+`PageBody`'s `Gap` defaults to `1.5rem`; pass a different value only when a
+page genuinely needs tighter or looser spacing between its top-level blocks.
 
 **Page header with a right-aligned action** (e.g. "+ New role", "Register
 passkey") — pass `Actions`:
