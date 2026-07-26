@@ -703,6 +703,19 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   flex-wrap: wrap;
 }
 
+/* In-card section header row (SectionCard): a single-line heading with an
+   optional right-aligned action, e.g. a "+ New" button next to "Notes". Unlike
+   ag-page-head (page-level, allows a subtitle under the heading) this is a
+   single line, so it's centre- rather than bottom-aligned. */
+.ag-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
 /* Dashed empty-state card (no passkeys, no data, …). */
 .ag-empty {
   background: var(--ag-surface);

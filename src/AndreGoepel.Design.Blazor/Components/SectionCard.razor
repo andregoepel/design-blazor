@@ -1,0 +1,42 @@
+@* A RadzenCard with an in-card section header (title + optional right-aligned
+   Actions) over ChildContent (DESIGN.md §5, ag-card-head). Extracted from the
+   repeated RadzenCard + space-between header row pattern used for a page's
+   panel cards (e.g. customer-portal's CustomerPage.razor "Notes"/"Tasks"/"Files"
+   cards). Set FullHeight so cards of different content heights still line up
+   in a RadzenRow grid. *@
+
+<RadzenCard class="@CardClass">
+    <div class="ag-card-head">
+        <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2" class="rz-mb-0">@Title</RadzenText>
+        @if (Actions is not null)
+        {
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
+                @Actions
+            </RadzenStack>
+        }
+    </div>
+    @ChildContent
+</RadzenCard>
+
+@code {
+    /// <summary>The section heading, rendered as an H6.</summary>
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "";
+
+    /// <summary>Optional right-aligned action(s) next to the title, e.g. a "+ New note" button.</summary>
+    [Parameter]
+    public RenderFragment? Actions { get; set; }
+
+    /// <summary>The card's body content.</summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Stretches the card to fill its row (<c>rz-height-100</c>) so cards of different
+    /// content heights still line up side by side in a grid, e.g. a <c>RadzenRow</c>.
+    /// </summary>
+    [Parameter]
+    public bool FullHeight { get; set; }
+
+    private string CardClass => FullHeight ? "rz-height-100" : "";
+}

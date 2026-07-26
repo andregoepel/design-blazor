@@ -280,6 +280,31 @@ button that isn't a card footer (sits under a paragraph), use
 `<div class="ag-actions-inline">…</div>` so it keeps its natural width instead of
 stretching.
 
+### Section cards
+
+A page laid out as several panel cards side by side (e.g. a detail page's
+"Notes"/"Tasks"/"Files" cards) — use `SectionCard` instead of hand-writing a
+`RadzenCard` + space-between header row. `Title` renders as an H2 (a page's own
+`H1` comes from `PageHeader`); `Actions` is an optional right-aligned slot (e.g.
+a "+ New note" button); set `FullHeight` so cards of different content heights
+still line up in a `RadzenRow`:
+
+```razor
+<RadzenRow Gap="1rem">
+    <RadzenColumn Size="12" SizeLG="4">
+        <SectionCard Title="Notes" FullHeight="true">
+            <Actions>
+                <RadzenButton Text="New note" Icon="add" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" />
+            </Actions>
+            <CustomerNotesList Notes="_notes" />
+        </SectionCard>
+    </RadzenColumn>
+</RadzenRow>
+```
+
+Omit `Actions` for a title-only header. The header uses `ag-card-head` — a
+single-line variant of `ag-page-head` (see §6).
+
 ### Status badges
 
 Use `StatusBadge` with a semantic `Variant`; it maps to the matching
@@ -563,6 +588,7 @@ password?" link is `FormField`'s `LabelActions` slot (see §5 "Forms").
 | Class | Purpose |
 |---|---|
 | `ag-page-head` | header row: heading left, action right (rendered by `PageHeader`) |
+| `ag-card-head` | in-card section header row: heading left, action right (rendered by `SectionCard`) |
 | `ag-dialog-header` | bordered dialog title + optional subtitle (rendered by `DialogHeader`) |
 | `ag-card-actions` | bordered card footer, right-aligned (add `ag-start` for left; rendered by `CardForm`) |
 | `ag-actions-inline` | inline button group that doesn't stretch |
