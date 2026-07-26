@@ -3,48 +3,46 @@
 
 <AppPageTitle Title="@L["Tokens.PageTitle"]" Breadcrumb="@L["Tokens.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["Tokens.PageTitle"]"
-                    Subtitle="@L["Tokens.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="@L["Tokens.PageTitle"]"
+                Subtitle="@L["Tokens.Subtitle"]" />
 
-        <RadzenCard>
-            <RadzenStack Gap="1rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Tokens.ColourTokens"]</RadzenText>
-                <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.75rem;">
-                    @foreach (var t in Swatches)
-                    {
-                        <div style="border:1px solid var(--ag-border); border-radius:8px; overflow:hidden;">
-                            <div style="height:56px; background:var(--@t.Var);"></div>
-                            <div style="padding:0.5rem 0.6rem;">
-                                <div style="font-weight:600; font-size:13px;">@L[t.LabelKey]</div>
-                                <div class="ag-mono" style="font-size:11px; color:var(--ag-muted);">--@t.Var</div>
-                            </div>
+    <RadzenCard>
+        <RadzenStack Gap="1rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Tokens.ColourTokens"]</RadzenText>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.75rem;">
+                @foreach (var t in Swatches)
+                {
+                    <div style="border:1px solid var(--ag-border); border-radius:8px; overflow:hidden;">
+                        <div style="height:56px; background:var(--@t.Var);"></div>
+                        <div style="padding:0.5rem 0.6rem;">
+                            <div style="font-weight:600; font-size:13px;">@L[t.LabelKey]</div>
+                            <div class="ag-mono" style="font-size:11px; color:var(--ag-muted);">--@t.Var</div>
                         </div>
-                    }
-                </div>
-            </RadzenStack>
-        </RadzenCard>
+                    </div>
+                }
+            </div>
+        </RadzenStack>
+    </RadzenCard>
 
-        <RadzenCard>
-            <RadzenStack Gap="0.75rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Tokens.TypeRamp"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H1">@L["Tokens.H1"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H2">@L["Tokens.H2"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H3">@L["Tokens.H3"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H4">@L["Tokens.H4"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H5">@L["Tokens.H5"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.H6">@L["Tokens.H6"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Subtitle1">@L["Tokens.Subtitle1"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Subtitle2">@L["Tokens.Subtitle2"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">@L["Tokens.Body1"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">@L["Tokens.Body2"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">@L["Tokens.Caption"]</RadzenText>
-                <span class="ag-mono">@L["Tokens.MonoSample"]</span>
-            </RadzenStack>
-        </RadzenCard>
-    </RadzenStack>
-</div>
+    <RadzenCard>
+        <RadzenStack Gap="0.75rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Tokens.TypeRamp"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H1">@L["Tokens.H1"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H2">@L["Tokens.H2"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H3">@L["Tokens.H3"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">@L["Tokens.H4"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">@L["Tokens.H5"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.H6">@L["Tokens.H6"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Subtitle1">@L["Tokens.Subtitle1"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Subtitle2">@L["Tokens.Subtitle2"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">@L["Tokens.Body1"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">@L["Tokens.Body2"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">@L["Tokens.Caption"]</RadzenText>
+            <span class="ag-mono">@L["Tokens.MonoSample"]</span>
+        </RadzenStack>
+    </RadzenCard>
+</PageBody>
 
 @code {
     private sealed record Token(string Var, string LabelKey);

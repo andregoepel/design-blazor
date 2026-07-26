@@ -5,51 +5,49 @@
 
 <AppPageTitle Title="@L["Forms.PageTitle"]" Breadcrumb="@L["Forms.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["Forms.PageTitle"]"
-                    Subtitle="@L["Forms.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="@L["Forms.PageTitle"]"
+                Subtitle="@L["Forms.Subtitle"]" />
 
-        @* SubmitText/BusyText are left unset — CardForm's own localized defaults
-           ("Save changes"/"Saving…" or their German equivalents) apply. *@
-        <CardForm TItem="Model" Data="_model" Submit="OnSubmit" Cancel="OnCancel" IsBusy="_saving">
-            <div class="ag-form-grid">
-                <FormField Label="@L["Forms.FirstName"]" For="FirstName">
-                    <RadzenTextBox @bind-Value="_model.FirstName" Name="FirstName" Style="width:100%" />
-                    <RadzenRequiredValidator Component="FirstName" Text="@L["Forms.FirstNameRequired"]" />
-                </FormField>
-                <FormField Label="@L["Forms.LastName"]" For="LastName">
-                    <RadzenTextBox @bind-Value="_model.LastName" Name="LastName" Style="width:100%" />
-                    <RadzenRequiredValidator Component="LastName" Text="@L["Forms.LastNameRequired"]" />
-                </FormField>
-            </div>
-
-            <FormField Label="@L["Forms.Email"]" For="Email" Hint="@L["Forms.EmailHint"]">
-                <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
-                <RadzenRequiredValidator Component="Email" Text="@L["Forms.EmailRequired"]" />
-                <RadzenEmailValidator Component="Email" Text="@L["Forms.EmailInvalid"]" />
+    @* SubmitText/BusyText are left unset — CardForm's own localized defaults
+       ("Save changes"/"Saving…" or their German equivalents) apply. *@
+    <CardForm TItem="Model" Data="_model" Submit="OnSubmit" Cancel="OnCancel" IsBusy="_saving">
+        <div class="ag-form-grid">
+            <FormField Label="@L["Forms.FirstName"]" For="FirstName">
+                <RadzenTextBox @bind-Value="_model.FirstName" Name="FirstName" Style="width:100%" />
+                <RadzenRequiredValidator Component="FirstName" Text="@L["Forms.FirstNameRequired"]" />
             </FormField>
-
-            <FormField Label="@L["Forms.Role"]" For="Role">
-                <RadzenDropDown @bind-Value="_model.Role" Data="RoleOptions" TextProperty="Label" ValueProperty="Key" Name="Role" Style="width:100%" />
+            <FormField Label="@L["Forms.LastName"]" For="LastName">
+                <RadzenTextBox @bind-Value="_model.LastName" Name="LastName" Style="width:100%" />
+                <RadzenRequiredValidator Component="LastName" Text="@L["Forms.LastNameRequired"]" />
             </FormField>
+        </div>
 
-            <FormField Label="@L["Forms.Notes"]" For="Notes">
-                <RadzenTextArea @bind-Value="_model.Notes" Name="Notes" Rows="3" Style="width:100%" />
-            </FormField>
-        </CardForm>
+        <FormField Label="@L["Forms.Email"]" For="Email" Hint="@L["Forms.EmailHint"]">
+            <RadzenTextBox @bind-Value="_model.Email" Name="Email" Placeholder="name@example.com" Style="width:100%" />
+            <RadzenRequiredValidator Component="Email" Text="@L["Forms.EmailRequired"]" />
+            <RadzenEmailValidator Component="Email" Text="@L["Forms.EmailInvalid"]" />
+        </FormField>
 
-        @* Danger="true" swaps the submit button to ButtonStyle.Danger — for a
-           form whose primary action is destructive (e.g. account deletion). *@
-        <CardForm TItem="DeleteAccountModel" Data="_deleteAccountModel" Submit="OnDeleteAccount"
-                  Title="@L["Forms.DeleteAccountTitle"]" SubmitText="@L["Forms.DeleteAccountSubmit"]" Danger="true">
-            <FormField Label="@L["Forms.DeleteAccountConfirm"]" For="Confirm">
-                <RadzenTextBox @bind-Value="_deleteAccountModel.Confirm" Name="Confirm" Style="width:100%" />
-                <RadzenRequiredValidator Component="Confirm" Text="@L["Forms.DeleteAccountConfirmRequired"]" />
-            </FormField>
-        </CardForm>
-    </RadzenStack>
-</div>
+        <FormField Label="@L["Forms.Role"]" For="Role">
+            <RadzenDropDown @bind-Value="_model.Role" Data="RoleOptions" TextProperty="Label" ValueProperty="Key" Name="Role" Style="width:100%" />
+        </FormField>
+
+        <FormField Label="@L["Forms.Notes"]" For="Notes">
+            <RadzenTextArea @bind-Value="_model.Notes" Name="Notes" Rows="3" Style="width:100%" />
+        </FormField>
+    </CardForm>
+
+    @* Danger="true" swaps the submit button to ButtonStyle.Danger — for a
+       form whose primary action is destructive (e.g. account deletion). *@
+    <CardForm TItem="DeleteAccountModel" Data="_deleteAccountModel" Submit="OnDeleteAccount"
+              Title="@L["Forms.DeleteAccountTitle"]" SubmitText="@L["Forms.DeleteAccountSubmit"]" Danger="true">
+        <FormField Label="@L["Forms.DeleteAccountConfirm"]" For="Confirm">
+            <RadzenTextBox @bind-Value="_deleteAccountModel.Confirm" Name="Confirm" Style="width:100%" />
+            <RadzenRequiredValidator Component="Confirm" Text="@L["Forms.DeleteAccountConfirmRequired"]" />
+        </FormField>
+    </CardForm>
+</PageBody>
 
 @code {
     private sealed record RoleOption(string Key, string Label);

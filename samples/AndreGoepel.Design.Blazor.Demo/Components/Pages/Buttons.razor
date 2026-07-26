@@ -4,66 +4,64 @@
 
 <AppPageTitle Title="@L["Buttons.PageTitle"]" Breadcrumb="@L["Buttons.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["Buttons.PageTitle"]"
-                    Subtitle="@L["Buttons.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="@L["Buttons.PageTitle"]"
+                Subtitle="@L["Buttons.Subtitle"]" />
 
-        <RadzenCard>
-            <RadzenStack Gap="1rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.ButtonStyles"]</RadzenText>
-                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
-                    <RadzenButton Text="@L["Buttons.Primary"]" ButtonStyle="ButtonStyle.Primary" />
-                    <RadzenButton Text="@L["Buttons.LightCancel"]" ButtonStyle="ButtonStyle.Light" />
-                    <RadzenButton Text="@L["Buttons.Secondary"]" ButtonStyle="ButtonStyle.Secondary" />
-                    <RadzenButton Text="@L["Buttons.Success"]" ButtonStyle="ButtonStyle.Success" />
-                    <RadzenButton Text="@L["Buttons.Warning"]" ButtonStyle="ButtonStyle.Warning" />
-                    <RadzenButton Text="@L["Buttons.Danger"]" ButtonStyle="ButtonStyle.Danger" />
-                    <RadzenButton Text="@L["Buttons.Disabled"]" ButtonStyle="ButtonStyle.Primary" Disabled="true" />
-                </RadzenStack>
-
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.SizesBusyState"]</RadzenText>
-                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
-                    <RadzenButton Text="@L["Buttons.Medium"]" ButtonStyle="ButtonStyle.Primary" />
-                    <RadzenButton Text="@L["Buttons.Small"]" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Small" />
-                    <RadzenButton Text="@L["Buttons.ExtraSmall"]" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.ExtraSmall" />
-                    <RadzenButton Text="@(_busy ? L["Buttons.Working"] : L["Buttons.RunWithBusyState"])" ButtonStyle="ButtonStyle.Primary"
-                                  IsBusy="_busy" BusyText="@L["Buttons.Working"]" Click="RunBusyAsync" />
-                    <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Primary" />
-                </RadzenStack>
+    <RadzenCard>
+        <RadzenStack Gap="1rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.ButtonStyles"]</RadzenText>
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                <RadzenButton Text="@L["Buttons.Primary"]" ButtonStyle="ButtonStyle.Primary" />
+                <RadzenButton Text="@L["Buttons.LightCancel"]" ButtonStyle="ButtonStyle.Light" />
+                <RadzenButton Text="@L["Buttons.Secondary"]" ButtonStyle="ButtonStyle.Secondary" />
+                <RadzenButton Text="@L["Buttons.Success"]" ButtonStyle="ButtonStyle.Success" />
+                <RadzenButton Text="@L["Buttons.Warning"]" ButtonStyle="ButtonStyle.Warning" />
+                <RadzenButton Text="@L["Buttons.Danger"]" ButtonStyle="ButtonStyle.Danger" />
+                <RadzenButton Text="@L["Buttons.Disabled"]" ButtonStyle="ButtonStyle.Primary" Disabled="true" />
             </RadzenStack>
-        </RadzenCard>
 
-        <RadzenCard>
-            <RadzenStack Gap="1rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.StatusBadges"]</RadzenText>
-                <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
-                    <StatusBadge Text="@L["Buttons.Active"]" Variant="BadgeVariant.Success" />
-                    <StatusBadge Text="@L["Buttons.Deleted"]" Variant="BadgeVariant.Danger" />
-                    <StatusBadge Text="@L["Buttons.Invited"]" Variant="BadgeVariant.Warning" />
-                    <StatusBadge Text="@L["Buttons.Syncing"]" Variant="BadgeVariant.Info" />
-                    <StatusBadge Text="@L["Buttons.Draft"]" Variant="BadgeVariant.Neutral" />
-                </RadzenStack>
-                <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-                    @((MarkupString)L["Buttons.StatusBadgeCaption"].Value)
-                </RadzenText>
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.SizesBusyState"]</RadzenText>
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.75rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                <RadzenButton Text="@L["Buttons.Medium"]" ButtonStyle="ButtonStyle.Primary" />
+                <RadzenButton Text="@L["Buttons.Small"]" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Small" />
+                <RadzenButton Text="@L["Buttons.ExtraSmall"]" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.ExtraSmall" />
+                <RadzenButton Text="@(_busy ? L["Buttons.Working"] : L["Buttons.RunWithBusyState"])" ButtonStyle="ButtonStyle.Primary"
+                              IsBusy="_busy" BusyText="@L["Buttons.Working"]" Click="RunBusyAsync" />
+                <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Primary" />
             </RadzenStack>
-        </RadzenCard>
+        </RadzenStack>
+    </RadzenCard>
 
-        <RadzenCard>
-            <RadzenStack Gap="0.75rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.CardActionRow"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
-                    @((MarkupString)L["Buttons.CardActionRowCaption"].Value)
-                </RadzenText>
-                <div class="ag-card-actions">
-                    <RadzenButton Text="@L["Buttons.Cancel"]" ButtonStyle="ButtonStyle.Light" />
-                    <RadzenButton Text="@L["Buttons.SaveChanges"]" ButtonStyle="ButtonStyle.Primary" />
-                </div>
+    <RadzenCard>
+        <RadzenStack Gap="1rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.StatusBadges"]</RadzenText>
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+                <StatusBadge Text="@L["Buttons.Active"]" Variant="BadgeVariant.Success" />
+                <StatusBadge Text="@L["Buttons.Deleted"]" Variant="BadgeVariant.Danger" />
+                <StatusBadge Text="@L["Buttons.Invited"]" Variant="BadgeVariant.Warning" />
+                <StatusBadge Text="@L["Buttons.Syncing"]" Variant="BadgeVariant.Info" />
+                <StatusBadge Text="@L["Buttons.Draft"]" Variant="BadgeVariant.Neutral" />
             </RadzenStack>
-        </RadzenCard>
-    </RadzenStack>
-</div>
+            <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+                @((MarkupString)L["Buttons.StatusBadgeCaption"].Value)
+            </RadzenText>
+        </RadzenStack>
+    </RadzenCard>
+
+    <RadzenCard>
+        <RadzenStack Gap="0.75rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Buttons.CardActionRow"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                @((MarkupString)L["Buttons.CardActionRowCaption"].Value)
+            </RadzenText>
+            <div class="ag-card-actions">
+                <RadzenButton Text="@L["Buttons.Cancel"]" ButtonStyle="ButtonStyle.Light" />
+                <RadzenButton Text="@L["Buttons.SaveChanges"]" ButtonStyle="ButtonStyle.Primary" />
+            </div>
+        </RadzenStack>
+    </RadzenCard>
+</PageBody>
 
 @code {
     private bool _busy;

@@ -3,24 +3,22 @@
 
 <AppPageTitle Title="@L["Icons.PageTitle"]" Breadcrumb="@L["Icons.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["Icons.PageTitle"]"
-                    Subtitle="@L["Icons.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="@L["Icons.PageTitle"]"
+                Subtitle="@L["Icons.Subtitle"]" />
 
-        <RadzenCard>
-            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:0.75rem;">
-                @foreach (var name in Glyphs)
-                {
-                    <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:0.9rem; border:1px solid var(--ag-border); border-radius:8px;">
-                        <AppIcon Name="@name" Size="24" />
-                        <span class="ag-mono" style="font-size:12px;">@name</span>
-                    </div>
-                }
-            </div>
-        </RadzenCard>
-    </RadzenStack>
-</div>
+    <RadzenCard>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:0.75rem;">
+            @foreach (var name in Glyphs)
+            {
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:0.9rem; border:1px solid var(--ag-border); border-radius:8px;">
+                    <AppIcon Name="@name" Size="24" />
+                    <span class="ag-mono" style="font-size:12px;">@name</span>
+                </div>
+            }
+        </div>
+    </RadzenCard>
+</PageBody>
 
 @code {
     // Keep in sync with AppIcon.Glyphs.

@@ -7,93 +7,91 @@
 
 <AppPageTitle Title="@L["DataGrid.PageTitle"]" Breadcrumb="@L["DataGrid.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="@L["DataGrid.PageTitle"]"
-                    Subtitle="@L["DataGrid.Subtitle"]">
-            <Actions>
-                <RadzenButton Text="@L["DataGrid.NewUser"]" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
-            </Actions>
-        </PageHeader>
+<PageBody>
+    <PageHeader Title="@L["DataGrid.PageTitle"]"
+                Subtitle="@L["DataGrid.Subtitle"]">
+        <Actions>
+            <RadzenButton Text="@L["DataGrid.NewUser"]" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddOne" />
+        </Actions>
+    </PageHeader>
 
-        <FilterBar OnApply="ApplyFilters">
-            <ChildContent>
-                <FormField Label="@L["DataGrid.StatusLabel"]" For="StatusFilter">
-                    <RadzenDropDown @bind-Value="_pendingStatus" Data="StatusOptions" TextProperty="Label" ValueProperty="Key"
-                                    Name="StatusFilter" Style="min-width: 12rem;" />
-                </FormField>
-            </ChildContent>
-            <Actions>
-                <RadzenButton Text="@L["DataGrid.Reset"]" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
-            </Actions>
-        </FilterBar>
+    <FilterBar OnApply="ApplyFilters">
+        <ChildContent>
+            <FormField Label="@L["DataGrid.StatusLabel"]" For="StatusFilter">
+                <RadzenDropDown @bind-Value="_pendingStatus" Data="StatusOptions" TextProperty="Label" ValueProperty="Key"
+                                Name="StatusFilter" Style="min-width: 12rem;" />
+            </FormField>
+        </ChildContent>
+        <Actions>
+            <RadzenButton Text="@L["DataGrid.Reset"]" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="ResetFilters" />
+        </Actions>
+    </FilterBar>
 
-        <DataCard>
-            <GridToolbar @bind-Search="_search" SearchPlaceholder="@L["DataGrid.SearchUsers"]"
-                         Count="@L["DataGrid.Count", Filtered.Count, _users.Count]" />
+    <DataCard>
+        <GridToolbar @bind-Search="_search" SearchPlaceholder="@L["DataGrid.SearchUsers"]"
+                     Count="@L["DataGrid.Count", Filtered.Count, _users.Count]" />
 
-            @if (Filtered.Count == 0)
-            {
-                <div class="rz-p-4 rz-p-md-6">
-                    <EmptyState Icon="@("👤︎")" Title="@L["DataGrid.NoUsersMatch"]"
-                                Text="@L["DataGrid.TryDifferentTerm"]" />
-                </div>
-            }
-            else
-            {
-                <RadzenDataGrid TItem="User" Data="Filtered" Density="Density.Compact"
-                                AllowFiltering="false" AllowColumnResize="false"
-                                AllowPaging="true" PageSize="8" AllowSorting="true">
-                    <Columns>
-                        <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]">
-                            <Template Context="u">
-                                <div style="display:flex; flex-direction:column; gap:2px;">
-                                    <span class="ag-cell-name">@u.Name</span>
-                                    <span class="ag-cell-id">@u.Id</span>
-                                </div>
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="User" Property="Email" Title="@L["DataGrid.EmailColumn"]" />
-                        <RadzenDataGridColumn TItem="User" Property="Active" Title="@L["DataGrid.StatusColumn"]" Width="120px">
-                            <Template Context="u">
-                                @if (u.Active)
-                                {
-                                    <StatusBadge Text="@L["DataGrid.Active"]" Variant="BadgeVariant.Success" />
-                                }
-                                else
-                                {
-                                    <StatusBadge Text="@L["DataGrid.Disabled"]" Variant="BadgeVariant.Danger" />
-                                }
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="User" Title="" Width="160px" TextAlign="TextAlign.End" Sortable="false">
-                            <Template Context="u">
-                                <RowActions>
-                                    <RadzenButton Text="@L["DataGrid.Edit"]" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
-                                                  Click="@(() => Edit(u))" />
-                                    <IconButton Icon="more_horiz" Title="@L["DataGrid.MoreActions"]" Click="@(args => OpenRowMenu(args, u))" />
-                                </RowActions>
-                            </Template>
-                        </RadzenDataGridColumn>
-                    </Columns>
-                </RadzenDataGrid>
-            }
-        </DataCard>
-
-        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            @((MarkupString)L["DataGrid.EmptyTextCaption"].Value)
-        </RadzenText>
-        <DataCard>
-            <RadzenDataGrid TItem="User" Data="@(new List<User>())" EmptyText="@L["DataGrid.NoArchivedUsers"]"
-                            Density="Density.Compact" AllowPaging="false">
+        @if (Filtered.Count == 0)
+        {
+            <div class="rz-p-4 rz-p-md-6">
+                <EmptyState Icon="@("👤︎")" Title="@L["DataGrid.NoUsersMatch"]"
+                            Text="@L["DataGrid.TryDifferentTerm"]" />
+            </div>
+        }
+        else
+        {
+            <RadzenDataGrid TItem="User" Data="Filtered" Density="Density.Compact"
+                            AllowFiltering="false" AllowColumnResize="false"
+                            AllowPaging="true" PageSize="8" AllowSorting="true">
                 <Columns>
-                    <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]" />
+                    <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]">
+                        <Template Context="u">
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <span class="ag-cell-name">@u.Name</span>
+                                <span class="ag-cell-id">@u.Id</span>
+                            </div>
+                        </Template>
+                    </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="User" Property="Email" Title="@L["DataGrid.EmailColumn"]" />
+                    <RadzenDataGridColumn TItem="User" Property="Active" Title="@L["DataGrid.StatusColumn"]" Width="120px">
+                        <Template Context="u">
+                            @if (u.Active)
+                            {
+                                <StatusBadge Text="@L["DataGrid.Active"]" Variant="BadgeVariant.Success" />
+                            }
+                            else
+                            {
+                                <StatusBadge Text="@L["DataGrid.Disabled"]" Variant="BadgeVariant.Danger" />
+                            }
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="User" Title="" Width="160px" TextAlign="TextAlign.End" Sortable="false">
+                        <Template Context="u">
+                            <RowActions>
+                                <RadzenButton Text="@L["DataGrid.Edit"]" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                                              Click="@(() => Edit(u))" />
+                                <IconButton Icon="more_horiz" Title="@L["DataGrid.MoreActions"]" Click="@(args => OpenRowMenu(args, u))" />
+                            </RowActions>
+                        </Template>
+                    </RadzenDataGridColumn>
                 </Columns>
             </RadzenDataGrid>
-        </DataCard>
-    </RadzenStack>
-</div>
+        }
+    </DataCard>
+
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @((MarkupString)L["DataGrid.EmptyTextCaption"].Value)
+    </RadzenText>
+    <DataCard>
+        <RadzenDataGrid TItem="User" Data="@(new List<User>())" EmptyText="@L["DataGrid.NoArchivedUsers"]"
+                        Density="Density.Compact" AllowPaging="false">
+            <Columns>
+                <RadzenDataGridColumn TItem="User" Property="Name" Title="@L["DataGrid.UserColumn"]" />
+                <RadzenDataGridColumn TItem="User" Property="Email" Title="@L["DataGrid.EmailColumn"]" />
+            </Columns>
+        </RadzenDataGrid>
+    </DataCard>
+</PageBody>
 
 @code {
     private sealed record StatusOption(string Key, string Label);

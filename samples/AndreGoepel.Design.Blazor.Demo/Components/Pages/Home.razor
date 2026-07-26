@@ -4,51 +4,49 @@
 
 <AppPageTitle Title="@L["Home.PageTitle"]" Breadcrumb="@L["Home.Breadcrumb"]" />
 
-<div class="rz-p-4 rz-p-md-6">
-    <RadzenStack Gap="1.5rem">
-        <PageHeader Title="AndreGoepel.Design.Blazor"
-                    Subtitle="@L["Home.Subtitle"]" />
+<PageBody>
+    <PageHeader Title="AndreGoepel.Design.Blazor"
+                Subtitle="@L["Home.Subtitle"]" />
 
-        <RadzenCard>
-            <RadzenStack Gap="1rem">
-                <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Home.WhatYoureLookingAt"]</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
-                    @((MarkupString)L["Home.Description"].Value)
-                </RadzenText>
-                <InfoBox Label="@L["Home.ComponentStatusLabel"]"
-                         Value="@L["Home.ComponentStatusValue"]" />
-            </RadzenStack>
-        </RadzenCard>
+    <RadzenCard>
+        <RadzenStack Gap="1rem">
+            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H2">@L["Home.WhatYoureLookingAt"]</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body2" Style="color: var(--rz-text-secondary-color);">
+                @((MarkupString)L["Home.Description"].Value)
+            </RadzenText>
+            <InfoBox Label="@L["Home.ComponentStatusLabel"]"
+                     Value="@L["Home.ComponentStatusValue"]" />
+        </RadzenStack>
+    </RadzenCard>
 
-        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            @((MarkupString)L["Home.PageHeaderCaption"].Value)
-        </RadzenText>
-        <PageHeader Title="@L["Home.PageHeaderPatternTitle"]" Subtitle="@L["Home.PageHeaderPatternSubtitle"]">
-            <Actions>
-                <RadzenButton Text="@L["Home.PrimaryAction"]" Icon="add" ButtonStyle="ButtonStyle.Primary" />
-            </Actions>
-        </PageHeader>
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @((MarkupString)L["Home.PageHeaderCaption"].Value)
+    </RadzenText>
+    <PageHeader Title="@L["Home.PageHeaderPatternTitle"]" Subtitle="@L["Home.PageHeaderPatternSubtitle"]">
+        <Actions>
+            <RadzenButton Text="@L["Home.PrimaryAction"]" Icon="add" ButtonStyle="ButtonStyle.Primary" />
+        </Actions>
+    </PageHeader>
 
-        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            @((MarkupString)L["Home.StatTileCaption"].Value)
-        </RadzenText>
-        <RadzenRow Gap="1rem">
-            <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="@L["Home.Income"]" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
-            </RadzenColumn>
-            <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="@L["Home.Expenses"]" Value="€1,890.40" Variant="BadgeVariant.Danger" />
-            </RadzenColumn>
-            <RadzenColumn Size="12" SizeMd="4">
-                <StatTile Label="@L["Home.Net"]" Value="€2,359.60" />
-            </RadzenColumn>
-        </RadzenRow>
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @((MarkupString)L["Home.StatTileCaption"].Value)
+    </RadzenText>
+    <RadzenRow Gap="1rem">
+        <RadzenColumn Size="12" SizeMd="4">
+            <StatTile Label="@L["Home.Income"]" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMd="4">
+            <StatTile Label="@L["Home.Expenses"]" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMd="4">
+            <StatTile Label="@L["Home.Net"]" Value="€2,359.60" />
+        </RadzenColumn>
+    </RadzenRow>
 
-        <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
-            @((MarkupString)L["Home.LinkButtonCaption"].Value)
-        </RadzenText>
-        <div class="ag-actions-inline">
-            <LinkButton Text="@L["Home.JumpToIcons"]" Path="icons" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
-        </div>
-    </RadzenStack>
-</div>
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @((MarkupString)L["Home.LinkButtonCaption"].Value)
+    </RadzenText>
+    <div class="ag-actions-inline">
+        <LinkButton Text="@L["Home.JumpToIcons"]" Path="icons" ButtonStyle="ButtonStyle.Light" Icon="chevron_right" />
+    </div>
+</PageBody>
