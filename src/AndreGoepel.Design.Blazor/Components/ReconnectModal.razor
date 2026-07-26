@@ -1,0 +1,39 @@
+@inherits LocalizedComponentBase
+
+@* Blazor Server's reconnect UI, reskinned onto the design system's own
+   localization (DesignStrings) instead of Blazor's default hard-coded English
+   markup. Drop it once in the host's App.razor body, after Routes:
+   <ReconnectModal />. Requires nothing else — the component ships its own
+   CSS-isolated styles and a collocated JS module. *@
+
+<script type="module" src="@Assets["Components/ReconnectModal.razor.js"]"></script>
+
+<dialog id="components-reconnect-modal" data-nosnippet>
+    <div class="components-reconnect-container">
+        <div class="components-rejoining-animation" aria-hidden="true">
+            <div></div>
+            <div></div>
+        </div>
+        <p class="components-reconnect-first-attempt-visible">
+            @T("Reconnect.Rejoining")
+        </p>
+        <p class="components-reconnect-repeated-attempt-visible">
+            @T("Reconnect.RejoinFailedPrefix") <span id="components-seconds-to-next-attempt"></span> @T("Reconnect.RejoinFailedSuffix")
+        </p>
+        <p class="components-reconnect-failed-visible">
+            @T("Reconnect.FailedLine1")<br />@T("Reconnect.FailedLine2")
+        </p>
+        <button id="components-reconnect-button" class="components-reconnect-failed-visible">
+            @T("Reconnect.Retry")
+        </button>
+        <p class="components-pause-visible">
+            @T("Reconnect.Paused")
+        </p>
+        <p class="components-resume-failed-visible">
+            @T("Reconnect.ResumeFailedLine1")<br />@T("Reconnect.ResumeFailedLine2")
+        </p>
+        <button id="components-resume-button" class="components-pause-visible components-resume-failed-visible">
+            @T("Reconnect.Resume")
+        </button>
+    </div>
+</dialog>

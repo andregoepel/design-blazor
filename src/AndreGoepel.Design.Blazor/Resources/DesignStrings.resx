@@ -147,4 +147,45 @@
     <value>Language</value>
     <comment>Accessible group label for the LanguageSwitcher. The individual language names are not resources — LanguageSwitcher uses each culture's own NativeName.</comment>
   </data>
+
+  <data name="Reconnect.Rejoining" xml:space="preserve">
+    <value>Rejoining the server...</value>
+    <comment>ReconnectModal: shown on the first reconnect attempt.</comment>
+  </data>
+  <data name="Reconnect.RejoinFailedPrefix" xml:space="preserve">
+    <value>Rejoin failed... trying again in</value>
+    <comment>ReconnectModal: followed by a live seconds-remaining counter, then Reconnect.RejoinFailedSuffix.</comment>
+  </data>
+  <data name="Reconnect.RejoinFailedSuffix" xml:space="preserve">
+    <value>seconds.</value>
+    <comment>ReconnectModal: follows the seconds-remaining counter started by Reconnect.RejoinFailedPrefix.</comment>
+  </data>
+  <data name="Reconnect.FailedLine1" xml:space="preserve">
+    <value>Failed to rejoin.</value>
+    <comment>ReconnectModal: first line shown once reconnect attempts are exhausted.</comment>
+  </data>
+  <data name="Reconnect.FailedLine2" xml:space="preserve">
+    <value>Please retry or reload the page.</value>
+    <comment>ReconnectModal: second line shown once reconnect attempts are exhausted.</comment>
+  </data>
+  <data name="Reconnect.Retry" xml:space="preserve">
+    <value>Retry</value>
+    <comment>ReconnectModal: manual retry button shown after reconnect attempts are exhausted.</comment>
+  </data>
+  <data name="Reconnect.Paused" xml:space="preserve">
+    <value>The session has been paused by the server.</value>
+    <comment>ReconnectModal: shown when the server has paused the circuit.</comment>
+  </data>
+  <data name="Reconnect.ResumeFailedLine1" xml:space="preserve">
+    <value>Failed to resume the session.</value>
+    <comment>ReconnectModal: first line shown when resuming a paused circuit fails.</comment>
+  </data>
+  <data name="Reconnect.ResumeFailedLine2" xml:space="preserve">
+    <value>Please retry or reload the page.</value>
+    <comment>ReconnectModal: second line shown when resuming a paused circuit fails.</comment>
+  </data>
+  <data name="Reconnect.Resume" xml:space="preserve">
+    <value>Resume</value>
+    <comment>ReconnectModal: button to resume a paused circuit.</comment>
+  </data>
 </root>

@@ -625,6 +625,27 @@ fills the slots:
 The host only needs to load `nav.js` (see the Aspire sample's `App.razor`);
 `AppShell` emits the hamburger, backdrop and `data-nav-open` itself.
 
+### Reconnect UI
+
+`ReconnectModal` replaces Blazor Server's built-in reconnect dialog (which is
+hard-coded English) with a localized one, keyed off `DesignStrings`. Drop it once
+in the host's `App.razor` body, right after `Routes`:
+
+```razor
+<body>
+    <Routes />
+    <ReconnectModal />
+    ...
+</body>
+```
+
+It ships its own CSS-isolated styles and a collocated JS module — nothing else to
+wire up. Its markup and behaviour follow Blazor's own reconnect UI (retry after a
+failed reconnect; a distinct "resume failed" state when resuming a *paused*
+circuit fails, as opposed to a lost one) — deliberately not reskinned onto the
+`--ag-*` tokens: it has to render intelligibly even if the app's own stylesheet
+failed to load, which is exactly the kind of situation this dialog exists for.
+
 ### Page title & brand
 
 Every routed page uses `AppPageTitle` to set the document `<title>`. Register the
