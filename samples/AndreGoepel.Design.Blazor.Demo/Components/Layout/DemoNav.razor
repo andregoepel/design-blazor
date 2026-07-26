@@ -1,24 +1,21 @@
-@* Sidebar navigation for the component gallery, using the design system's
-   ag-nav-* markup so entries match the shell's own sections. *@
+@* Sidebar navigation for the component gallery, using NavSection/NavItem so
+   entries match the shell's own sections without hand-typing ag-nav-* markup. *@
 @inject IStringLocalizer<Strings> L
 
-<div class="ag-nav-section">@L["Nav.SectionGettingStarted"]</div>
-<div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="" Match="NavLinkMatch.All">@L["Nav.Overview"]</NavLink>
-    <NavLink class="ag-nav-item" href="tokens">@L["Nav.TokensTypography"]</NavLink>
-    <NavLink class="ag-nav-item" href="icons">@L["Nav.Icons"]</NavLink>
-</div>
+<NavSection Title="@L["Nav.SectionGettingStarted"]">
+    <NavItem Href="" Text="@L["Nav.Overview"]" Match="NavLinkMatch.All" />
+    <NavItem Href="tokens" Text="@L["Nav.TokensTypography"]" />
+    <NavItem Href="icons" Text="@L["Nav.Icons"]" />
+</NavSection>
 
-<div class="ag-nav-section">@L["Nav.SectionComponents"]</div>
-<div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="buttons">@L["Nav.ButtonsBadges"]</NavLink>
-    <NavLink class="ag-nav-item" href="forms">@L["Nav.Forms"]</NavLink>
-    <NavLink class="ag-nav-item" href="data-grid">@L["Nav.DataGrid"]</NavLink>
-    <NavLink class="ag-nav-item" href="feedback">@L["Nav.Feedback"]</NavLink>
-    <NavLink class="ag-nav-item" href="settings">@L["Nav.Settings"]</NavLink>
-</div>
+<NavSection Title="@L["Nav.SectionComponents"]">
+    <NavItem Href="buttons" Text="@L["Nav.ButtonsBadges"]" />
+    <NavItem Href="forms" Text="@L["Nav.Forms"]" />
+    <NavItem Href="data-grid" Text="@L["Nav.DataGrid"]" />
+    <NavItem Href="feedback" Text="@L["Nav.Feedback"]" />
+    <NavItem Href="settings" Text="@L["Nav.Settings"]" />
+</NavSection>
 
-<div class="ag-nav-section">@L["Nav.SectionPatterns"]</div>
-<div class="ag-nav-group">
-    <NavLink class="ag-nav-item" href="login">@L["Nav.LoginShell"]</NavLink>
-</div>
+<NavSection Title="@L["Nav.SectionPatterns"]">
+    <NavItem Href="login" Text="@L["Nav.LoginShell"]" />
+</NavSection>
