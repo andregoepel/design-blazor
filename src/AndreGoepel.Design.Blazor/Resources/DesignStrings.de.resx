@@ -127,4 +127,35 @@
   <data name="Language.GroupLabel" xml:space="preserve">
     <value>Sprache</value>
   </data>
+
+  <data name="Reconnect.Rejoining" xml:space="preserve">
+    <value>Verbindung zum Server wird wiederhergestellt …</value>
+  </data>
+  <data name="Reconnect.RejoinFailedPrefix" xml:space="preserve">
+    <value>Wiederverbinden fehlgeschlagen … neuer Versuch in</value>
+  </data>
+  <data name="Reconnect.RejoinFailedSuffix" xml:space="preserve">
+    <value>Sekunden.</value>
+  </data>
+  <data name="Reconnect.FailedLine1" xml:space="preserve">
+    <value>Wiederverbinden nicht möglich.</value>
+  </data>
+  <data name="Reconnect.FailedLine2" xml:space="preserve">
+    <value>Bitte erneut versuchen oder die Seite neu laden.</value>
+  </data>
+  <data name="Reconnect.Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="Reconnect.Paused" xml:space="preserve">
+    <value>Die Sitzung wurde vom Server pausiert.</value>
+  </data>
+  <data name="Reconnect.ResumeFailedLine1" xml:space="preserve">
+    <value>Sitzung konnte nicht fortgesetzt werden.</value>
+  </data>
+  <data name="Reconnect.ResumeFailedLine2" xml:space="preserve">
+    <value>Bitte erneut versuchen oder die Seite neu laden.</value>
+  </data>
+  <data name="Reconnect.Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
 </root>

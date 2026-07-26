@@ -84,21 +84,6 @@
   <data name="Nav.Settings" xml:space="preserve"><value><![CDATA[Einstellungsschalter]]></value></data>
   <data name="Nav.LoginShell" xml:space="preserve"><value><![CDATA[Login-Hülle]]></value></data>
 
-  <!-- ReconnectModal -->
-  <data name="Reconnect.Rejoining" xml:space="preserve"><value><![CDATA[Verbindung zum Server wird wiederhergestellt …]]></value></data>
-  <data name="Reconnect.RejoinFailedPrefix" xml:space="preserve">
-    <value><![CDATA[Wiederverbinden fehlgeschlagen … neuer Versuch in]]></value>
-    <comment>Gefolgt von einem live aktualisierten Sekunden-Countdown, dann RejoinFailedSuffix.</comment>
-  </data>
-  <data name="Reconnect.RejoinFailedSuffix" xml:space="preserve"><value><![CDATA[Sekunden.]]></value></data>
-  <data name="Reconnect.FailedLine1" xml:space="preserve"><value><![CDATA[Wiederverbinden nicht möglich.]]></value></data>
-  <data name="Reconnect.FailedLine2" xml:space="preserve"><value><![CDATA[Bitte erneut versuchen oder die Seite neu laden.]]></value></data>
-  <data name="Reconnect.Retry" xml:space="preserve"><value><![CDATA[Erneut versuchen]]></value></data>
-  <data name="Reconnect.Paused" xml:space="preserve"><value><![CDATA[Die Sitzung wurde vom Server pausiert.]]></value></data>
-  <data name="Reconnect.ResumeFailedLine1" xml:space="preserve"><value><![CDATA[Sitzung konnte nicht fortgesetzt werden.]]></value></data>
-  <data name="Reconnect.ResumeFailedLine2" xml:space="preserve"><value><![CDATA[Bitte erneut versuchen oder die Seite neu laden.]]></value></data>
-  <data name="Reconnect.Resume" xml:space="preserve"><value><![CDATA[Fortsetzen]]></value></data>
-
   <!-- Home.razor -->
   <data name="Home.PageTitle" xml:space="preserve"><value><![CDATA[Übersicht]]></value></data>
   <data name="Home.Breadcrumb" xml:space="preserve"><value><![CDATA[Erste Schritte / Übersicht]]></value></data>

@@ -87,21 +87,6 @@
   <data name="Nav.Settings" xml:space="preserve"><value><![CDATA[Settings toggles]]></value></data>
   <data name="Nav.LoginShell" xml:space="preserve"><value><![CDATA[Login shell]]></value></data>
 
-  <!-- ReconnectModal (framework reconnect UI) -->
-  <data name="Reconnect.Rejoining" xml:space="preserve"><value><![CDATA[Rejoining the server...]]></value></data>
-  <data name="Reconnect.RejoinFailedPrefix" xml:space="preserve">
-    <value><![CDATA[Rejoin failed... trying again in]]></value>
-    <comment>Followed by a live seconds-remaining counter, then RejoinFailedSuffix.</comment>
-  </data>
-  <data name="Reconnect.RejoinFailedSuffix" xml:space="preserve"><value><![CDATA[seconds.]]></value></data>
-  <data name="Reconnect.FailedLine1" xml:space="preserve"><value><![CDATA[Failed to rejoin.]]></value></data>
-  <data name="Reconnect.FailedLine2" xml:space="preserve"><value><![CDATA[Please retry or reload the page.]]></value></data>
-  <data name="Reconnect.Retry" xml:space="preserve"><value><![CDATA[Retry]]></value></data>
-  <data name="Reconnect.Paused" xml:space="preserve"><value><![CDATA[The session has been paused by the server.]]></value></data>
-  <data name="Reconnect.ResumeFailedLine1" xml:space="preserve"><value><![CDATA[Failed to resume the session.]]></value></data>
-  <data name="Reconnect.ResumeFailedLine2" xml:space="preserve"><value><![CDATA[Please retry or reload the page.]]></value></data>
-  <data name="Reconnect.Resume" xml:space="preserve"><value><![CDATA[Resume]]></value></data>
-
   <!-- Home.razor -->
   <data name="Home.PageTitle" xml:space="preserve"><value><![CDATA[Overview]]></value></data>
   <data name="Home.Breadcrumb" xml:space="preserve"><value><![CDATA[Getting started / Overview]]></value></data>
