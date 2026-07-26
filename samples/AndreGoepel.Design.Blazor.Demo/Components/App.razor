@@ -8,16 +8,10 @@
     <base href="/" />
     <ResourcePreloader />
 
-    @* Design-system stylesheet stack — ORDER MATTERS:
-       self-hosted fonts → Radzen base → design tokens (must load AFTER Radzen). *@
-    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/fonts.css" />
-    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css" />
-    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/design.css" />
-    <link rel="stylesheet" href="@Assets["app.css"]" />
+    @* Order-critical design-system stylesheet stack + theme.js — see
+       DesignBlazorHead's own doc comment for what it does and doesn't cover. *@
+    <DesignBlazorHead AppStylesheetHref="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["AndreGoepel.Design.Blazor.Demo.styles.css"]" />
-
-    @* Applies the stored light/dark preference before first paint (no flash). *@
-    <script src="_content/AndreGoepel.Design.Blazor/js/theme.js"></script>
 
     <ImportMap />
     <link rel="icon" type="image/png" href="favicon.png" />

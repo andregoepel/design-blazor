@@ -1,0 +1,30 @@
+@* Bundles the order-critical <head> stylesheet stack every host App.razor
+   otherwise hand-types with its own "ORDER MATTERS" comment (DESIGN.md §3):
+   self-hosted fonts → Radzen's material-base → design tokens (must load
+   AFTER Radzen, so its remaps win) → the host's own app-specific stylesheet,
+   then theme.js, which applies the stored light/dark preference before first
+   paint. Drop it once near the top of the host's <head>, in place of the
+   five hand-typed tags.
+
+   Renders as plain <link>/<script> tags via static SSR — App.razor is never
+   itself an interactive component, so this needs no @rendermode and works
+   the same way the existing <ResourcePreloader /> already does inside
+   <head>. It only owns the four order-dependent tags: a host's own isolated
+   CSS bundle (*.styles.css) and body-script ordering (nav.js before
+   blazor.web.js) are unrelated ordering constraints left for the host, as
+   documented on the PR. *@
+
+<link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/fonts.css" />
+<link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css" />
+<link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/design.css" />
+<link rel="stylesheet" href="@AppStylesheetHref" />
+<script src="_content/AndreGoepel.Design.Blazor/js/theme.js"></script>
+
+@code {
+    /// <summary>
+    /// The host's own app-specific stylesheet href, e.g. <c>@@Assets["app.css"]</c>.
+    /// Loaded last in the ordering-critical stack, after the design tokens.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public string AppStylesheetHref { get; set; } = "";
+}
