@@ -1,7 +1,4 @@
-using System.Globalization;
 using System.Resources;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 
 namespace AndreGoepel.Design.Blazor.Resources;
 
@@ -16,6 +13,12 @@ namespace AndreGoepel.Design.Blazor.Resources;
 /// had not touched. Resolving optionally instead matches what the library already does for
 /// <c>DesignBlazorOptions</c> in <c>AppPageTitle</c> and for the localizer in
 /// <see cref="ConfirmService"/>.
+/// <para>
+/// A thin wrapper over the generic <see cref="LocalizedTextExtensions.LocalizedText{TMarker}(IServiceProvider, string, ResourceManager)"/>,
+/// closed over <see cref="DesignStrings"/>, so this library's own call sites
+/// (<c>Services.DesignText("Key")</c>, and every component's <c>T(key)</c> via
+/// <see cref="AndreGoepel.Design.Blazor.Components.LocalizedComponentBase"/>) don't need to change.
+/// </para>
 /// </remarks>
 internal static class DesignTextExtensions
 {
@@ -31,26 +34,13 @@ internal static class DesignTextExtensions
     /// culture. Prefers the registered <see cref="IStringLocalizer{T}"/> so a host can
     /// substitute one; falls back to reading the embedded resources directly.
     /// </summary>
-    internal static string DesignText(this IServiceProvider services, string key)
-    {
-        if (services.GetService<IStringLocalizer<DesignStrings>>() is { } localizer)
-        {
-            var localized = localizer[key];
-            if (!localized.ResourceNotFound)
-            {
-                return localized.Value;
-            }
-        }
-
-        // CurrentUICulture is what request localization sets per request, so the fallback
-        // stays culture-aware without any DI involvement.
-        return Fallback.GetString(key, CultureInfo.CurrentUICulture) ?? key;
-    }
+    internal static string DesignText(this IServiceProvider services, string key) =>
+        services.LocalizedText<DesignStrings>(key, Fallback);
 
     /// <inheritdoc cref="DesignText(IServiceProvider, string)"/>
     internal static string DesignText(
         this IServiceProvider services,
         string key,
         params object[] arguments
-    ) => string.Format(CultureInfo.CurrentCulture, services.DesignText(key), arguments);
+    ) => services.LocalizedText<DesignStrings>(key, Fallback, arguments);
 }

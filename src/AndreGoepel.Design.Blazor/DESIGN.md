@@ -907,3 +907,44 @@ copy its `Program.cs`, `App.razor`, and `Resources/` wiring.
 > matching in German. Bind a stable, culture-invariant key (`"active"`, not
 > `L["DataGrid.Active"]`) and only use the localized string for the label; see
 > `DataGrid.razor`'s `StatusOptions` in the sample app.
+
+### Reusing the primitive from another library
+
+The above sections cover *this* library's own `DesignStrings` and a host *app*'s
+own strings. A third case: another **library** in the ecosystem (e.g.
+`AndreGoepel.AppFoundation`, `AndreGoepel.Marten.Identity.Blazor`) that ships its
+own routable pages/components and needs the exact same "resolve my own strings,
+tolerating a host that hasn't registered localization" behaviour against its
+*own* marker type (`AppFoundationStrings`, `IdentityStrings`, …) — not
+`DesignStrings`. Rather than re-implementing the `[Inject] IServiceProvider` +
+`IStringLocalizer<T>` + fallback `ResourceManager` pattern from scratch (as
+`AppFoundationTextExtensions`/`IdentityTextExtensions` used to, byte-for-byte
+identical to this library's own `DesignTextExtensions` except for the marker
+type), depend on this package's generic primitives:
+
+```csharp
+// YourLibrary.Resources.LocalizedTextExtensions equivalent — a thin wrapper,
+// exactly like this library's own DesignTextExtensions:
+private static readonly ResourceManager Fallback =
+    new(typeof(YourLibraryStrings).FullName!, typeof(YourLibraryStrings).Assembly);
+
+internal static string YourLibraryText(this IServiceProvider services, string key) =>
+    services.LocalizedText<YourLibraryStrings>(key, Fallback);
+```
+
+For components, inherit `LocalizedComponentBase<TMarker>` (closed over your own
+marker type) instead of hand-rolling the `[Inject] IServiceProvider` + `T(string)`
+pair again — it derives its fallback `ResourceManager` from the marker type
+automatically, using the same convention every marker/resx pair in the ecosystem
+already follows:
+
+```csharp
+public abstract class YourLibraryLocalizedComponentBase
+    : LocalizedComponentBase<YourLibraryStrings>;
+```
+
+A thin, non-generic subclass like this (rather than `@inherits
+LocalizedComponentBase<YourLibraryStrings>` spelled out on every page) keeps
+`@inherits YourLibraryLocalizedComponentBase` short, and avoids a name collision
+with this library's own non-generic `LocalizedComponentBase` when both
+namespaces are imported in the same `_Imports.razor`.
