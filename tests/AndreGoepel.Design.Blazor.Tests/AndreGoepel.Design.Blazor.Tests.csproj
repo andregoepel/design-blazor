@@ -12,9 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="bunit" />
-    <!-- Pins the transitive AngleSharp version bunit resolves; see the
-         PackageVersion comment in Directory.Packages.props. -->
-    <PackageReference Include="AngleSharp" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="xunit.v3" />
