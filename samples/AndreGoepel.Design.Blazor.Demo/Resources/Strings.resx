@@ -106,7 +106,7 @@
   <data name="Home.PageHeaderPatternSubtitle" xml:space="preserve"><value><![CDATA[Heading left, primary action right.]]></value></data>
   <data name="Home.PrimaryAction" xml:space="preserve"><value><![CDATA[Primary action]]></value></data>
   <data name="Home.StatTileCaption" xml:space="preserve">
-    <value><![CDATA[<code>StatTile</code> — a caption + a big value, optionally tinted and iconed.]]></value>
+    <value><![CDATA[<code>StatTile</code> — a caption + a big value, optionally tinted and iconed — laid out by <code>StatTileRow</code> (a responsive grid, no column bookkeeping).]]></value>
     <comment>Rendered as HTML (MarkupString).</comment>
   </data>
   <data name="Home.Income" xml:space="preserve"><value><![CDATA[Income]]></value></data>
@@ -296,6 +296,13 @@
     <value><![CDATA[Current values: registration={0}, two-factor={1}, passkeys={2} (disabled)]]></value>
     <comment>{0}/{1}/{2} are the three toggle states (bool).</comment>
   </data>
+  <data name="Settings.ToggleFieldCaption" xml:space="preserve">
+    <value><![CDATA[<code>ToggleField</code> — an inline toggle + label for toolbars, dialogs, and forms: a checkbox by default, a switch via <code>Switch</code>.]]></value>
+    <comment>Rendered as HTML (MarkupString).</comment>
+  </data>
+  <data name="Settings.ShowArchived" xml:space="preserve"><value><![CDATA[Show archived]]></value></data>
+  <data name="Settings.CompactMode" xml:space="preserve"><value><![CDATA[Compact mode]]></value></data>
+  <data name="Settings.AutoSync" xml:space="preserve"><value><![CDATA[Auto-sync (disabled)]]></value></data>
 
   <!-- Tokens.razor -->
   <data name="Tokens.PageTitle" xml:space="preserve"><value><![CDATA[Tokens & typography]]></value></data>

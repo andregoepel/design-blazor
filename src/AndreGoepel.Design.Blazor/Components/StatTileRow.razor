@@ -1,0 +1,23 @@
+@* A responsive row of StatTiles: a CSS grid that fits as many tiles per row as
+   MinTileWidth allows, all equal width, wrapping to fewer columns (down to one)
+   on narrow screens — no per-tile RadzenColumn breakpoint bookkeeping. *@
+
+<div class="ag-stat-tiles" style="@RowStyle">
+    @ChildContent
+</div>
+
+@code {
+    /// <summary>The <c>StatTile</c>s (or equivalent cards) to lay out.</summary>
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Minimum width a tile may shrink to before the row wraps to fewer columns,
+    /// as a CSS length. Defaults to <c>14rem</c> — smaller fits more tiles per row.
+    /// </summary>
+    [Parameter]
+    public string? MinTileWidth { get; set; }
+
+    private string? RowStyle =>
+        MinTileWidth is null ? null : $"--ag-stat-tile-min: {MinTileWidth};";
+}

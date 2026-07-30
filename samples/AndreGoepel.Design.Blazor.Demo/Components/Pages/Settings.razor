@@ -24,10 +24,23 @@
     <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
         @L["Settings.CurrentValues", _registration, _twoFactor, _passkeys]
     </RadzenText>
+
+    <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
+        @((MarkupString)L["Settings.ToggleFieldCaption"].Value)
+    </RadzenText>
+    <RadzenCard>
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="1.5rem" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center">
+            <ToggleField Label="@L["Settings.ShowArchived"]" @bind-Value="_showArchived" />
+            <ToggleField Label="@L["Settings.CompactMode"]" @bind-Value="_compact" Switch="true" />
+            <ToggleField Label="@L["Settings.AutoSync"]" Value="true" Disabled="true" />
+        </RadzenStack>
+    </RadzenCard>
 </PageBody>
 
 @code {
     private bool _registration = true;
     private bool _twoFactor = true;
     private bool _passkeys;
+    private bool _showArchived;
+    private bool _compact = true;
 }

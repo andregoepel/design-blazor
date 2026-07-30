@@ -31,17 +31,11 @@
     <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
         @((MarkupString)L["Home.StatTileCaption"].Value)
     </RadzenText>
-    <RadzenRow Gap="1rem">
-        <RadzenColumn Size="12" SizeMd="4">
-            <StatTile Label="@L["Home.Income"]" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
-        </RadzenColumn>
-        <RadzenColumn Size="12" SizeMd="4">
-            <StatTile Label="@L["Home.Expenses"]" Value="€1,890.40" Variant="BadgeVariant.Danger" />
-        </RadzenColumn>
-        <RadzenColumn Size="12" SizeMd="4">
-            <StatTile Label="@L["Home.Net"]" Value="€2,359.60" />
-        </RadzenColumn>
-    </RadzenRow>
+    <StatTileRow>
+        <StatTile Label="@L["Home.Income"]" Value="€4,250.00" Variant="BadgeVariant.Success" Icon="chevron-right" />
+        <StatTile Label="@L["Home.Expenses"]" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+        <StatTile Label="@L["Home.Net"]" Value="€2,359.60" />
+    </StatTileRow>
 
     <RadzenText TextStyle="TextStyle.Caption" Style="color: var(--rz-text-secondary-color);">
         @((MarkupString)L["Home.LinkButtonCaption"].Value)

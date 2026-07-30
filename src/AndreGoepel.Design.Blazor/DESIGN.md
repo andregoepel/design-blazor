@@ -216,6 +216,26 @@ that the last row drops automatically:
 </RadzenCard>
 ```
 
+### Inline toggles
+
+Everywhere else a bool is toggled — a "Show archived" filter in a grid toolbar,
+an opt-in in a dialog, a flag in a form — use `ToggleField`: the control with
+its label to the right, consistently spaced, label linked so clicking it
+toggles too. It renders a `RadzenCheckBox` by default; set `Switch` for a
+`RadzenSwitch` (a switch reads as "takes effect immediately", a checkbox as
+"part of the form being submitted"):
+
+```razor
+<ToggleField Label="Show archived" @bind-Value="_showArchived" />
+<ToggleField Label="Maintenance mode" @bind-Value="Input.Maintenance" Switch="true" />
+```
+
+Don't hand-pair `RadzenCheckBox`/`RadzenSwitch` + `RadzenLabel` with ad-hoc
+`rz-ms-*` spacing. Pass `Name` only when a validator has to reference the
+control — otherwise the label linkage is wired up automatically. For a bordered
+settings-page row with a description use `SettingToggleRow` (above); for a
+label-above field in a `CardForm` grid keep `FormField`.
+
 ### Buttons
 
 Sentence case, dark-on-accent primaries. Order secondary/cancel **before** the
@@ -332,19 +352,21 @@ the same `BadgeVariant` as `StatusBadge`, and an optional `AppIcon` glyph next
 to the caption. `Value` is a pre-formatted string — `StatTile` doesn't format
 numbers or currency itself.
 
+Lay a row of them out with `StatTileRow` — a responsive grid that fits as many
+tiles per row as `MinTileWidth` (default `14rem`) allows and wraps to fewer
+columns on narrow screens, instead of hand-writing `RadzenRow`/`RadzenColumn`
+breakpoints per tile:
+
 ```razor
-<RadzenRow Gap="1rem">
-    <RadzenColumn Size="12" SizeMd="4">
-        <StatTile Label="Income" Value="€4,250.00" Variant="BadgeVariant.Success" />
-    </RadzenColumn>
-    <RadzenColumn Size="12" SizeMd="4">
-        <StatTile Label="Expenses" Value="€1,890.40" Variant="BadgeVariant.Danger" />
-    </RadzenColumn>
-    <RadzenColumn Size="12" SizeMd="4">
-        <StatTile Label="Net" Value="€2,359.60" />   @* Neutral: inherits the default heading colour *@
-    </RadzenColumn>
-</RadzenRow>
+<StatTileRow>
+    <StatTile Label="Income" Value="€4,250.00" Variant="BadgeVariant.Success" />
+    <StatTile Label="Expenses" Value="€1,890.40" Variant="BadgeVariant.Danger" />
+    <StatTile Label="Net" Value="€2,359.60" />   @* Neutral: inherits the default heading colour *@
+</StatTileRow>
 ```
+
+Pass `MinTileWidth` only when a row genuinely needs a different density (a
+smaller value fits more tiles per row before wrapping).
 
 ### Alerts / status banners
 
@@ -621,6 +643,8 @@ password?" link is `FormField`'s `LabelActions` slot (see §5 "Forms").
 | `ag-required` | red asterisk after a required field's label (rendered by `FormField`) |
 | `ag-field-head`, `ag-field-head-link` | label row + trailing action, e.g. "Forgot password?" (rendered by `FormField` when `LabelActions` is set) |
 | `ag-toggle-row`, `ag-toggle-row-text`, `ag-toggle-row-label`, `ag-toggle-row-description` | settings toggle row: label + description + switch (rendered by `SettingToggleRow`) |
+| `ag-toggle-field` | inline toggle + trailing label (rendered by `ToggleField`) |
+| `ag-stat-tiles` | responsive stat-tile grid (rendered by `StatTileRow`) |
 | `ag-badge` + `ag-badge-success` / `-danger` / `-warn` / `-info` / `-neutral` | status pills (rendered by `StatusBadge`) |
 | `ag-grid-toolbar`, `ag-search`, `ag-search-icon`, `ag-search-input`, `ag-grid-count` | in-card grid toolbar: filter box + row count (rendered by `GridToolbar`, inside `DataCard`) |
 | `ag-info-box`, `ag-info-box-label`, `ag-info-box-value` | inline soft-tinted info pill (rendered by `InfoBox`) |
