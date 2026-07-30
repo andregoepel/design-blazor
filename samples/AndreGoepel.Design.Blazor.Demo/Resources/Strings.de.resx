@@ -103,7 +103,7 @@
   <data name="Home.PageHeaderPatternSubtitle" xml:space="preserve"><value><![CDATA[Überschrift links, primäre Aktion rechts.]]></value></data>
   <data name="Home.PrimaryAction" xml:space="preserve"><value><![CDATA[Primäre Aktion]]></value></data>
   <data name="Home.StatTileCaption" xml:space="preserve">
-    <value><![CDATA[<code>StatTile</code> — eine Beschriftung + ein großer Wert, optional eingefärbt und mit Icon.]]></value>
+    <value><![CDATA[<code>StatTile</code> — eine Beschriftung + ein großer Wert, optional eingefärbt und mit Icon — angeordnet von <code>StatTileRow</code> (ein responsives Raster, keine Spalten-Buchführung).]]></value>
     <comment>Wird als HTML (MarkupString) gerendert.</comment>
   </data>
   <data name="Home.Income" xml:space="preserve"><value><![CDATA[Einnahmen]]></value></data>
@@ -293,6 +293,13 @@
     <value><![CDATA[Aktuelle Werte: Registrierung={0}, Zwei-Faktor={1}, Passkeys={2} (deaktiviert)]]></value>
     <comment>{0}/{1}/{2} sind die drei Schalterzustände (bool).</comment>
   </data>
+  <data name="Settings.ToggleFieldCaption" xml:space="preserve">
+    <value><![CDATA[<code>ToggleField</code> — ein Inline-Umschalter + Label für Toolbars, Dialoge und Formulare: standardmäßig eine Checkbox, per <code>Switch</code> ein Schalter.]]></value>
+    <comment>Wird als HTML (MarkupString) gerendert.</comment>
+  </data>
+  <data name="Settings.ShowArchived" xml:space="preserve"><value><![CDATA[Archivierte anzeigen]]></value></data>
+  <data name="Settings.CompactMode" xml:space="preserve"><value><![CDATA[Kompaktmodus]]></value></data>
+  <data name="Settings.AutoSync" xml:space="preserve"><value><![CDATA[Auto-Sync (deaktiviert)]]></value></data>
 
   <!-- Tokens.razor -->
   <data name="Tokens.PageTitle" xml:space="preserve"><value><![CDATA[Tokens & Typografie]]></value></data>

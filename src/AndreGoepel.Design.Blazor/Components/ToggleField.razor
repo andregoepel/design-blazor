@@ -1,0 +1,56 @@
+@* An inline toggle with its label to the right — a grid-toolbar filter, a
+   dialog opt-in, a form flag. Renders a RadzenCheckBox by default; set
+   Switch for a RadzenSwitch. The label is linked to the control, so clicking
+   it toggles too. For a bordered settings-page row with a description, use
+   SettingToggleRow instead. Bind Value two-way with @bind-Value. *@
+
+<div class="ag-toggle-field">
+    @if (Switch)
+    {
+        <RadzenSwitch Value="Value" ValueChanged="OnValueChanged" Disabled="Disabled" Name="@EffectiveName" />
+    }
+    else
+    {
+        <RadzenCheckBox Value="Value" ValueChanged="OnValueChanged" Disabled="Disabled" Name="@EffectiveName" TValue="bool" />
+    }
+    <RadzenLabel Text="@Label" Component="@EffectiveName" />
+</div>
+
+@code {
+    /// <summary>The label to the right of the toggle, e.g. "Show archived".</summary>
+    [Parameter, EditorRequired]
+    public string Label { get; set; } = "";
+
+    /// <summary>Whether the toggle is on. Bind with <c>@@bind-Value</c>.</summary>
+    [Parameter]
+    public bool Value { get; set; }
+
+    /// <summary>Raised when the toggle is flipped.</summary>
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    /// <summary>Renders a <c>RadzenSwitch</c> instead of the default checkbox.</summary>
+    [Parameter]
+    public bool Switch { get; set; }
+
+    /// <summary>Disables the toggle.</summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    /// <summary>
+    /// The control's <c>Name</c>, linking the label to it. Defaults to a unique
+    /// generated name — set it only when a validator has to reference the control.
+    /// </summary>
+    [Parameter]
+    public string? Name { get; set; }
+
+    private readonly string _generatedName = $"ag-toggle-{Guid.NewGuid():N}";
+
+    private string EffectiveName => Name ?? _generatedName;
+
+    private async Task OnValueChanged(bool value)
+    {
+        Value = value;
+        await ValueChanged.InvokeAsync(value);
+    }
+}

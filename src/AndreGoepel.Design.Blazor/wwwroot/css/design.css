@@ -694,6 +694,23 @@ h4:focus-visible, h5:focus-visible, h6:focus-visible {
   color: var(--ag-muted);
 }
 
+/* An inline toggle + trailing label (rendered by ToggleField) — e.g. a
+   "Show archived" checkbox in a grid toolbar or a dialog opt-in. */
+.ag-toggle-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* A responsive row of StatTiles (rendered by StatTileRow): as many equal-width
+   tiles per row as fit at --ag-stat-tile-min, wrapping to fewer columns —
+   down to one — as the viewport narrows. */
+.ag-stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--ag-stat-tile-min, 14rem), 100%), 1fr));
+  gap: 1rem;
+}
+
 /* Page header row with a heading on the left and an action on the right. */
 .ag-page-head {
   display: flex;
