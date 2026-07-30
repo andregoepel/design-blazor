@@ -70,7 +70,9 @@ builder.Services.AddDesignBlazor(o => o.BrandName = "Acme"); // en/de by default
 app.UseDesignBlazorLocalization(); // before MapRazorComponents
 ```
 
-`LanguageSwitcher` (above) links to the culture-switch endpoint this sets up. See
+`LanguageSwitcher` (above) links to the culture-switch endpoint this sets up. A
+page that needs its own styling instead of `LanguageSwitcher` (e.g. a public page
+without `design.css`) builds the same links via `CultureLinks.Build`. See
 [DESIGN.md §9](src/AndreGoepel.Design.Blazor/DESIGN.md#9-localization) for how a
 host app localizes its own pages the same way — the
 [demo app](samples/AndreGoepel.Design.Blazor.Demo) is a fully bilingual reference.

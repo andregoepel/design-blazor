@@ -897,6 +897,33 @@ Because switching culture only takes effect on the request that (re-)builds the
 circuit, this is a full page load, not a live update — by design, not a
 limitation to work around.
 
+### A custom-styled switch: `CultureLinks`
+
+Some pages can't use `LanguageSwitcher` itself — e.g. a public, statically
+rendered form page that deliberately does **not** load `design.css` and brings
+its own styling. Don't re-implement the endonym / href / active-culture logic
+there; build the links with `CultureLinks.Build` and render your own markup
+around them:
+
+```razor
+@inject IOptions<DesignBlazorOptions> Options
+@inject NavigationManager Navigation
+
+@foreach (var culture in CultureLinks.Build(Options.Value, Navigation))
+{
+    <a class="my-lang-btn @(culture.IsActive ? "is-active" : null)"
+       href="@culture.Href" title="@culture.DisplayName"
+       aria-current="@(culture.IsActive ? "true" : null)"
+       data-enhance-nav="false">@culture.Code</a>
+}
+```
+
+Each `CultureLink` carries the upper-cased `Code`, the endonym `DisplayName`,
+the culture-endpoint `Href` (base-relative, current page as return URL), and
+`IsActive` (parent-chain aware, so `de-DE` matches a supported `de`). Keep the
+`data-enhance-nav="false"` — the reasons above apply to a hand-rolled switch
+just the same.
+
 ### A host app's own strings
 
 `DesignStrings` covers only the library's own built-in text. A host localizes its
