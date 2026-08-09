@@ -233,14 +233,14 @@
       "andregoepel.design.blazor": {
         "type": "Project",
         "dependencies": {
-          "Radzen.Blazor": "[11.1.7, )"
+          "Radzen.Blazor": "[11.2.0, )"
         }
       },
       "Radzen.Blazor": {
         "type": "CentralTransitive",
-        "requested": "[11.1.7, )",
-        "resolved": "11.1.7",
-        "contentHash": "3cRwdBwC2rFtzLxuzeqE2UlglRVKyhPMuxZk62bj+9hIyBqd8THPo+uNKkPOhLdm0wcLKET8BbsDnQ4x2EzMLQ=="
+        "requested": "[11.2.0, )",
+        "resolved": "11.2.0",
+        "contentHash": "hBnrzApLsABPPT1CsaWfDxOKDxo0UzD+wu7i8gcmp0+/BO9AQdGIxBudq9heVOcwDjSpRtvhsFDkifTyl3Urzw=="
       }
     }
   }
