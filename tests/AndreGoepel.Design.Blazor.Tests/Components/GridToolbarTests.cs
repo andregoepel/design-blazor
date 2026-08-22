@@ -78,7 +78,7 @@ public class GridToolbarTests : DesignBlazorTestContext
     public void Render_InGerman_UsesGermanPlaceholder()
     {
         // Arrange
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         // Act
         var cut = Render<GridToolbar>(parameters => parameters.Add(p => p.Search, ""));
@@ -92,7 +92,7 @@ public class GridToolbarTests : DesignBlazorTestContext
     {
         // Arrange — an explicit parameter has to win over the localizer, otherwise
         // hosts that already pass their own text would silently lose it.
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         // Act
         var cut = Render<GridToolbar>(parameters =>

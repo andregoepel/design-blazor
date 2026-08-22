@@ -179,7 +179,7 @@ public class DialogFormTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_ShowsGermanSubmitAndCancelText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = RenderForm(new Model());
 

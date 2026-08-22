@@ -39,7 +39,7 @@ public class FilterBarTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_ShowsGermanApplyText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = Render<FilterBar>();
 
@@ -49,7 +49,7 @@ public class FilterBarTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_WithCustomApplyText_KeepsTheHostsText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = Render<FilterBar>(parameters => parameters.Add(p => p.ApplyText, "Filtern"));
 

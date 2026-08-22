@@ -1,4 +1,3 @@
-using System.Globalization;
 using AndreGoepel.Design.Blazor.Components;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
@@ -66,18 +65,10 @@ public class NoLocalizationRegisteredTests : BunitContext
     {
         // The fallback reads the satellite resources off CurrentUICulture, so dropping the
         // IStringLocalizer must not quietly pin the UI to English.
-        var original = CultureInfo.CurrentUICulture;
-        try
-        {
-            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de");
+        using var culture = CultureScope.UiOnly("de");
 
-            var cut = Render<GridToolbar>(parameters => parameters.Add(p => p.Search, ""));
+        var cut = Render<GridToolbar>(parameters => parameters.Add(p => p.Search, ""));
 
-            Assert.Equal("Suchen…", cut.Find("input.ag-search-input").GetAttribute("placeholder"));
-        }
-        finally
-        {
-            CultureInfo.CurrentUICulture = original;
-        }
+        Assert.Equal("Suchen…", cut.Find("input.ag-search-input").GetAttribute("placeholder"));
     }
 }

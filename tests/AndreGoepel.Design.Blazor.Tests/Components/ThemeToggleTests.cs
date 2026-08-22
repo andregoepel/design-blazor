@@ -46,7 +46,7 @@ public class ThemeToggleTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_LabelsAreGerman()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = Render<ThemeToggle>();
 
