@@ -116,7 +116,7 @@ public class FilteredGridTests : DesignBlazorTestContext
     public void Render_InGerman_UsesGermanDefaults()
     {
         // Arrange
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         // Act
         var cut = Render(p => p.Add(c => c.Items, []).Add(c => c.TotalCount, 5));

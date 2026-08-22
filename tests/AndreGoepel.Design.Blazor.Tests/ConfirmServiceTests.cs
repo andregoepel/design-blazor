@@ -105,7 +105,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     [Fact]
     public async Task ConfirmAsync_WithLocalizer_UsesTheCurrentCultureForTitleAndButtons()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockDialog(true);
         var svc = new ConfirmService(dialog, Localizer);
 
@@ -125,7 +125,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     [Fact]
     public async Task ConfirmDeleteAsync_WithLocalizer_FormatsTheGermanMessage()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockDialog(true);
         var svc = new ConfirmService(dialog, Localizer);
 
@@ -143,7 +143,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     [Fact]
     public async Task ConfirmAsync_WithLocalizer_StillHonoursExplicitText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockDialog(true);
         var svc = new ConfirmService(dialog, Localizer);
 
@@ -165,7 +165,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     {
         // Hosts that construct the service directly get no localizer; that must not
         // throw or produce empty dialog text.
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockDialog(true);
         var svc = new ConfirmService(dialog);
 
@@ -219,7 +219,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     [Fact]
     public async Task AlertAsync_WithLocalizer_UsesTheCurrentCultureForTitleAndButton()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockAlertDialog();
         var svc = new ConfirmService(dialog, Localizer);
 
@@ -237,7 +237,7 @@ public class ConfirmServiceTests : DesignBlazorTestContext
     [Fact]
     public async Task AlertAsync_WithoutLocalizer_FallsBackToEnglish()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var dialog = MockAlertDialog();
         var svc = new ConfirmService(dialog);
 

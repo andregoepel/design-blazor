@@ -25,7 +25,7 @@ public class AppShellTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_HamburgerLabelIsGerman()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = Render<AppShell>(parameters => parameters.Add(p => p.BrandName, "Acme"));
 

@@ -92,7 +92,7 @@ public class CardFormTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_ShowsGermanSubmitAndCancelText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = RenderForm(
             new Model(),
@@ -107,7 +107,7 @@ public class CardFormTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_WhenBusy_ShowsGermanBusyText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = RenderForm(new Model(), p => p.Add(c => c.IsBusy, true));
 
@@ -117,7 +117,7 @@ public class CardFormTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_WithCustomSubmitText_KeepsTheHostsText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         var cut = RenderForm(new Model(), p => p.Add(c => c.SubmitText, "Create user"));
 

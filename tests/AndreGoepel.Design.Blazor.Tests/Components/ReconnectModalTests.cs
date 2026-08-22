@@ -64,7 +64,7 @@ public class ReconnectModalTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_ShowsGermanText()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
 
         // Act
         var cut = Render<ReconnectModal>();

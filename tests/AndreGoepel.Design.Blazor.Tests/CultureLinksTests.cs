@@ -66,7 +66,7 @@ public class CultureLinksTests : DesignBlazorTestContext
     public void Build_MarksTheCurrentUiCultureActive()
     {
         // Arrange
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         var options = new DesignBlazorOptions();
 
         // Act
@@ -81,7 +81,7 @@ public class CultureLinksTests : DesignBlazorTestContext
     public void Build_WithRegionalCulture_StillMatchesTheSupportedParent()
     {
         // Arrange — a request culture of de-DE has to light up the supported "de".
-        UseCulture("de-DE");
+        using var _ = new CultureScope("de-DE");
         var options = new DesignBlazorOptions();
 
         // Act

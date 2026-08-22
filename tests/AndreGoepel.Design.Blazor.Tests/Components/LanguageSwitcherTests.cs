@@ -52,7 +52,7 @@ public class LanguageSwitcherTests : DesignBlazorTestContext
     [Fact]
     public void Render_InGerman_MarksGermanActiveAndLocalizesTheGroupLabel()
     {
-        UseCulture("de");
+        using var _ = new CultureScope("de");
         Configure();
 
         var cut = Render<LanguageSwitcher>();
@@ -66,7 +66,7 @@ public class LanguageSwitcherTests : DesignBlazorTestContext
     {
         // A request culture of de-DE has to light up the supported "de" — otherwise
         // no item would appear active for most German browsers.
-        UseCulture("de-DE");
+        using var _ = new CultureScope("de-DE");
         Configure();
 
         var cut = Render<LanguageSwitcher>();
