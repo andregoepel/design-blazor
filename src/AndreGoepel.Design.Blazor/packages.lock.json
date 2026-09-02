@@ -4,9 +4,9 @@
     "net10.0": {
       "Radzen.Blazor": {
         "type": "Direct",
-        "requested": "[11.2.6, )",
-        "resolved": "11.2.6",
-        "contentHash": "+Oq/IrCS4mrqSYD1ZFwMRirVdrIaaqNBoyuDO2zhbPn5jVi7Xf7oyIbLj5ktf0QGAslkd97eaXvZ9h/FaJ1T9g=="
+        "requested": "[11.2.8, )",
+        "resolved": "11.2.8",
+        "contentHash": "17dcvLPk8tjZT1Cjj/Rzt2+Mxr8D7XPVI754T0eICQ5EGwqVGCR7HhhvVferniEfyIrJiUXwXjkRcqlpkflbZg=="
       }
     }
   }
