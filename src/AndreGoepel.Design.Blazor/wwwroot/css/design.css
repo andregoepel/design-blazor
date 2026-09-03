@@ -120,6 +120,12 @@
   --rz-grid-hover-background-color: var(--ag-hover);
   --rz-grid-stripe-background-color: var(--ag-hover);
   --rz-grid-stripe-odd-background-color: var(--ag-surface);
+  /* Selected rows: the fill already lands on the soft accent (via --rz-primary-lighter),
+     but Radzen colours the cell text with --rz-on-primary-lighter, its indigo-on-tint
+     pairing — link-blue on the dark shell, and it swallows the sign colours next to it.
+     Keep the text on the normal colour; the fill alone marks the row (#110). */
+  --rz-grid-selected-background-color: var(--ag-accent-soft);
+  --rz-grid-selected-color: var(--ag-text);
 
   /* status colours */
   --rz-success: var(--ag-accent);
