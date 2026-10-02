@@ -15,6 +15,27 @@ in unrelated stacks.
 dotnet add package AndreGoepel.Design.Blazor
 ```
 
+## Radzen 12 compatibility
+
+This version uses Radzen.Blazor 12.0.3. Hosts with a direct Radzen dependency must
+align that dependency to 12.x before consuming this package and regenerate their
+NuGet lock files. The design-system components do not contain date pickers or
+charts; those controls belong to the consuming applications.
+
+Review the [Radzen 12 release notes](https://github.com/radzenhq/radzen-blazor/releases/tag/v12.0.0)
+when upgrading host pages:
+
+- Date-picker navigation now drills through calendar views. Set
+  `NavigationMode="DatePickerNavigationMode.DropDown"` to retain the previous UI.
+- Chart value-axis ranges, tick intervals, and category-label fitting have new
+  defaults. Use explicit `Range`, `Step`, and `LabelFit` settings where the
+  existing chart presentation must be preserved.
+- Saved DataGrid enum filters use numeric values. Radzen still loads settings
+  written by version 11; application code should not depend on the old serialized
+  representation.
+- Direct dynamic-LINQ calls produce trimming warnings. Hosts that enable trimming
+  must review those calls separately.
+
 ## Use
 
 Reference the stylesheets **after** Radzen's `material-base.css`, and load the
